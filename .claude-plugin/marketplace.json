@@ -11,15 +11,15 @@
   "plugins": [
     {
       "name": "sentinel-ai",
-      "source": ".",
+      "source": "./",
       "description": "Real-time safety guardrails for LLM applications. Scans for prompt injection, PII leaks, harmful content, toxicity, hallucinations, and dangerous tool calls with sub-millisecond latency.",
       "version": "0.5.0",
       "author": {
         "name": "Maxwell Calkin",
         "url": "https://github.com/MaxwellCalkin"
       },
-      "homepage": "https://github.com/MaxwellCalkin/sentinel-ai",
-      "repository": "https://github.com/MaxwellCalkin/sentinel-ai",
+      "homepage": "https://github.com/apoiase/sentinel-ai",
+      "repository": "https://github.com/apoiase/sentinel-ai",
       "license": "Apache-2.0",
       "keywords": ["safety", "guardrails", "security", "prompt-injection", "pii", "scanning", "llm"],
       "category": "security",
