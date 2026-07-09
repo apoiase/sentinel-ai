@@ -1,25 +1,25 @@
-# /scan-tool-call — Check if a tool call is safe
+# /scan-tool-call — Verificar se uma chamada de ferramenta é segura
 
-Scan a tool call for dangerous operations before execution.
+Varre uma chamada de ferramenta em busca de operações perigosas antes da execução.
 
-## Usage
+## Uso
 
-/scan-tool-call <tool_name> <arguments as JSON>
+/scan-tool-call <tool_name> <argumentos em JSON>
 
-## Behavior
+## Comportamento
 
-Use the Sentinel AI `scan_tool_call` MCP tool to:
-1. Parse the tool name and JSON arguments
-2. Check for dangerous shell commands (rm -rf, credential access, etc.)
-3. Check for data exfiltration patterns (curl to external servers, etc.)
-4. Check for privilege escalation attempts
-5. Report risk level and whether the call should be blocked
+Use a ferramenta MCP `scan_tool_call` do Sentinel AI para:
+1. Fazer parse do nome da ferramenta e dos argumentos em JSON
+2. Verificar comandos shell perigosos (rm -rf, acesso a credenciais, etc.)
+3. Verificar padrões de exfiltração de dados (curl para servidores externos, etc.)
+4. Verificar tentativas de escalonamento de privilégio
+5. Reportar o nível de risco e se a chamada deveria ser bloqueada
 
-Present findings with:
-- Risk level (NONE, LOW, MEDIUM, HIGH, CRITICAL)
-- Threat type (dangerous_command, exfiltration, sensitive_file, privilege_escalation)
-- Description of the threat
-- Whether the tool call would be blocked
+Apresente os findings com:
+- Nível de risco (NONE, LOW, MEDIUM, HIGH, CRITICAL)
+- Tipo de ameaça (dangerous_command, exfiltration, sensitive_file, privilege_escalation)
+- Descrição da ameaça
+- Se a chamada de ferramenta seria bloqueada
 
 ## Input
 

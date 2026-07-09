@@ -1,26 +1,26 @@
-# /red-team — Test safety scanning robustness
+# /red-team — Testar a robustez da varredura de segurança
 
-Red-team your safety scanning by generating adversarial variants of a prompt injection attempt.
+Faça red-team da sua varredura de segurança gerando variantes adversariais de uma tentativa de prompt injection.
 
-## Usage
+## Uso
 
-/red-team <injection attempt text>
+/red-team <texto da tentativa de injeção>
 
-## Behavior
+## Comportamento
 
-Use the Sentinel AI `test_robustness` MCP tool to:
-1. Take the provided text (a known injection attempt)
-2. Generate adversarial variants using 10+ evasion techniques (homoglyphs, zero-width characters, leetspeak, payload splitting, synonym substitution, etc.)
-3. Test whether each variant is still detected by the safety scanner
-4. Report the detection rate, total variants tested, and any variants that evaded detection
+Use a ferramenta MCP `test_robustness` do Sentinel AI para:
+1. Pegar o texto fornecido (uma tentativa de injeção conhecida)
+2. Gerar variantes adversariais usando mais de 10 técnicas de evasão (homoglifos, caracteres de largura zero, leetspeak, divisão de payload, substituição de sinônimos, etc.)
+3. Testar se cada variante ainda é detectada pelo scanner de segurança
+4. Reportar a taxa de detecção, o total de variantes testadas e quaisquer variantes que evadiram a detecção
 
-Present results showing:
-- Overall detection rate (e.g., 95%)
-- Number of variants tested vs detected
-- List of evasion techniques used
-- Any variants that evaded detection (with the technique used)
+Apresente os resultados mostrando:
+- Taxa de detecção geral (ex.: 95%)
+- Número de variantes testadas vs. detectadas
+- Lista das técnicas de evasão usadas
+- Quaisquer variantes que evadiram a detecção (com a técnica usada)
 
-This helps identify weaknesses in safety scanning before they can be exploited.
+Isso ajuda a identificar fraquezas na varredura de segurança antes que possam ser exploradas.
 
 ## Input
 

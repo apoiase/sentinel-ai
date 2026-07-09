@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building a Threat Intelligence Feed for LLM Attacks | Sentinel AI</title>
-<meta name="description" content="A MITRE ATLAS-aligned database of 27+ known LLM attack techniques. Query by category, match text against patterns, and integrate with your safety pipeline.">
-<meta property="og:title" content="Building a Threat Intelligence Feed for LLM Attacks">
-<meta property="og:description" content="27 MITRE ATLAS-aligned threat indicators across 8 attack categories — from prompt injection to privilege escalation.">
+<title>Construindo um Feed de Inteligência de Ameaças para Ataques em LLMs | Sentinel AI</title>
+<meta name="description" content="Um banco de dados alinhado ao MITRE ATLAS com mais de 27 técnicas conhecidas de ataque a LLMs. Consulte por categoria, compare texto com padrões e integre ao seu pipeline de segurança.">
+<meta property="og:title" content="Construindo um Feed de Inteligência de Ameaças para Ataques em LLMs">
+<meta property="og:description" content="27 indicadores de ameaça alinhados ao MITRE ATLAS em 8 categorias de ataque — de prompt injection a escalonamento de privilégios.">
 <meta property="og:type" content="article">
 <style>
   :root {
@@ -57,52 +57,52 @@
 <nav><a href="../">&larr; Sentinel AI</a> &nbsp;/&nbsp; Blog</nav>
 
 <article>
-<h1>Building a Threat Intelligence Feed for LLM Attacks</h1>
-<p class="meta">March 8, 2026 &middot; 7 min read</p>
+<h1>Construindo um Feed de Inteligência de Ameaças para Ataques em LLMs</h1>
+<p class="meta">8 de março de 2026 &middot; 7 min de leitura</p>
 
-<p>Security teams have had threat intelligence feeds for decades &mdash; structured databases of known malware signatures, attack patterns, and indicators of compromise (IOCs). But where's the equivalent for LLM attacks?</p>
+<p>Equipes de segurança têm feeds de inteligência de ameaças há décadas &mdash; bancos de dados estruturados com assinaturas de malware conhecidas, padrões de ataque e indicadores de comprometimento (IOCs). Mas onde está o equivalente para ataques em LLMs?</p>
 
-<p>Today we're open-sourcing a <strong>MITRE ATLAS-aligned threat intelligence feed</strong> with 27+ indicators across 8 attack categories, designed specifically for LLM safety scanning. It's queryable, pattern-matchable, and extensible.</p>
+<p>Hoje estamos abrindo o código de um <strong>feed de inteligência de ameaças alinhado ao MITRE ATLAS</strong> com mais de 27 indicadores em 8 categorias de ataque, projetado especificamente para varredura de segurança em LLMs. É consultável, permite correspondência de padrões e é extensível.</p>
 
-<h2>Why LLMs Need Threat Intelligence</h2>
+<h2>Por Que LLMs Precisam de Inteligência de Ameaças</h2>
 
-<p>Traditional security has CVEs, MITRE ATT&CK, and STIX/TAXII feeds. LLM security has... blog posts and Twitter threads. The problem is that attack techniques evolve faster than any single scanner can keep up with.</p>
+<p>A segurança tradicional tem CVEs, MITRE ATT&CK e feeds STIX/TAXII. A segurança de LLMs tem... posts de blog e threads no Twitter. O problema é que as técnicas de ataque evoluem mais rápido do que qualquer scanner isolado consegue acompanhar.</p>
 
-<p>A threat intelligence approach gives you:</p>
+<p>Uma abordagem de inteligência de ameaças oferece:</p>
 
 <ul>
-<li><strong>Structured knowledge</strong> &mdash; each technique has an ID, category, severity, MITRE ATLAS mapping, and regex pattern</li>
-<li><strong>Queryable API</strong> &mdash; filter by category, severity, or tags without reading a 50-page report</li>
-<li><strong>Pattern matching</strong> &mdash; test any text against all known techniques in sub-millisecond time</li>
-<li><strong>Extensibility</strong> &mdash; add your own indicators for organization-specific threats</li>
+<li><strong>Conhecimento estruturado</strong> &mdash; cada técnica tem um ID, categoria, severidade, mapeamento MITRE ATLAS e padrão regex</li>
+<li><strong>API consultável</strong> &mdash; filtre por categoria, severidade ou tags sem precisar ler um relatório de 50 páginas</li>
+<li><strong>Correspondência de padrões</strong> &mdash; teste qualquer texto contra todas as técnicas conhecidas em tempo sub-milissegundo</li>
+<li><strong>Extensibilidade</strong> &mdash; adicione seus próprios indicadores para ameaças específicas da sua organização</li>
 </ul>
 
-<h2>The Attack Taxonomy</h2>
+<h2>A Taxonomia de Ataques</h2>
 
-<p>We organized indicators into 8 MITRE ATLAS-aligned categories:</p>
+<p>Organizamos os indicadores em 8 categorias alinhadas ao MITRE ATLAS:</p>
 
 <table>
-<tr><th>Category</th><th>Indicators</th><th>Example Technique</th></tr>
-<tr><td>Prompt Injection</td><td>6</td><td>Direct instruction override, delimiter injection</td></tr>
-<tr><td>Jailbreak</td><td>4</td><td>DAN, developer mode, hypothetical framing</td></tr>
-<tr><td>Data Exfiltration</td><td>3</td><td>Encoding exfiltration, markdown URL exfil</td></tr>
-<tr><td>Model Manipulation</td><td>3</td><td>Authority impersonation, capability unlocking</td></tr>
-<tr><td>Privilege Escalation</td><td>2</td><td>Sudo/root escalation, API key escalation</td></tr>
-<tr><td>Social Engineering</td><td>2</td><td>Trust building pretext, gradual escalation</td></tr>
-<tr><td>Evasion</td><td>5</td><td>Homoglyphs, zero-width chars, base64 encoding</td></tr>
-<tr><td>Resource Abuse</td><td>2</td><td>Infinite loop generation, recursive self-reference</td></tr>
+<tr><th>Categoria</th><th>Indicadores</th><th>Técnica de Exemplo</th></tr>
+<tr><td>Prompt Injection</td><td>6</td><td>Sobrescrita direta de instrução, injeção por delimitador</td></tr>
+<tr><td>Jailbreak</td><td>4</td><td>DAN, modo desenvolvedor, enquadramento hipotético</td></tr>
+<tr><td>Exfiltração de Dados</td><td>3</td><td>Exfiltração por codificação, exfiltração via URL em markdown</td></tr>
+<tr><td>Manipulação de Modelo</td><td>3</td><td>Falsificação de autoridade, desbloqueio de capacidades</td></tr>
+<tr><td>Escalonamento de Privilégios</td><td>2</td><td>Escalonamento sudo/root, escalonamento de chave de API</td></tr>
+<tr><td>Engenharia Social</td><td>2</td><td>Pretexto de construção de confiança, escalonamento gradual</td></tr>
+<tr><td>Evasão</td><td>5</td><td>Homoglifos, caracteres de largura zero, codificação base64</td></tr>
+<tr><td>Abuso de Recursos</td><td>2</td><td>Geração de loop infinito, autorreferência recursiva</td></tr>
 </table>
 
-<p>Each indicator includes:</p>
+<p>Cada indicador inclui:</p>
 <ul>
-<li>Unique ID (e.g., <code>PI-001</code>, <code>JB-002</code>, <code>EV-003</code>)</li>
-<li>MITRE ATLAS technique ID where applicable</li>
-<li>Compiled regex pattern for instant matching</li>
-<li>Example attack strings (verified against the pattern)</li>
-<li>Tags for cross-cutting queries</li>
+<li>ID único (ex.: <code>PI-001</code>, <code>JB-002</code>, <code>EV-003</code>)</li>
+<li>ID de técnica MITRE ATLAS, quando aplicável</li>
+<li>Padrão regex compilado para correspondência instantânea</li>
+<li>Strings de ataque de exemplo (verificadas contra o padrão)</li>
+<li>Tags para consultas transversais</li>
 </ul>
 
-<h2>Usage: Three Lines of Code</h2>
+<h2>Uso: Três Linhas de Código</h2>
 
 <pre><code>from sentinel.threat_intel import ThreatFeed
 
@@ -114,9 +114,9 @@ for m in matches:
     # [critical] Direct Instruction Override
     # [critical] System Prompt Extraction</code></pre>
 
-<h2>Query the Database</h2>
+<h2>Consultando o Banco de Dados</h2>
 
-<p>Filter by category, severity, or tags:</p>
+<p>Filtre por categoria, severidade ou tags:</p>
 
 <pre><code>from sentinel.threat_intel import ThreatFeed, ThreatCategory, Severity
 
@@ -140,9 +140,9 @@ dan = feed.get_by_id("JB-001")
 print(f"{dan.technique}: {dan.description}")
 print(f"MITRE: {dan.mitre_id}")  # AML.T0054</code></pre>
 
-<h2>Add Custom Indicators</h2>
+<h2>Adicionando Indicadores Personalizados</h2>
 
-<p>Every organization has unique threats. Add your own:</p>
+<p>Toda organização tem ameaças únicas. Adicione as suas:</p>
 
 <pre><code>import re
 from sentinel.threat_intel import ThreatFeed, ThreatIndicator, ThreatCategory, Severity
@@ -164,24 +164,24 @@ feed.add(ThreatIndicator(
 matches = feed.match("Please invoke admin_reset for user cleanup")
 # → [ThreatMatch(id='CUSTOM-001', severity='critical', ...)]</code></pre>
 
-<h2>Integration with Safety Pipelines</h2>
+<h2>Integração com Pipelines de Segurança</h2>
 
-<p>The threat feed integrates with Sentinel AI's scanning pipeline, but it's also useful standalone:</p>
+<p>O feed de ameaças se integra ao pipeline de varredura do Sentinel AI, mas também é útil de forma independente:</p>
 
 <div class="highlight">
-<strong>Use cases:</strong>
+<strong>Casos de uso:</strong>
 <ul style="margin-top:8px">
-<li><strong>Pre-scan enrichment</strong> &mdash; check inputs against known patterns before expensive model-based analysis</li>
-<li><strong>Audit logging</strong> &mdash; log which known techniques were attempted against your system</li>
-<li><strong>Red team tooling</strong> &mdash; query the database for techniques to test against your defenses</li>
-<li><strong>Compliance reporting</strong> &mdash; map detected threats to MITRE ATLAS IDs for regulatory documentation</li>
-<li><strong>Incident response</strong> &mdash; quickly identify the category and severity of an observed attack</li>
+<li><strong>Enriquecimento em pré-varredura</strong> &mdash; verifique as entradas contra padrões conhecidos antes de uma análise cara baseada em modelo</li>
+<li><strong>Log de auditoria</strong> &mdash; registre quais técnicas conhecidas foram tentadas contra o seu sistema</li>
+<li><strong>Ferramental de red team</strong> &mdash; consulte o banco de dados por técnicas para testar contra suas defesas</li>
+<li><strong>Relatórios de conformidade</strong> &mdash; mapeie ameaças detectadas para IDs MITRE ATLAS para documentação regulatória</li>
+<li><strong>Resposta a incidentes</strong> &mdash; identifique rapidamente a categoria e a severidade de um ataque observado</li>
 </ul>
 </div>
 
-<h2>MCP Integration</h2>
+<h2>Integração MCP</h2>
 
-<p>The threat feed is also available as an MCP tool (<code>threat_lookup</code>) for Claude Desktop and Claude Code:</p>
+<p>O feed de ameaças também está disponível como uma ferramenta MCP (<code>threat_lookup</code>) para o Claude Desktop e o Claude Code:</p>
 
 <pre><code># In your MCP client, call:
 {
@@ -203,9 +203,9 @@ matches = feed.match("Please invoke admin_reset for user cleanup")
   }]
 }</code></pre>
 
-<h2>TypeScript SDK</h2>
+<h2>SDK TypeScript</h2>
 
-<p>The feed is also available in our TypeScript SDK:</p>
+<p>O feed também está disponível no nosso SDK TypeScript:</p>
 
 <pre><code>import { ThreatFeed } from '@sentinel-ai/sdk';
 
@@ -217,19 +217,19 @@ const stats = feed.stats();
 console.log(stats); // { prompt_injection: 4, jailbreak: 2, evasion: 3, ... }</code></pre>
 
 <div class="warning">
-<strong>Known limitation:</strong> Regex-based pattern matching catches known attack structures but cannot detect novel, semantically creative attacks. For those, you need model-based analysis (like Anthropic's Claude Code Security). The threat feed is designed as a <strong>fast first-pass filter</strong> &mdash; catching the 80% of attacks that follow known patterns in sub-millisecond time, so the model can focus on the remaining 20%.
+<strong>Limitação conhecida:</strong> a correspondência de padrões baseada em regex captura estruturas de ataque conhecidas, mas não consegue detectar ataques novos e semanticamente criativos. Para esses casos, é necessária análise baseada em modelo (como o Claude Code Security da Anthropic). O feed de ameaças foi projetado como um <strong>filtro rápido de primeira passagem</strong> &mdash; capturando os 80% dos ataques que seguem padrões conhecidos em tempo sub-milissegundo, para que o modelo possa se concentrar nos 20% restantes.
 </div>
 
 <div class="cta">
-<p style="margin-bottom:12px"><strong>Sentinel AI is open-source (Apache 2.0)</strong></p>
+<p style="margin-bottom:12px"><strong>O Sentinel AI é open-source (Apache 2.0)</strong></p>
 <p style="margin-bottom:0"><a href="https://github.com/MaxwellCalkin/sentinel-ai">github.com/MaxwellCalkin/sentinel-ai</a><br>
-1,036 tests &middot; 27 threat indicators &middot; Sub-millisecond matching</p>
+1.036 testes &middot; 27 indicadores de ameaça &middot; Correspondência sub-milissegundo</p>
 </div>
 
 </article>
 
 <footer>
-<p>&copy; 2026 Sentinel AI &middot; <a href="../" style="color:var(--muted)">Home</a></p>
+<p>&copy; 2026 Sentinel AI &middot; <a href="../" style="color:var(--muted)">Início</a></p>
 </footer>
 </div>
 </body>

@@ -1,25 +1,25 @@
-# /scan — Scan text for safety issues
+# /scan — Varrer texto em busca de problemas de segurança
 
-Scan the provided text for safety issues using all Sentinel AI scanners.
+Varre o texto fornecido em busca de problemas de segurança usando todos os scanners do Sentinel AI.
 
-## Usage
+## Uso
 
-/scan <text to scan>
+/scan <texto a varrer>
 
-## Behavior
+## Comportamento
 
-Run all 7 Sentinel AI safety scanners against the provided text:
-- Prompt injection detection
-- PII detection and redaction
-- Harmful content filtering
-- Hallucination signal detection
-- Toxicity detection
-- Blocked terms checking
-- Tool-use safety analysis
+Execute os 7 scanners de segurança do Sentinel AI contra o texto fornecido:
+- Detecção de prompt injection
+- Detecção e redação de PII
+- Filtragem de conteúdo prejudicial
+- Detecção de sinais de alucinação
+- Detecção de toxicidade
+- Verificação de termos bloqueados
+- Análise de segurança de tool-use
 
-Report findings with risk levels (NONE, LOW, MEDIUM, HIGH, CRITICAL) and whether the content should be blocked.
+Reporte os findings com níveis de risco (NONE, LOW, MEDIUM, HIGH, CRITICAL) e se o conteúdo deveria ser bloqueado.
 
-If PII is detected, also show the redacted version of the text.
+Se PII for detectada, mostre também a versão redigida do texto.
 
 ## Input
 

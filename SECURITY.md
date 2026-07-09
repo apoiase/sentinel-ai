@@ -1,44 +1,44 @@
-# Security Policy
+# Política de Segurança
 
-## Supported Versions
+## Versões Suportadas
 
-| Version | Supported          |
+| Versão  | Suportada          |
 |---------|--------------------|
-| 0.5.x   | Yes                |
-| < 0.5   | No                 |
+| 0.5.x   | Sim                |
+| < 0.5   | Não                |
 
-## Reporting a Vulnerability
+## Reportando uma Vulnerabilidade
 
-If you discover a security vulnerability in Sentinel AI, please report it responsibly:
+Se você descobrir uma vulnerabilidade de segurança no Sentinel AI, por favor reporte de forma responsável:
 
-1. **Do NOT open a public issue.**
-2. Email: [security@sentinel-ai.dev](mailto:security@sentinel-ai.dev) or use [GitHub Security Advisories](https://github.com/MaxwellCalkin/sentinel-ai/security/advisories/new).
-3. Include:
-   - Description of the vulnerability
-   - Steps to reproduce
-   - Impact assessment
-   - Suggested fix (if any)
+1. **NÃO abra uma issue pública.**
+2. E-mail: [security@sentinel-ai.dev](mailto:security@sentinel-ai.dev) ou use os [GitHub Security Advisories](https://github.com/MaxwellCalkin/sentinel-ai/security/advisories/new).
+3. Inclua:
+   - Descrição da vulnerabilidade
+   - Passos para reproduzir
+   - Avaliação de impacto
+   - Sugestão de correção (se houver)
 
-We aim to acknowledge reports within 48 hours and provide a fix within 7 days for critical issues.
+Nosso objetivo é confirmar o recebimento de reports em até 48 horas e fornecer uma correção em até 7 dias para problemas críticos.
 
-## Scope
+## Escopo
 
-The following are in scope:
-- Scanner bypass techniques (e.g., evasion patterns that bypass prompt injection detection)
-- False negative gaps in PII detection
-- Vulnerabilities in the API server (`sentinel serve`)
-- Authentication/authorization bypass in the auth module
-- Injection vulnerabilities in the CLI or MCP server
+Estão dentro do escopo:
+- Técnicas de bypass do scanner (ex.: padrões de evasão que burlam a detecção de prompt injection)
+- Lacunas de falso negativo na detecção de PII
+- Vulnerabilidades no servidor da API (`sentinel serve`)
+- Bypass de autenticação/autorização no módulo de auth
+- Vulnerabilidades de injeção na CLI ou no servidor MCP
 
-Out of scope:
-- Denial of service via large input (we document no size limits)
-- Issues in optional dependencies (FastAPI, uvicorn, etc.)
+Fora do escopo:
+- Denial of service via input grande (não documentamos limites de tamanho)
+- Problemas em dependências opcionais (FastAPI, uvicorn, etc.)
 
-## Security Design
+## Design de Segurança
 
-Sentinel AI is designed with security as a core principle:
+O Sentinel AI foi projetado com segurança como princípio central:
 
-- **No network calls**: Core scanning is entirely local — no data leaves your machine.
-- **No persistent storage**: Scanned text is never written to disk or logged by default.
-- **Minimal dependencies**: Only `regex` in the core library to minimize supply chain risk.
-- **Pattern-based**: Deterministic behavior — no model inference, no side channels.
+- **Sem chamadas de rede**: A varredura principal é inteiramente local — nenhum dado sai da sua máquina.
+- **Sem armazenamento persistente**: O texto varrido nunca é gravado em disco nem logado por padrão.
+- **Dependências mínimas**: Apenas `regex` na biblioteca principal, para minimizar o risco de supply chain.
+- **Baseado em padrões**: Comportamento determinístico — sem inferência de modelo, sem side channels.

