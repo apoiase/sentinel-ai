@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Turning CLAUDE.md Rules into Deterministic Guardrails | Sentinel AI</title>
-<meta name="description" content="CLAUDE.md rules are just suggestions the model can ignore. ClaudeMdEnforcer converts them into deterministic checks that actually block violations.">
-<meta property="og:title" content="Turning CLAUDE.md Rules into Deterministic Guardrails">
-<meta property="og:description" content="Why your CLAUDE.md rules are just suggestions, and how to make them enforceable with Sentinel AI.">
+<title>Transformando Regras do CLAUDE.md em Guardrails Determinísticos | Sentinel AI</title>
+<meta name="description" content="Regras do CLAUDE.md são apenas sugestões que o modelo pode ignorar. O ClaudeMdEnforcer as converte em verificações determinísticas que realmente bloqueiam violações.">
+<meta property="og:title" content="Transformando Regras do CLAUDE.md em Guardrails Determinísticos">
+<meta property="og:description" content="Por que suas regras do CLAUDE.md são apenas sugestões, e como torná-las obrigatórias com o Sentinel AI.">
 <meta property="og:type" content="article">
 <style>
   :root {
@@ -58,16 +58,16 @@
 <nav><a href="../">&larr; Sentinel AI</a> &nbsp;/&nbsp; Blog</nav>
 
 <article>
-<h1>Turning CLAUDE.md Rules into Deterministic Guardrails</h1>
-<p class="meta">March 8, 2026 &middot; 7 min read</p>
+<h1>Transformando Regras do CLAUDE.md em Guardrails Determinísticos</h1>
+<p class="meta">8 de março de 2026 &middot; 7 min de leitura</p>
 
-<p>Every Claude Code project has a <code>CLAUDE.md</code> file with rules like "Never use <code>rm -rf</code>" or "Do not access <code>.env</code>." These rules are critical for safety &mdash; but they're just <em>suggestions</em>. The model reads them, understands them, and usually follows them. But "usually" isn't good enough when the stakes are production data, credentials, or infrastructure.</p>
+<p>Todo projeto do Claude Code tem um arquivo <code>CLAUDE.md</code> com regras como "Nunca use <code>rm -rf</code>" ou "Não acesse <code>.env</code>." Essas regras são críticas para a segurança &mdash; mas são apenas <em>sugestões</em>. O modelo as lê, as entende e geralmente as segue. Mas "geralmente" não é bom o suficiente quando o que está em jogo são dados de produção, credenciais ou infraestrutura.</p>
 
-<p>Today we're releasing <strong>ClaudeMdEnforcer</strong>: a tool that reads your CLAUDE.md, extracts the prohibition rules, and converts them into deterministic checks that <em>actually block violations</em> before they execute.</p>
+<p>Hoje estamos lançando o <strong>ClaudeMdEnforcer</strong>: uma ferramenta que lê seu CLAUDE.md, extrai as regras de proibição e as converte em verificações determinísticas que <em>realmente bloqueiam violações</em> antes que sejam executadas.</p>
 
-<h2>The Problem: Rules Without Enforcement</h2>
+<h2>O Problema: Regras Sem Aplicação</h2>
 
-<p>Consider a typical CLAUDE.md:</p>
+<p>Considere um CLAUDE.md típico:</p>
 
 <pre><code># Project Rules
 - Never use `rm -rf`
@@ -75,36 +75,36 @@
 - Never run `git push --force`
 - Do not modify files in `tests/` without asking</code></pre>
 
-<p>These rules exist in the model's context window. The model sees them and generally complies. But there are failure modes:</p>
+<p>Essas regras existem na janela de contexto do modelo. O modelo as vê e geralmente cumpre. Mas há modos de falha:</p>
 
 <div class="danger">
-<strong>When CLAUDE.md rules fail:</strong>
+<strong>Quando as regras do CLAUDE.md falham:</strong>
 <ul style="margin-top: 8px;">
-<li><strong>Context window overflow</strong> &mdash; Long sessions push CLAUDE.md instructions out of the context window</li>
-<li><strong>Prompt injection</strong> &mdash; An attacker's payload in a file overrides CLAUDE.md instructions</li>
-<li><strong>Jailbreaks</strong> &mdash; Adversarial prompts convince the model to ignore its instructions</li>
-<li><strong>Model updates</strong> &mdash; A new model version may interpret rules differently</li>
-<li><strong>Ambiguity</strong> &mdash; "Do not modify tests/" &mdash; does renaming a test file count?</li>
+<li><strong>Overflow da janela de contexto</strong> &mdash; sessões longas empurram as instruções do CLAUDE.md para fora da janela de contexto</li>
+<li><strong>Prompt injection</strong> &mdash; o payload de um atacante em um arquivo sobrepõe as instruções do CLAUDE.md</li>
+<li><strong>Jailbreaks</strong> &mdash; prompts adversariais convencem o modelo a ignorar suas instruções</li>
+<li><strong>Atualizações de modelo</strong> &mdash; uma nova versão do modelo pode interpretar as regras de forma diferente</li>
+<li><strong>Ambiguidade</strong> &mdash; "Não modifique tests/" &mdash; renomear um arquivo de teste conta?</li>
 </ul>
 </div>
 
-<p>The fundamental issue: <strong>CLAUDE.md rules are enforced by the same system they're trying to constrain.</strong> That's like asking a program to enforce its own security policy without an OS kernel.</p>
+<p>A questão fundamental: <strong>as regras do CLAUDE.md são aplicadas pelo mesmo sistema que elas tentam restringir.</strong> É como pedir para um programa aplicar sua própria política de segurança sem um kernel de SO.</p>
 
-<h2>The Solution: Deterministic Enforcement</h2>
+<h2>A Solução: Aplicação Determinística</h2>
 
-<p>ClaudeMdEnforcer adds a kernel-level enforcement layer. It parses your CLAUDE.md, extracts prohibition rules using NLP pattern matching, and generates deterministic checks that run <em>outside</em> the model's control:</p>
+<p>O ClaudeMdEnforcer adiciona uma camada de aplicação em nível de kernel. Ele faz o parsing do seu CLAUDE.md, extrai regras de proibição usando pattern matching de NLP e gera verificações determinísticas que rodam <em>fora</em> do controle do modelo:</p>
 
 <pre><code>from sentinel import ClaudeMdEnforcer
 
-# Parse your CLAUDE.md
+# Faz o parsing do seu CLAUDE.md
 enforcer = ClaudeMdEnforcer.from_file("CLAUDE.md")
 
-# Check a tool call
+# Verifica uma tool call
 verdict = enforcer.check("bash", {"command": "rm -rf /tmp"})
 print(verdict.allowed)       # False
 print(verdict.violated_rules) # ["Never use `rm -rf`"]
 
-# See what rules were extracted
+# Veja quais regras foram extraídas
 print(enforcer.summary())
 # Extracted 4 enforceable rule(s) from CLAUDE.md:
 #   Blocked Commands (2):
@@ -114,16 +114,16 @@ print(enforcer.summary())
 #     L3 .env  — Do not access `.env` or `.aws/credentials`
 #     L5 tests/  — Do not modify files in `tests/`</code></pre>
 
-<h2>How It Works</h2>
+<h2>Como Funciona</h2>
 
-<p>ClaudeMdEnforcer uses a three-stage pipeline:</p>
+<p>O ClaudeMdEnforcer usa um pipeline de três estágios:</p>
 
-<h3>1. Prohibition Detection</h3>
+<h3>1. Detecção de Proibições</h3>
 
-<p>The parser identifies prohibition rules using linguistic patterns:</p>
+<p>O parser identifica regras de proibição usando padrões linguísticos:</p>
 
 <table>
-<tr><th>Pattern</th><th>Example</th></tr>
+<tr><th>Padrão</th><th>Exemplo</th></tr>
 <tr><td><code>never X</code></td><td>"Never use rm -rf"</td></tr>
 <tr><td><code>do not X</code></td><td>"Do not access .env"</td></tr>
 <tr><td><code>must not X</code></td><td>"You must not run wget"</td></tr>
@@ -131,11 +131,11 @@ print(enforcer.summary())
 <tr><td><code>avoid X</code></td><td>"Avoid modifying the database"</td></tr>
 </table>
 
-<p>It handles Markdown formatting: list items, backtick-quoted content, bold/italic, and prose paragraphs. Regular documentation (like "the user should not see errors") is ignored &mdash; only actionable tool-constraining rules are extracted.</p>
+<p>Ele lida com formatação Markdown: itens de lista, conteúdo entre crases, negrito/itálico e parágrafos de texto corrido. Documentação comum (como "o usuário não deve ver erros") é ignorada &mdash; só regras acionáveis que restringem ferramentas são extraídas.</p>
 
-<h3>2. Command &amp; Path Extraction</h3>
+<h3>2. Extração de Comando e Caminho</h3>
 
-<p>Once a prohibition is identified, the parser extracts the specific command, path, or tool being blocked:</p>
+<p>Uma vez identificada uma proibição, o parser extrai o comando, caminho ou ferramenta específicos que estão sendo bloqueados:</p>
 
 <ul>
 <li><code>"Never use `rm -rf`"</code> &rarr; blocked_command: <code>rm -rf</code></li>
@@ -144,19 +144,19 @@ print(enforcer.summary())
 <li><code>"Never run `git push --force`"</code> &rarr; blocked_command: <code>git push --force</code></li>
 </ul>
 
-<h3>3. Runtime Enforcement</h3>
+<h3>3. Aplicação em Tempo de Execução</h3>
 
-<p>Each extracted rule becomes a compiled regex that's tested against every tool call. The check runs in microseconds &mdash; no LLM inference, no API calls, no latency.</p>
+<p>Cada regra extraída vira uma regex compilada que é testada contra cada tool call. A verificação roda em microssegundos &mdash; sem inferência de LLM, sem chamadas de API, sem latência.</p>
 
-<h2>Integration with Claude Code Hooks</h2>
+<h2>Integração com Hooks do Claude Code</h2>
 
-<p>The killer feature: ClaudeMdEnforcer plugs directly into Claude Code's <code>PreToolUse</code> hook system. Every tool call is checked before execution:</p>
+<p>O recurso matador: o ClaudeMdEnforcer se conecta diretamente ao sistema de hooks <code>PreToolUse</code> do Claude Code. Toda tool call é verificada antes da execução:</p>
 
-<pre><code># Install sentinel and configure hooks:
+<pre><code># Instala o sentinel e configura os hooks:
 pip install sentinel-guardrails
 sentinel init
 
-# Or manually add to .claude/settings.json:
+# Ou adicione manualmente ao .claude/settings.json:
 {
   "hooks": {
     "PreToolUse": [{
@@ -169,46 +169,46 @@ sentinel init
   }
 }</code></pre>
 
-<p>Now every <code>Bash</code>, <code>Write</code>, and <code>Edit</code> call is checked against your CLAUDE.md rules. If a rule is violated, the tool call is blocked with exit code 2 and a clear message explaining why.</p>
+<p>Agora toda chamada de <code>Bash</code>, <code>Write</code> e <code>Edit</code> é verificada contra suas regras do CLAUDE.md. Se uma regra for violada, a tool call é bloqueada com exit code 2 e uma mensagem clara explicando o motivo.</p>
 
-<h2>CLI Usage</h2>
+<h2>Uso via CLI</h2>
 
-<p>The <code>sentinel enforce</code> command gives you full access from the terminal:</p>
+<p>O comando <code>sentinel enforce</code> te dá acesso completo pelo terminal:</p>
 
-<pre><code># Extract and display rules
+<pre><code># Extrai e exibe as regras
 sentinel enforce --file CLAUDE.md --show-rules
 
-# Check a specific tool call
+# Verifica uma tool call específica
 sentinel enforce --file CLAUDE.md --tool bash --command "rm -rf /tmp"
-# Output: [BLOCKED] bash — Rule violated: Never use `rm -rf`
+# Saída: [BLOCKED] bash — Rule violated: Never use `rm -rf`
 
-# Export as a guard policy YAML
+# Exporta como uma guard policy YAML
 sentinel enforce --file CLAUDE.md --export-policy > policy.yaml
 
-# JSON output for CI/CD integration
+# Saída em JSON para integração com CI/CD
 sentinel enforce --file CLAUDE.md --export-policy --format json</code></pre>
 
-<h2>Policy Generation</h2>
+<h2>Geração de Política</h2>
 
-<p>ClaudeMdEnforcer can export its extracted rules as a <code>GuardPolicy</code> &mdash; a declarative policy object that works with SessionGuard for full session-level enforcement:</p>
+<p>O ClaudeMdEnforcer pode exportar suas regras extraídas como uma <code>GuardPolicy</code> &mdash; um objeto de política declarativo que funciona com o SessionGuard para aplicação completa em nível de sessão:</p>
 
 <pre><code>enforcer = ClaudeMdEnforcer.from_file("CLAUDE.md")
 
-# Convert to a guard policy
+# Converte para uma guard policy
 policy = enforcer.to_guard_policy()
 
-# Create a session guard with the policy
+# Cria um session guard com a política
 guard = policy.create_guard(session_id="agent-session-1")
 
-# Now every tool call is checked
+# Agora toda tool call é verificada
 verdict = guard.check("bash", {"command": "rm -rf /"})
 # Blocked by CLAUDE.md rule AND by built-in dangerous command detection</code></pre>
 
-<p>This gives you layered defense: CLAUDE.md rules plus built-in safety scanning, all in one <code>check()</code> call.</p>
+<p>Isso te dá defesa em camadas: regras do CLAUDE.md mais escaneamento de segurança embutido, tudo em uma única chamada <code>check()</code>.</p>
 
-<h2>TypeScript SDK</h2>
+<h2>SDK em TypeScript</h2>
 
-<p>ClaudeMdEnforcer is also available in the TypeScript SDK:</p>
+<p>O ClaudeMdEnforcer também está disponível no SDK TypeScript:</p>
 
 <pre><code>import { ClaudeMdEnforcer } from '@sentinel-ai/sdk';
 
@@ -222,53 +222,53 @@ if (!verdict.allowed) {
 // Export to policy
 const policy = enforcer.toGuardPolicy();</code></pre>
 
-<h2>What Gets Extracted (and What Doesn't)</h2>
+<h2>O Que É Extraído (e o Que Não É)</h2>
 
 <div class="highlight">
-<strong>Extracted as enforceable rules:</strong>
+<strong>Extraído como regras aplicáveis:</strong>
 <ul style="margin-top: 8px;">
-<li>"Never use <code>rm -rf</code>" &rarr; blocks any bash command containing <code>rm -rf</code></li>
-<li>"Do not access <code>.env</code>" &rarr; blocks file reads/writes to <code>.env</code></li>
-<li>"curl is forbidden" &rarr; blocks all <code>curl</code> tool calls</li>
-<li>"Blocked commands: mkfs, dd, fdisk" &rarr; blocks each listed command</li>
+<li>"Never use <code>rm -rf</code>" &rarr; bloqueia qualquer comando bash contendo <code>rm -rf</code></li>
+<li>"Do not access <code>.env</code>" &rarr; bloqueia leituras/escritas de arquivo em <code>.env</code></li>
+<li>"curl is forbidden" &rarr; bloqueia todas as tool calls de <code>curl</code></li>
+<li>"Blocked commands: mkfs, dd, fdisk" &rarr; bloqueia cada comando listado</li>
 </ul>
 </div>
 
 <div class="warning">
-<strong>Not extracted (by design):</strong>
+<strong>Não extraído (por design):</strong>
 <ul style="margin-top: 8px;">
-<li>"The application should handle errors gracefully" &mdash; not a tool constraint</li>
-<li>"Use TypeScript for new files" &mdash; affirmative preference, not a prohibition</li>
-<li>"Follow PEP 8 style" &mdash; style guidance, not a security rule</li>
+<li>"The application should handle errors gracefully" &mdash; não é uma restrição de ferramenta</li>
+<li>"Use TypeScript for new files" &mdash; preferência afirmativa, não uma proibição</li>
+<li>"Follow PEP 8 style" &mdash; orientação de estilo, não uma regra de segurança</li>
 </ul>
 </div>
 
-<p>The parser deliberately focuses on <strong>security-relevant prohibitions</strong> &mdash; rules that constrain what tools can do. Style preferences and architectural guidance remain in the model's context where they belong.</p>
+<p>O parser foca deliberadamente em <strong>proibições relevantes para segurança</strong> &mdash; regras que restringem o que as ferramentas podem fazer. Preferências de estilo e orientação arquitetural permanecem no contexto do modelo, onde pertencem.</p>
 
-<h2>Defense in Depth</h2>
+<h2>Defesa em Profundidade</h2>
 
-<p>ClaudeMdEnforcer is one layer in a defense-in-depth strategy:</p>
+<p>O ClaudeMdEnforcer é uma camada de uma estratégia de defesa em profundidade:</p>
 
 <table>
-<tr><th>Layer</th><th>What</th><th>Enforced By</th></tr>
-<tr><td>1</td><td>CLAUDE.md rules</td><td>Model context (soft)</td></tr>
-<tr><td>2</td><td>ClaudeMdEnforcer</td><td>Deterministic regex (hard)</td></tr>
-<tr><td>3</td><td>SessionGuard</td><td>Attack chain detection (smart)</td></tr>
-<tr><td>4</td><td>GuardPolicy</td><td>Declarative YAML policy (configurable)</td></tr>
+<tr><th>Camada</th><th>O Quê</th><th>Aplicado Por</th></tr>
+<tr><td>1</td><td>Regras do CLAUDE.md</td><td>Contexto do modelo (soft)</td></tr>
+<tr><td>2</td><td>ClaudeMdEnforcer</td><td>Regex determinística (hard)</td></tr>
+<tr><td>3</td><td>SessionGuard</td><td>Detecção de cadeia de ataque (smart)</td></tr>
+<tr><td>4</td><td>GuardPolicy</td><td>Política YAML declarativa (configurável)</td></tr>
 </table>
 
-<p>Layer 1 handles the 99% case. Layers 2-4 catch the 1% that matters most.</p>
+<p>A camada 1 cobre 99% dos casos. As camadas 2 a 4 capturam o 1% que mais importa.</p>
 
 <div class="cta">
-<p><strong>Get started:</strong></p>
+<p><strong>Comece agora:</strong></p>
 <p><code>pip install sentinel-guardrails</code></p>
-<p style="margin-top: 12px;"><a href="https://github.com/MaxwellCalkin/sentinel-ai">GitHub</a> &nbsp;&middot;&nbsp; <a href="https://maxwellcalkin.github.io/sentinel-ai/">Documentation</a> &nbsp;&middot;&nbsp; <a href="https://pypi.org/project/sentinel-guardrails/">PyPI</a></p>
+<p style="margin-top: 12px;"><a href="https://github.com/MaxwellCalkin/sentinel-ai">GitHub</a> &nbsp;&middot;&nbsp; <a href="https://maxwellcalkin.github.io/sentinel-ai/">Documentação</a> &nbsp;&middot;&nbsp; <a href="https://pypi.org/project/sentinel-guardrails/">PyPI</a></p>
 </div>
 
 </article>
 
 <footer>
-<p>Sentinel AI &mdash; Real-time safety guardrails for LLM applications</p>
+<p>Sentinel AI &mdash; Guardrails de segurança em tempo real para aplicações LLM</p>
 <p>Apache 2.0 &middot; <a href="https://github.com/MaxwellCalkin/sentinel-ai" style="color: var(--accent2);">GitHub</a></p>
 </footer>
 

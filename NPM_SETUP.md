@@ -1,30 +1,30 @@
-# Publishing @sentinel-ai/sdk to npm
+# Publicando @sentinel-ai/sdk no npm
 
-## One-time setup
+## Configuração única
 
-1. Create an npm account at https://www.npmjs.com/signup (if you don't have one)
+1. Crie uma conta npm em https://www.npmjs.com/signup (caso não tenha uma)
 
-2. Create an npm access token:
-   - Go to https://www.npmjs.com/settings/~/tokens
-   - Click "Generate New Token" > "Classic Token"
-   - Select "Automation" type
-   - Copy the token
+2. Crie um token de acesso npm:
+   - Acesse https://www.npmjs.com/settings/~/tokens
+   - Clique em "Generate New Token" > "Classic Token"
+   - Selecione o tipo "Automation"
+   - Copie o token
 
-3. Add the token to GitHub:
-   - Go to https://github.com/MaxwellCalkin/sentinel-ai/settings/secrets/actions
-   - Click "New repository secret"
-   - Name: `NPM_TOKEN`
-   - Value: paste the npm token
+3. Adicione o token ao GitHub:
+   - Acesse https://github.com/MaxwellCalkin/sentinel-ai/settings/secrets/actions
+   - Clique em "New repository secret"
+   - Nome: `NPM_TOKEN`
+   - Valor: cole o token do npm
 
-4. Create the npm org (optional, for scoped packages):
-   - Go to https://www.npmjs.com/org/create
-   - Create org: `sentinel-ai`
-   - Or publish without scope by changing `name` in `sdk-js/package.json` to `sentinel-guardrails-js`
+4. Crie a org do npm (opcional, para pacotes com escopo):
+   - Acesse https://www.npmjs.com/org/create
+   - Crie a org: `sentinel-ai`
+   - Ou publique sem escopo alterando o `name` em `sdk-js/package.json` para `sentinel-guardrails-js`
 
-## Publishing
+## Publicação
 
-### Automatic (on GitHub release)
-The npm publish workflow runs automatically when you create a GitHub release. The JS SDK version in `sdk-js/package.json` should match the release tag.
+### Automática (em release do GitHub)
+O workflow de publicação no npm roda automaticamente quando você cria um release no GitHub. A versão do SDK JS em `sdk-js/package.json` deve corresponder à tag do release.
 
 ### Manual
 ```bash
@@ -33,12 +33,12 @@ npm login
 npm publish --access public
 ```
 
-## What gets published
+## O que é publicado
 
-The package includes:
-- `dist/index.js` — compiled JavaScript (CommonJS)
-- `dist/index.d.ts` — TypeScript type declarations
-- `README.md` — package documentation
+O pacote inclui:
+- `dist/index.js` — JavaScript compilado (CommonJS)
+- `dist/index.d.ts` — declarações de tipos TypeScript
+- `README.md` — documentação do pacote
 - `LICENSE` — Apache 2.0
 
-Source code (`src/`) and tests are NOT included in the npm package.
+O código-fonte (`src/`) e os testes NÃO estão incluídos no pacote npm.

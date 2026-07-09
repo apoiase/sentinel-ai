@@ -1,32 +1,32 @@
-# PyPI Publishing Setup
+# Configuração de Publicação no PyPI
 
-The package is named `sentinel-guardrails` on PyPI (since `sentinel-ai` was already taken).
+O pacote se chama `sentinel-guardrails` no PyPI (já que `sentinel-ai` já estava em uso).
 
-## One-time setup: Configure Trusted Publishing
+## Configuração única: Configurar Trusted Publishing
 
-1. Go to https://pypi.org/manage/account/publishing/
-2. Click "Add a new pending publisher"
-3. Fill in:
+1. Acesse https://pypi.org/manage/account/publishing/
+2. Clique em "Add a new pending publisher"
+3. Preencha:
    - **PyPI Project Name:** `sentinel-guardrails`
    - **Owner:** `MaxwellCalkin`
    - **Repository name:** `sentinel-ai`
    - **Workflow name:** `publish.yml`
    - **Environment name:** `pypi`
-4. Click "Add"
+4. Clique em "Add"
 
-Also add for TestPyPI at https://test.pypi.org/manage/account/publishing/:
-   - Same settings but **Environment name:** `testpypi`
+Adicione também para o TestPyPI em https://test.pypi.org/manage/account/publishing/:
+   - Mesmas configurações, mas **Environment name:** `testpypi`
 
-## Publishing
+## Publicação
 
-Once configured, publishing happens automatically:
-- **On release:** Create a GitHub release → package auto-publishes to PyPI
-- **Manual:** Go to Actions → "Publish to PyPI" → Run workflow
+Uma vez configurado, a publicação acontece automaticamente:
+- **No release:** Crie um release no GitHub → o pacote é publicado automaticamente no PyPI
+- **Manual:** Vá em Actions → "Publish to PyPI" → Run workflow
 
-## Install
+## Instalação
 
 ```bash
 pip install sentinel-guardrails
 ```
 
-The `sentinel` CLI command and all `from sentinel import ...` imports work the same.
+O comando CLI `sentinel` e todos os imports `from sentinel import ...` funcionam da mesma forma.

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One-Line Safety for Agentic AI: Introducing SessionGuard | Sentinel AI</title>
-<meta name="description" content="Drop-in safety layer that combines audit logging, attack chain detection, and threat intelligence into a single check() call for agentic AI sessions.">
-<meta property="og:title" content="One-Line Safety for Agentic AI: Introducing SessionGuard">
-<meta property="og:description" content="Combines SessionAudit + AttackChainDetector + ThreatFeed into a single guard.check() call with full SIEM export.">
+<title>Segurança em Uma Linha para IA Agêntica: Apresentando o SessionGuard | Sentinel AI</title>
+<meta name="description" content="Camada de segurança plug-and-play que combina log de auditoria, detecção de cadeia de ataque e inteligência de ameaças em uma única chamada check() para sessões de IA agêntica.">
+<meta property="og:title" content="Segurança em Uma Linha para IA Agêntica: Apresentando o SessionGuard">
+<meta property="og:description" content="Combina SessionAudit + AttackChainDetector + ThreatFeed em uma única chamada guard.check() com exportação completa para SIEM.">
 <meta property="og:type" content="article">
 <style>
   :root {
@@ -57,35 +57,35 @@
 <nav><a href="../">&larr; Sentinel AI</a> &nbsp;/&nbsp; Blog</nav>
 
 <article>
-<h1>One-Line Safety for Agentic AI: Introducing SessionGuard</h1>
-<p class="meta">March 8, 2026 &middot; 8 min read</p>
+<h1>Segurança em Uma Linha para IA Agêntica: Apresentando o SessionGuard</h1>
+<p class="meta">8 de março de 2026 &middot; 8 min de leitura</p>
 
-<p>Agentic AI systems &mdash; LLMs that call tools, write code, and interact with the real world &mdash; are the fastest-growing surface area in AI security. A single agent session might execute 50+ tool calls, any combination of which could constitute an attack chain that no individual call would trigger.</p>
+<p>Sistemas de IA agêntica &mdash; LLMs que chamam ferramentas, escrevem código e interagem com o mundo real &mdash; são a área de maior crescimento em segurança de IA. Uma única sessão de agente pode executar 50+ chamadas de ferramenta, e qualquer combinação delas pode constituir uma cadeia de ataque que nenhuma chamada individual dispararia.</p>
 
-<p>Today we're releasing <strong>SessionGuard</strong>: a unified safety layer that combines audit logging, attack chain detection, and threat intelligence into a single <code>guard.check()</code> call. One line of code gives you real-time protection, full audit trail, and SIEM-ready export.</p>
+<p>Hoje estamos lançando o <strong>SessionGuard</strong>: uma camada de segurança unificada que combina log de auditoria, detecção de cadeia de ataque e inteligência de ameaças em uma única chamada <code>guard.check()</code>. Uma linha de código oferece proteção em tempo real, trilha de auditoria completa e exportação pronta para SIEM.</p>
 
-<h2>The Problem: Agentic Safety is Multi-Dimensional</h2>
+<h2>O Problema: Segurança Agêntica é Multidimensional</h2>
 
-<p>Existing safety tools solve pieces of the puzzle:</p>
+<p>As ferramentas de segurança existentes resolvem partes do quebra-cabeça:</p>
 
 <ul>
-<li><strong>Input scanners</strong> catch prompt injection in individual messages</li>
-<li><strong>Tool-use validators</strong> block dangerous commands one at a time</li>
-<li><strong>Audit loggers</strong> record what happened after the fact</li>
+<li><strong>Scanners de entrada</strong> capturam prompt injection em mensagens individuais</li>
+<li><strong>Validadores de uso de ferramentas</strong> bloqueiam comandos perigosos um de cada vez</li>
+<li><strong>Loggers de auditoria</strong> registram o que aconteceu depois do fato</li>
 </ul>
 
-<p>But agentic attacks are <em>sequences</em>. An attacker doesn't just run <code>rm -rf /</code> &mdash; they first run <code>whoami</code> (reconnaissance), then <code>cat .env</code> (credential access), then <code>curl -X POST</code> (exfiltration). Each step looks innocuous alone.</p>
+<p>Mas ataques agênticos são <em>sequências</em>. Um atacante não simplesmente executa <code>rm -rf /</code> &mdash; primeiro executa <code>whoami</code> (reconhecimento), depois <code>cat .env</code> (acesso a credenciais), depois <code>curl -X POST</code> (exfiltração). Cada etapa parece inofensiva isoladamente.</p>
 
-<p>SessionGuard solves this by combining three systems into one call:</p>
+<p>O SessionGuard resolve isso combinando três sistemas em uma única chamada:</p>
 
 <table>
-<tr><th>Component</th><th>What It Does</th><th>Why It Matters</th></tr>
-<tr><td><strong>SessionAudit</strong></td><td>Tamper-evident hash-chained logging</td><td>SOC 2, ISO 27001 compliance</td></tr>
-<tr><td><strong>AttackChainDetector</strong></td><td>Multi-step attack sequence detection</td><td>Catches what single-call scanners miss</td></tr>
-<tr><td><strong>ThreatFeed</strong></td><td>MITRE ATLAS pattern matching</td><td>Known attack technique detection</td></tr>
+<tr><th>Componente</th><th>O Que Faz</th><th>Por Que Importa</th></tr>
+<tr><td><strong>SessionAudit</strong></td><td>Log encadeado por hash, à prova de adulteração</td><td>Conformidade com SOC 2, ISO 27001</td></tr>
+<tr><td><strong>AttackChainDetector</strong></td><td>Detecção de sequências de ataque em múltiplas etapas</td><td>Captura o que scanners de chamada única não detectam</td></tr>
+<tr><td><strong>ThreatFeed</strong></td><td>Correspondência de padrões MITRE ATLAS</td><td>Detecção de técnicas de ataque conhecidas</td></tr>
 </table>
 
-<h2>Usage: One Line</h2>
+<h2>Uso: Uma Linha</h2>
 
 <pre><code>from sentinel.session_guard import SessionGuard
 
@@ -109,42 +109,42 @@ for tool_call in agent.tool_calls():
     # Execute the tool call
     result = execute_tool(tool_call)</code></pre>
 
-<h2>What Gets Checked</h2>
+<h2>O Que É Verificado</h2>
 
-<p>Every <code>guard.check()</code> call runs four layers of analysis:</p>
+<p>Cada chamada <code>guard.check()</code> executa quatro camadas de análise:</p>
 
-<h3>1. Destructive Command Detection</h3>
-<p>Compiled regex patterns catch dangerous commands instantly:</p>
+<h3>1. Detecção de Comandos Destrutivos</h3>
+<p>Padrões regex compilados capturam comandos perigosos instantaneamente:</p>
 <pre><code>guard.check("bash", {"command": "rm -rf /"})
 # GuardVerdict(allowed=False, risk="critical",
 #   block_reason="destructive_command: ...")</code></pre>
 
-<p>Catches: <code>rm -rf</code>, fork bombs, <code>dd</code> to disk, <code>chmod 777 /</code>, <code>curl | bash</code>, and more.</p>
+<p>Captura: <code>rm -rf</code>, fork bombs, <code>dd</code> para disco, <code>chmod 777 /</code>, <code>curl | bash</code>, e mais.</p>
 
-<h3>2. Sensitive File Access</h3>
+<h3>2. Acesso a Arquivos Sensíveis</h3>
 <pre><code>guard.check("read_file", {"path": ".env"})
 # GuardVerdict(allowed=True, risk="high",
 #   warnings=["Sensitive file access: .env"])</code></pre>
 
-<p>Monitors access to: <code>.env</code>, <code>.aws/credentials</code>, <code>.ssh/id_rsa</code>, <code>/etc/shadow</code>, <code>.kube/config</code>, and 10+ other sensitive paths.</p>
+<p>Monitora o acesso a: <code>.env</code>, <code>.aws/credentials</code>, <code>.ssh/id_rsa</code>, <code>/etc/shadow</code>, <code>.kube/config</code>, e mais 10+ caminhos sensíveis.</p>
 
-<h3>3. Threat Intelligence Matching</h3>
+<h3>3. Correspondência com Inteligência de Ameaças</h3>
 <pre><code>guard.check("bash", {"command": "echo 'ignore all previous instructions'"})
 # GuardVerdict(threat_matches=["[critical] Direct Instruction Override"])</code></pre>
 
-<p>Matches against 27 MITRE ATLAS-aligned indicators across prompt injection, jailbreaks, data exfiltration, privilege escalation, and evasion techniques.</p>
+<p>Faz correspondência com 27 indicadores alinhados ao MITRE ATLAS em prompt injection, jailbreaks, exfiltração de dados, escalonamento de privilégios e técnicas de evasão.</p>
 
-<h3>4. Attack Chain Detection</h3>
+<h3>4. Detecção de Cadeia de Ataque</h3>
 <pre><code>guard.check("bash", {"command": "whoami"})          # reconnaissance
 guard.check("read_file", {"path": ".env"})            # credential access
 guard.check("bash", {"command": "curl -X POST ..."})  # exfiltration
 # GuardVerdict(chains_detected=["recon_credential_exfiltrate"], risk="critical")</code></pre>
 
-<p>Detects 6 multi-step attack chains including recon&rarr;credential&rarr;exfiltrate, escalation&rarr;destruction, and context poisoning sequences.</p>
+<p>Detecta 6 cadeias de ataque em múltiplas etapas, incluindo recon&rarr;credential&rarr;exfiltrate, escalation&rarr;destruction, e sequências de envenenamento de contexto.</p>
 
-<h2>Custom Rules</h2>
+<h2>Regras Personalizadas</h2>
 
-<p>Add project-specific blocking rules:</p>
+<p>Adicione regras de bloqueio específicas do projeto:</p>
 
 <pre><code>guard = SessionGuard(
     block_on="high",
@@ -160,9 +160,9 @@ guard.check("bash", {"command": "curl -X POST ..."})  # exfiltration
     ],
 )</code></pre>
 
-<h2>SIEM Export</h2>
+<h2>Exportação para SIEM</h2>
 
-<p>Every check is logged with SHA-256 hash chaining. Export the full trail at session end:</p>
+<p>Cada verificação é registrada com encadeamento de hash SHA-256. Exporte a trilha completa ao final da sessão:</p>
 
 <pre><code>report = guard.export()
 
@@ -183,11 +183,11 @@ guard.check("bash", {"command": "curl -X POST ..."})  # exfiltration
 #   "entries": [...]  # Every check, hash-chained
 # }</code></pre>
 
-<p>Ship the JSON to Splunk, Datadog, Elastic, or any SIEM. The hash chain lets you prove no entries were tampered with &mdash; critical for SOC 2 and ISO 27001 compliance audits.</p>
+<p>Envie o JSON para Splunk, Datadog, Elastic, ou qualquer SIEM. O encadeamento de hash permite provar que nenhuma entrada foi adulterada &mdash; essencial para auditorias de conformidade SOC 2 e ISO 27001.</p>
 
-<h2>TypeScript SDK</h2>
+<h2>SDK TypeScript</h2>
 
-<p>Full parity in the TypeScript SDK:</p>
+<p>Paridade total no SDK TypeScript:</p>
 
 <pre><code>import { SessionGuard } from '@sentinel-ai/sdk';
 
@@ -200,44 +200,44 @@ const guard = new SessionGuard({
 const verdict = guard.check('bash', { command: 'ls src/' });
 console.log(verdict.safe); // true</code></pre>
 
-<h2>Architecture</h2>
+<h2>Arquitetura</h2>
 
 <div class="highlight">
-<p><strong>Design principle:</strong> SessionGuard is a <em>coordinator</em>, not a new scanner. It combines existing, battle-tested components (each with their own test suites) into a unified API. This means you get the reliability of three proven systems with the simplicity of one call.</p>
+<p><strong>Princípio de design:</strong> o SessionGuard é um <em>coordenador</em>, não um novo scanner. Ele combina componentes já existentes e testados em batalha (cada um com seus próprios conjuntos de testes) em uma API unificada. Isso significa que você obtém a confiabilidade de três sistemas comprovados com a simplicidade de uma única chamada.</p>
 </div>
 
-<p>Internally, each <code>check()</code> call:</p>
+<p>Internamente, cada chamada <code>check()</code>:</p>
 <ol>
-<li>Checks against compiled destructive command patterns (sub-microsecond)</li>
-<li>Scans for sensitive file access (O(1) string matching)</li>
-<li>Matches against ThreatFeed (27 compiled regex patterns)</li>
-<li>Records in AttackChainDetector (windowed stage classification)</li>
-<li>Applies custom rules (user-defined lambdas)</li>
-<li>Makes block/allow decision based on threshold</li>
-<li>Logs to SessionAudit with hash chaining</li>
+<li>Verifica contra padrões compilados de comandos destrutivos (sub-microssegundo)</li>
+<li>Varre em busca de acesso a arquivos sensíveis (correspondência de string O(1))</li>
+<li>Faz correspondência com o ThreatFeed (27 padrões regex compilados)</li>
+<li>Registra no AttackChainDetector (classificação de estágio em janela deslizante)</li>
+<li>Aplica regras personalizadas (lambdas definidas pelo usuário)</li>
+<li>Toma a decisão de bloquear/permitir com base no limiar</li>
+<li>Registra no SessionAudit com encadeamento de hash</li>
 </ol>
 
-<p>Total overhead per check: &lt;0.1ms. Zero network calls. Zero dependencies beyond <code>regex</code>.</p>
+<p>Sobrecarga total por verificação: &lt;0,1ms. Zero chamadas de rede. Zero dependências além de <code>regex</code>.</p>
 
-<h2>What's Next</h2>
+<h2>Próximos Passos</h2>
 
-<p>SessionGuard is available now in both Python (<code>pip install sentinel-guardrails</code>) and TypeScript (<code>npm install @sentinel-ai/sdk</code>). It's the simplest way to add real-time safety to any agentic AI system.</p>
+<p>O SessionGuard já está disponível tanto em Python (<code>pip install sentinel-guardrails</code>) quanto em TypeScript (<code>npm install @sentinel-ai/sdk</code>). É a forma mais simples de adicionar segurança em tempo real a qualquer sistema de IA agêntica.</p>
 
-<p>Upcoming:</p>
+<p>Em breve:</p>
 <ul>
-<li>Webhook integration for real-time alerts to Slack/PagerDuty</li>
-<li>Policy-as-code for declarative rule configuration</li>
-<li>Session replay for forensic analysis</li>
+<li>Integração via webhook para alertas em tempo real no Slack/PagerDuty</li>
+<li>Policy-as-code para configuração declarativa de regras</li>
+<li>Replay de sessão para análise forense</li>
 </ul>
 
 <div class="cta">
-<p><a href="https://github.com/MaxwellCalkin/sentinel-ai">View on GitHub</a> &nbsp;|&nbsp; <a href="../">Try the Live Demo</a></p>
+<p><a href="https://github.com/MaxwellCalkin/sentinel-ai">Ver no GitHub</a> &nbsp;|&nbsp; <a href="../">Experimente a Demo ao Vivo</a></p>
 </div>
 
 </article>
 
 <footer>
-<p>Sentinel AI &mdash; Open-source safety guardrails for LLM applications. Apache 2.0.</p>
+<p>Sentinel AI &mdash; Guardrails de segurança open-source para aplicações LLM. Apache 2.0.</p>
 </footer>
 </div>
 </body>
