@@ -27,3 +27,8 @@ awesome-fastapi/
 awesome-prompt-injection/
 awesome-security/
 readme_temp.txt
+
+# NA-598 (big-picture rollout)
+.claude/settings.local.json
+.understand-anything/intermediate/
+graphify-out/.cache/
