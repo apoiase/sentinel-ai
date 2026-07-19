@@ -1,0 +1,6192 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "508de897f63632552c87d26c91ff3a419f18be69",
+  "generatedAt": "2026-07-18T18:28:36.579Z",
+  "files": {
+    "sentinel/core.py": {
+      "filePath": "sentinel/core.py",
+      "contentHash": "9a0227521884f8b2100695fb716af39f9fa8b4976475d2f436d8731ef39c6232",
+      "functions": [],
+      "classes": [
+        {
+          "name": "RiskLevel",
+          "methods": [
+            "__ge__",
+            "__gt__",
+            "__le__",
+            "__lt__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "Finding",
+          "methods": [],
+          "properties": [
+            "scanner",
+            "category",
+            "description",
+            "risk",
+            "span",
+            "metadata"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "ScanResult",
+          "methods": [
+            "safe"
+          ],
+          "properties": [
+            "text",
+            "findings",
+            "risk",
+            "blocked",
+            "latency_ms",
+            "redacted_text"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "Scanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "SentinelGuard",
+          "methods": [
+            "__init__",
+            "add_scanner",
+            "default",
+            "scan",
+            "scan_async",
+            "scan_batch",
+            "scan_batch_async",
+            "_apply_redactions"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 134
+        },
+        {
+          "name": "ScanCache",
+          "methods": [
+            "__init__",
+            "_key",
+            "scan",
+            "invalidate",
+            "stats"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 69
+        },
+        {
+          "name": "ScanMetrics",
+          "methods": [
+            "record",
+            "avg_latency_ms",
+            "block_rate",
+            "summary",
+            "reset"
+          ],
+          "properties": [
+            "total_scans",
+            "total_blocked",
+            "total_findings",
+            "total_latency_ms",
+            "risk_counts",
+            "category_counts",
+            "_lock"
+          ],
+          "exported": true,
+          "lineCount": 65
+        }
+      ],
+      "imports": [
+        {
+          "source": "asyncio",
+          "specifiers": [
+            "asyncio"
+          ]
+        },
+        {
+          "source": "hashlib",
+          "specifiers": [
+            "hashlib"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "OrderedDict"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "enum",
+          "specifiers": [
+            "Enum"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Protocol",
+            "Sequence"
+          ]
+        }
+      ],
+      "exports": [
+        "RiskLevel",
+        "Finding",
+        "ScanResult",
+        "Scanner",
+        "SentinelGuard",
+        "ScanCache",
+        "ScanMetrics"
+      ],
+      "totalLines": 342,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/__init__.py": {
+      "filePath": "sentinel/__init__.py",
+      "contentHash": "ca64a89ecf19d9c9a60f6976f9e84e20e364aff081a7cdd17b4f44ae9d50d9c2",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "ScanResult",
+            "RiskLevel",
+            "ScanCache",
+            "ScanMetrics"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.prompt_injection",
+          "specifiers": [
+            "PromptInjectionScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.pii",
+          "specifiers": [
+            "PIIScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.harmful_content",
+          "specifiers": [
+            "HarmfulContentScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.hallucination",
+          "specifiers": [
+            "HallucinationScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.toxicity",
+          "specifiers": [
+            "ToxicityScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.blocked_terms",
+          "specifiers": [
+            "BlockedTermsScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.tool_use",
+          "specifiers": [
+            "ToolUseScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.structured_output",
+          "specifiers": [
+            "StructuredOutputScanner"
+          ]
+        },
+        {
+          "source": "sentinel.policy",
+          "specifiers": [
+            "Policy"
+          ]
+        },
+        {
+          "source": "sentinel.streaming",
+          "specifiers": [
+            "StreamingGuard"
+          ]
+        },
+        {
+          "source": "sentinel.rsp_report",
+          "specifiers": [
+            "RiskReportGenerator"
+          ]
+        },
+        {
+          "source": "sentinel.conversation",
+          "specifiers": [
+            "ConversationGuard"
+          ]
+        },
+        {
+          "source": "sentinel.adversarial",
+          "specifiers": [
+            "AdversarialTester"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.code_scanner",
+          "specifiers": [
+            "CodeScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.obfuscation",
+          "specifiers": [
+            "ObfuscationScanner"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.secrets_scanner",
+          "specifiers": [
+            "SecretsScanner"
+          ]
+        },
+        {
+          "source": "sentinel.harden",
+          "specifiers": [
+            "harden_prompt",
+            "fence_user_input",
+            "sandwich_wrap",
+            "xml_tag_sections",
+            "HardeningConfig"
+          ]
+        },
+        {
+          "source": "sentinel.rate_guard",
+          "specifiers": [
+            "RateGuard"
+          ]
+        },
+        {
+          "source": "sentinel.compliance",
+          "specifiers": [
+            "ComplianceMapper",
+            "Framework",
+            "ComplianceStatus"
+          ]
+        },
+        {
+          "source": "sentinel.agent_monitor",
+          "specifiers": [
+            "AgentMonitor"
+          ]
+        },
+        {
+          "source": "sentinel.threat_intel",
+          "specifiers": [
+            "ThreatFeed",
+            "ThreatCategory",
+            "Severity"
+          ]
+        },
+        {
+          "source": "sentinel.attack_chain",
+          "specifiers": [
+            "AttackChainDetector"
+          ]
+        },
+        {
+          "source": "sentinel.session_audit",
+          "specifiers": [
+            "SessionAudit",
+            "AuditEntry"
+          ]
+        },
+        {
+          "source": "sentinel.session_guard",
+          "specifiers": [
+            "SessionGuard",
+            "GuardVerdict"
+          ]
+        },
+        {
+          "source": "sentinel.session_replay",
+          "specifiers": [
+            "SessionReplay",
+            "IncidentReport"
+          ]
+        },
+        {
+          "source": "sentinel.guard_policy",
+          "specifiers": [
+            "GuardPolicy"
+          ]
+        },
+        {
+          "source": "sentinel.claudemd_enforcer",
+          "specifiers": [
+            "ClaudeMdEnforcer",
+            "EnforcedRule",
+            "EnforcementVerdict"
+          ]
+        },
+        {
+          "source": "sentinel.evals",
+          "specifiers": [
+            "EvalRunner",
+            "EvalSuite",
+            "EvalCase",
+            "EvalResult",
+            "EvalReport"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_leak",
+          "specifiers": [
+            "PromptLeakDetector",
+            "LeakResult"
+          ]
+        },
+        {
+          "source": "sentinel.anthropic_wrapper",
+          "specifiers": [
+            "SafeAnthropic",
+            "SafeAsyncAnthropic",
+            "SafeResponse",
+            "SafetyError",
+            "InputBlockedError",
+            "OutputBlockedError"
+          ]
+        },
+        {
+          "source": "sentinel.openai_wrapper",
+          "specifiers": [
+            "SafeOpenAI",
+            "SafeAsyncOpenAI",
+            "SafeChatResponse"
+          ]
+        },
+        {
+          "source": "sentinel.token_budget",
+          "specifiers": [
+            "TokenBudget",
+            "TokenUsage",
+            "BudgetExceededError",
+            "estimate_cost"
+          ]
+        },
+        {
+          "source": "sentinel.data_classifier",
+          "specifiers": [
+            "DataClassifier",
+            "DataCategory",
+            "ClassificationResult"
+          ]
+        },
+        {
+          "source": "sentinel.output_validator",
+          "specifiers": [
+            "OutputValidator",
+            "ValidationResult",
+            "ValidationError"
+          ]
+        },
+        {
+          "source": "sentinel.self_heal",
+          "specifiers": [
+            "StructuredGenerator",
+            "GenerationResult"
+          ]
+        },
+        {
+          "source": "sentinel.risk_router",
+          "specifiers": [
+            "RiskRouter",
+            "ModelTier",
+            "RouteDecision"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_firewall",
+          "specifiers": [
+            "PromptFirewall",
+            "FirewallRule",
+            "FirewallAction"
+          ]
+        },
+        {
+          "source": "sentinel.similarity_guard",
+          "specifiers": [
+            "SimilarityGuard",
+            "SimilarityResult"
+          ]
+        },
+        {
+          "source": "sentinel.input_sanitizer",
+          "specifiers": [
+            "InputSanitizer",
+            "SanitizeResult"
+          ]
+        },
+        {
+          "source": "sentinel.audit_log",
+          "specifiers": [
+            "AuditLog",
+            "AuditEvent"
+          ]
+        },
+        {
+          "source": "sentinel.context_manager",
+          "specifiers": [
+            "ContextWindowManager"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_template",
+          "specifiers": [
+            "PromptTemplate",
+            "PromptLibrary"
+          ]
+        },
+        {
+          "source": "sentinel.guardrail_chain",
+          "specifiers": [
+            "GuardrailChain",
+            "OnFail",
+            "GuardrailStep"
+          ]
+        },
+        {
+          "source": "sentinel.response_classifier",
+          "specifiers": [
+            "ResponseClassifier",
+            "ResponseCategory"
+          ]
+        },
+        {
+          "source": "sentinel.canary_detector",
+          "specifiers": [
+            "CanaryDetector",
+            "CanaryResult",
+            "CanaryMatch"
+          ]
+        },
+        {
+          "source": "sentinel.cost_tracker",
+          "specifiers": [
+            "CostTracker",
+            "UsageRecord",
+            "ModelCost",
+            "CostBudgetExceeded"
+          ]
+        },
+        {
+          "source": "sentinel.ab_tester",
+          "specifiers": [
+            "ABTester",
+            "ABReport",
+            "VariantStats"
+          ]
+        },
+        {
+          "source": "sentinel.retry_policy",
+          "specifiers": [
+            "RetryPolicy",
+            "RetryResult"
+          ]
+        },
+        {
+          "source": "sentinel.embedding_guard",
+          "specifiers": [
+            "EmbeddingGuard",
+            "SemanticResult",
+            "SemanticMatch"
+          ]
+        },
+        {
+          "source": "sentinel.groundedness",
+          "specifiers": [
+            "GroundednessChecker",
+            "GroundednessResult",
+            "Claim"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_versioner",
+          "specifiers": [
+            "PromptVersioner",
+            "PromptVersion",
+            "PromptDiff"
+          ]
+        },
+        {
+          "source": "sentinel.circuit_breaker",
+          "specifiers": [
+            "CircuitBreaker",
+            "CircuitState",
+            "CircuitOpenError"
+          ]
+        },
+        {
+          "source": "sentinel.permission_guard",
+          "specifiers": [
+            "PermissionGuard",
+            "PermissionResult"
+          ]
+        },
+        {
+          "source": "sentinel.content_filter",
+          "specifiers": [
+            "ContentFilter",
+            "FilterResult",
+            "ContentCategory"
+          ]
+        },
+        {
+          "source": "sentinel.topic_guard",
+          "specifiers": [
+            "TopicGuard",
+            "TopicResult"
+          ]
+        },
+        {
+          "source": "sentinel.fewshot_protector",
+          "specifiers": [
+            "FewShotProtector",
+            "FewShotResult"
+          ]
+        },
+        {
+          "source": "sentinel.language_detector",
+          "specifiers": [
+            "LanguageDetector",
+            "LanguageResult"
+          ]
+        },
+        {
+          "source": "sentinel.bias_detector",
+          "specifiers": [
+            "BiasDetector",
+            "BiasResult"
+          ]
+        },
+        {
+          "source": "sentinel.watermark",
+          "specifiers": [
+            "WatermarkDetector",
+            "WatermarkResult",
+            "TextStats"
+          ]
+        },
+        {
+          "source": "sentinel.output_guard",
+          "specifiers": [
+            "OutputGuard",
+            "OutputCheckResult"
+          ]
+        },
+        {
+          "source": "sentinel.safety_score",
+          "specifiers": [
+            "SafetyScorer",
+            "SafetyScore"
+          ]
+        },
+        {
+          "source": "sentinel.redteam",
+          "specifiers": [
+            "RedTeamSuite",
+            "RedTeamReport",
+            "CategoryReport",
+            "AttackResult"
+          ]
+        },
+        {
+          "source": "sentinel.consent_tracker",
+          "specifiers": [
+            "ConsentTracker",
+            "ConsentRecord",
+            "ConsentStatus"
+          ]
+        },
+        {
+          "source": "sentinel.ratelimit_guard",
+          "specifiers": [
+            "RateLimitGuard",
+            "RateLimitResult",
+            "BucketStats"
+          ]
+        },
+        {
+          "source": "sentinel.diff_privacy",
+          "specifiers": [
+            "DiffPrivacy",
+            "NoiseResult",
+            "PrivateHistogram",
+            "PrivacyBudgetExhausted"
+          ]
+        },
+        {
+          "source": "sentinel.model_router",
+          "specifiers": [
+            "RouterStats",
+            "ContentModelRouter",
+            "ContentRouteDecision"
+          ]
+        },
+        {
+          "source": "sentinel.incident_tracker",
+          "specifiers": [
+            "IncidentTracker",
+            "Incident",
+            "IncidentSeverity",
+            "IncidentState",
+            "IncidentSummary"
+          ]
+        },
+        {
+          "source": "sentinel.policy_engine",
+          "specifiers": [
+            "PolicyEngine",
+            "PolicyResult",
+            "PolicyAction",
+            "PolicyViolation"
+          ]
+        },
+        {
+          "source": "sentinel.compliance_audit",
+          "specifiers": [
+            "ComplianceAuditor",
+            "AuditReport",
+            "CheckResult",
+            "CheckStatus"
+          ]
+        },
+        {
+          "source": "sentinel.token_counter",
+          "specifiers": [
+            "TokenCounter",
+            "TokenEstimate",
+            "TruncateResult"
+          ]
+        },
+        {
+          "source": "sentinel.response_sanitizer",
+          "specifiers": [
+            "ResponseSanitizer",
+            "SanitizeOutput"
+          ]
+        },
+        {
+          "source": "sentinel.context_isolation",
+          "specifiers": [
+            "ContextIsolation",
+            "IsolationResult",
+            "IsolationStats"
+          ]
+        },
+        {
+          "source": "sentinel.semantic_cache",
+          "specifiers": [
+            "SemanticCache",
+            "CacheHit",
+            "CacheStats"
+          ]
+        },
+        {
+          "source": "sentinel.input_validator",
+          "specifiers": [
+            "InputValidator",
+            "InputValidationResult"
+          ]
+        },
+        {
+          "source": "sentinel.anomaly_detector",
+          "specifiers": [
+            "AnomalyDetector",
+            "AnomalyReport",
+            "AnomalyFlag"
+          ]
+        },
+        {
+          "source": "sentinel.code_exec_guard",
+          "specifiers": [
+            "CodeExecGuard",
+            "CodeExecResult",
+            "CodeThreat"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_chain",
+          "specifiers": [
+            "PromptChain",
+            "ChainResult"
+          ]
+        },
+        {
+          "source": "sentinel.model_fingerprint",
+          "specifiers": [
+            "ModelFingerprint",
+            "FingerprintResult"
+          ]
+        },
+        {
+          "source": "sentinel.safety_dashboard",
+          "specifiers": [
+            "SafetyDashboard",
+            "DashboardSummary",
+            "TimeWindow"
+          ]
+        },
+        {
+          "source": "sentinel.tool_call_validator",
+          "specifiers": [
+            "ToolCallValidator",
+            "ToolValidationResult"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_shield",
+          "specifiers": [
+            "PromptShield",
+            "ShieldResult"
+          ]
+        },
+        {
+          "source": "sentinel.env_security",
+          "specifiers": [
+            "EnvSecurityChecker",
+            "EnvSecurityReport",
+            "EnvSecurityIssue"
+          ]
+        },
+        {
+          "source": "sentinel.data_masker",
+          "specifiers": [
+            "DataMasker",
+            "MaskResult"
+          ]
+        },
+        {
+          "source": "sentinel.multi_model",
+          "specifiers": [
+            "MultiModelGuard",
+            "ConsistencyResult"
+          ]
+        },
+        {
+          "source": "sentinel.factuality",
+          "specifiers": [
+            "FactualityChecker",
+            "FactualityResult",
+            "FactClaim"
+          ]
+        },
+        {
+          "source": "sentinel.output_formatter",
+          "specifiers": [
+            "OutputFormatter",
+            "FormatResult"
+          ]
+        },
+        {
+          "source": "sentinel.feedback_loop",
+          "specifiers": [
+            "FeedbackLoop",
+            "FeedbackEntry",
+            "FeedbackReport"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_optimizer",
+          "specifiers": [
+            "PromptOptimizer",
+            "OptimizationResult"
+          ]
+        },
+        {
+          "source": "sentinel.contextual_bandit",
+          "specifiers": [
+            "ContextualBandit",
+            "ArmStats",
+            "BanditResult",
+            "BanditReport"
+          ]
+        },
+        {
+          "source": "sentinel.explainability",
+          "specifiers": [
+            "ExplainabilityTracer",
+            "Explanation",
+            "TraceRecord",
+            "CheckRecord"
+          ]
+        },
+        {
+          "source": "sentinel.multi_turn",
+          "specifiers": [
+            "MultiTurnAnalyzer",
+            "MultiTurnReport",
+            "Turn"
+          ]
+        },
+        {
+          "source": "sentinel.semantic_router",
+          "specifiers": [
+            "SemanticRouter",
+            "SemanticRouteResult"
+          ]
+        },
+        {
+          "source": "sentinel.config_validator",
+          "specifiers": [
+            "ConfigValidator",
+            "ConfigResult",
+            "ConfigIssue"
+          ]
+        },
+        {
+          "source": "sentinel.health_check",
+          "specifiers": [
+            "HealthCheck",
+            "HealthReport",
+            "ComponentHealth"
+          ]
+        },
+        {
+          "source": "sentinel.message_queue",
+          "specifiers": [
+            "MessageQueue",
+            "QueueMessage",
+            "QueueStats"
+          ]
+        },
+        {
+          "source": "sentinel.latency_tracker",
+          "specifiers": [
+            "LatencyTracker",
+            "LatencyReport"
+          ]
+        },
+        {
+          "source": "sentinel.response_cache",
+          "specifiers": [
+            "ResponseCache",
+            "CacheResponse",
+            "ResponseCacheMetrics"
+          ]
+        },
+        {
+          "source": "sentinel.usage_quota",
+          "specifiers": [
+            "UsageQuota",
+            "QuotaStatus"
+          ]
+        },
+        {
+          "source": "sentinel.sensitivity_classifier",
+          "specifiers": [
+            "SensitivityClassifier",
+            "SensitivityResult"
+          ]
+        },
+        {
+          "source": "sentinel.conversation_memory",
+          "specifiers": [
+            "ConversationMemory",
+            "MemoryMessage",
+            "MemoryStats"
+          ]
+        },
+        {
+          "source": "sentinel.guardrail_metrics",
+          "specifiers": [
+            "GuardrailMetrics",
+            "CounterValue",
+            "GaugeValue",
+            "HistogramValue"
+          ]
+        },
+        {
+          "source": "sentinel.token_splitter",
+          "specifiers": [
+            "TokenSplitter",
+            "TextChunk"
+          ]
+        },
+        {
+          "source": "sentinel.access_control",
+          "specifiers": [
+            "AccessControl",
+            "AccessCheckResult"
+          ]
+        },
+        {
+          "source": "sentinel.output_benchmark",
+          "specifiers": [
+            "OutputBenchmark",
+            "BenchmarkScore",
+            "DimensionScore"
+          ]
+        },
+        {
+          "source": "sentinel.event_bus",
+          "specifiers": [
+            "EventBus",
+            "Event",
+            "EventStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_analytics",
+          "specifiers": [
+            "PromptAnalytics",
+            "PromptRecord",
+            "AnalyticsSummary"
+          ]
+        },
+        {
+          "source": "sentinel.model_card",
+          "specifiers": [
+            "ModelCard",
+            "CardValidation",
+            "SafetyRating",
+            "IntendedUse"
+          ]
+        },
+        {
+          "source": "sentinel.dependency_guard",
+          "specifiers": [
+            "DependencyGuard",
+            "PackageCheck",
+            "DependencyReport",
+            "TyposquatMatch"
+          ]
+        },
+        {
+          "source": "sentinel.schema_enforcer",
+          "specifiers": [
+            "SchemaEnforcer",
+            "EnforcementResult",
+            "CoercionResult"
+          ]
+        },
+        {
+          "source": "sentinel.risk_scorecard",
+          "specifiers": [
+            "RiskScorecard",
+            "ScorecardResult",
+            "ScorecardFinding",
+            "ScorecardComparison"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_registry",
+          "specifiers": [
+            "PromptRegistry",
+            "RegistryEntry",
+            "RegistryStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_benchmark",
+          "specifiers": [
+            "SafetyBenchmark",
+            "BenchmarkCase",
+            "BenchmarkReport",
+            "CategoryStats"
+          ]
+        },
+        {
+          "source": "sentinel.compliance_report",
+          "specifiers": [
+            "ComplianceReport",
+            "ReportOutput",
+            "FrameworkSummary",
+            "ComplianceControl"
+          ]
+        },
+        {
+          "source": "sentinel.threat_model",
+          "specifiers": [
+            "ThreatModel",
+            "ThreatAnalysis",
+            "Threat",
+            "ThreatComponent"
+          ]
+        },
+        {
+          "source": "sentinel.data_lineage",
+          "specifiers": [
+            "DataLineage",
+            "LineageNode",
+            "LineageEdge",
+            "FlowRecord",
+            "LineageValidation"
+          ]
+        },
+        {
+          "source": "sentinel.secret_rotator",
+          "specifiers": [
+            "SecretRotator",
+            "RotationStatus",
+            "RotationReport",
+            "RotationEvent"
+          ]
+        },
+        {
+          "source": "sentinel.attack_surface",
+          "specifiers": [
+            "AttackSurface",
+            "SurfaceAnalysis",
+            "Endpoint",
+            "Vulnerability",
+            "AttackDataFlow"
+          ]
+        },
+        {
+          "source": "sentinel.alert_manager",
+          "specifiers": [
+            "AlertManager",
+            "Alert",
+            "AlertStats"
+          ]
+        },
+        {
+          "source": "sentinel.context_guard",
+          "specifiers": [
+            "ContextGuard",
+            "ContextCheckResult",
+            "ConversationCheckResult",
+            "ContextGuardStats"
+          ]
+        },
+        {
+          "source": "sentinel.token_tracer",
+          "specifiers": [
+            "TokenTracer",
+            "TraceEntry",
+            "TracerReport"
+          ]
+        },
+        {
+          "source": "sentinel.safety_policy",
+          "specifiers": [
+            "SafetyPolicy",
+            "PolicyRule",
+            "PolicyEvaluation",
+            "RuleMatch"
+          ]
+        },
+        {
+          "source": "sentinel.privacy_guard",
+          "specifiers": [
+            "PrivacyGuard",
+            "PrivacyCheck",
+            "MinimizationResult",
+            "PrivacyReport"
+          ]
+        },
+        {
+          "source": "sentinel.response_filter",
+          "specifiers": [
+            "ResponseFilter",
+            "FilterResult",
+            "FilterStats"
+          ]
+        },
+        {
+          "source": "sentinel.intent_classifier",
+          "specifiers": [
+            "IntentClassifier",
+            "ClassificationOutput",
+            "IntentDef",
+            "ClassifierStats"
+          ]
+        },
+        {
+          "source": "sentinel.conversation_analyzer",
+          "specifiers": [
+            "ConversationAnalyzer",
+            "QualityScore",
+            "EngagementMetrics",
+            "ConvAnalysis"
+          ]
+        },
+        {
+          "source": "sentinel.output_monitor",
+          "specifiers": [
+            "OutputMonitor",
+            "MonitorEvent",
+            "MonitorReport",
+            "DriftReport",
+            "AnomalyEvent"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_injection_detector",
+          "specifiers": [
+            "PromptInjectionDetector",
+            "InjectionResult",
+            "InjectionExplanation",
+            "DetectorStats",
+            "PatternDef"
+          ]
+        },
+        {
+          "source": "sentinel.input_guard",
+          "specifiers": [
+            "InputGuard",
+            "GuardRule",
+            "GuardResult",
+            "GuardReport"
+          ]
+        },
+        {
+          "source": "sentinel.safety_reporter",
+          "specifiers": [
+            "SafetyReporter",
+            "SafetyEvent",
+            "TrendAnalysis",
+            "ReporterSummary"
+          ]
+        },
+        {
+          "source": "sentinel.embedding_drift",
+          "specifiers": [
+            "EmbeddingDrift",
+            "EmbeddingRecord",
+            "DriftCheck",
+            "DriftStats",
+            "DriftReport"
+          ]
+        },
+        {
+          "source": "sentinel.compliance_gate",
+          "specifiers": [
+            "ComplianceGate",
+            "ComplianceCheck",
+            "CheckOutcome",
+            "GateDecision",
+            "GateStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_decomposer",
+          "specifiers": [
+            "PromptDecomposer",
+            "SubTask",
+            "Decomposition",
+            "RecomposeResult",
+            "DecomposerStats"
+          ]
+        },
+        {
+          "source": "sentinel.model_validator",
+          "specifiers": [
+            "ModelValidator",
+            "FieldResult",
+            "ModelValidation",
+            "ValidatorStats",
+            "ModelValidationRule"
+          ]
+        },
+        {
+          "source": "sentinel.token_anomaly",
+          "specifiers": [
+            "TokenAnomaly",
+            "TokenRecord",
+            "AnomalyCheck",
+            "TokenAnomalyStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_contract",
+          "specifiers": [
+            "SafetyContract",
+            "Violation",
+            "ContractResult",
+            "ContractReport",
+            "ContractCondition"
+          ]
+        },
+        {
+          "source": "sentinel.output_censor",
+          "specifiers": [
+            "OutputCensor",
+            "CensorRule",
+            "CensorResult",
+            "CensorStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_sanitizer",
+          "specifiers": [
+            "PromptSanitizer",
+            "SanitizeConfig",
+            "SanitizeReport"
+          ]
+        },
+        {
+          "source": "sentinel.response_validator",
+          "specifiers": [
+            "ResponseValidator",
+            "ResponseCheck",
+            "ResponseValidation",
+            "ResponseValidatorStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_gateway",
+          "specifiers": [
+            "SafetyGateway",
+            "GatewayCheck",
+            "GatewayCheckResult",
+            "GatewayResult",
+            "GatewayStats"
+          ]
+        },
+        {
+          "source": "sentinel.adversarial_probe",
+          "specifiers": [
+            "AdversarialProbe",
+            "Probe",
+            "ProbeResult",
+            "ProbeReport"
+          ]
+        },
+        {
+          "source": "sentinel.decision_logger",
+          "specifiers": [
+            "DecisionLogger",
+            "Decision",
+            "DecisionSummary"
+          ]
+        },
+        {
+          "source": "sentinel.context_validator",
+          "specifiers": [
+            "ContextValidator",
+            "GroundingCheck",
+            "GroundingResult",
+            "GroundingStats"
+          ]
+        },
+        {
+          "source": "sentinel.policy_composer",
+          "specifiers": [
+            "PolicyComposer",
+            "ComposedPolicy",
+            "PolicyApplyResult",
+            "PolicyDiff",
+            "PolicyStats"
+          ]
+        },
+        {
+          "source": "sentinel.toxicity_filter",
+          "specifiers": [
+            "ToxicityFilter",
+            "ToxicityMatch",
+            "ToxicityResult",
+            "ToxicityStats"
+          ]
+        },
+        {
+          "source": "sentinel.request_throttler",
+          "specifiers": [
+            "RequestThrottler",
+            "ThrottleStatus",
+            "RequestDecision",
+            "ThrottlerStats"
+          ]
+        },
+        {
+          "source": "sentinel.output_tracer",
+          "specifiers": [
+            "OutputTracer",
+            "TraceTree",
+            "SpanSummary",
+            "TracerSpan"
+          ]
+        },
+        {
+          "source": "sentinel.claim_extractor",
+          "specifiers": [
+            "ClaimExtractor",
+            "ExtractedClaim",
+            "ExtractionResult",
+            "ExtractorStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_orchestrator",
+          "specifiers": [
+            "SafetyOrchestrator",
+            "PipelineComponent",
+            "ComponentOutcome",
+            "PipelineResult",
+            "OrchestratorStats"
+          ]
+        },
+        {
+          "source": "sentinel.interaction_logger",
+          "specifiers": [
+            "InteractionLogger",
+            "Interaction",
+            "InteractionSummary"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_validator",
+          "specifiers": [
+            "PromptValidator",
+            "ValidationRule",
+            "ValidationIssue",
+            "ValidationReport",
+            "ValidatorStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_middleware",
+          "specifiers": [
+            "SafetyMiddleware",
+            "MiddlewareHook",
+            "HookResult",
+            "MiddlewareResult",
+            "MiddlewareStats"
+          ]
+        },
+        {
+          "source": "sentinel.output_diversity",
+          "specifiers": [
+            "OutputDiversityChecker",
+            "DiversityScore",
+            "ComparisonResult",
+            "DiversityReport",
+            "DiversityStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_complexity",
+          "specifiers": [
+            "PromptComplexity",
+            "ComplexityScore",
+            "ComplexityComparison",
+            "ComplexityStats"
+          ]
+        },
+        {
+          "source": "sentinel.content_classifier_v2",
+          "specifiers": [
+            "ContentClassifierV2",
+            "LabelDefinition",
+            "ClassificationLabel",
+            "ClassificationResult",
+            "ClassifierConfig",
+            "ClassifierStats"
+          ]
+        },
+        {
+          "source": "sentinel.response_coherence",
+          "specifiers": [
+            "ResponseCoherence",
+            "CoherenceScore",
+            "CoherenceIssue",
+            "CoherenceReport",
+            "CoherenceStats"
+          ]
+        },
+        {
+          "source": "sentinel.embedding_validator",
+          "specifiers": [
+            "EmbeddingValidator",
+            "EmbeddingCheck",
+            "EmbeddingReport",
+            "EmbeddingProfile",
+            "EmbeddingValidatorStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_ensemble",
+          "specifiers": [
+            "SafetyEnsemble",
+            "CheckerVote",
+            "EnsembleDecision",
+            "EnsembleConfig",
+            "EnsembleStats"
+          ]
+        },
+        {
+          "source": "sentinel.token_estimator",
+          "specifiers": [
+            "TokenEstimator",
+            "TokenEstimate",
+            "CostEstimate",
+            "EstimatorStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_logger",
+          "specifiers": [
+            "SafetyLogger",
+            "SafetyLogEntry",
+            "LogFilter",
+            "LogSummary",
+            "LoggerStats"
+          ]
+        },
+        {
+          "source": "sentinel.input_normalizer",
+          "specifiers": [
+            "InputNormalizer",
+            "NormalizationStep",
+            "NormalizationResult",
+            "NormalizerConfig",
+            "NormalizerStats"
+          ]
+        },
+        {
+          "source": "sentinel.output_ranker",
+          "specifiers": [
+            "OutputRanker",
+            "RankingCriteria",
+            "CandidateScore",
+            "RankingResult",
+            "RankerStats"
+          ]
+        },
+        {
+          "source": "sentinel.conversation_safety",
+          "specifiers": [
+            "ConversationSafety",
+            "TurnAnalysis",
+            "EscalationPattern",
+            "ConversationReport",
+            "ConversationSafetyStats"
+          ]
+        },
+        {
+          "source": "sentinel.model_guard",
+          "specifiers": [
+            "ModelGuard",
+            "ModelConfig",
+            "ConfigIssue",
+            "ModelGuardStats",
+            "ModelGuardReport",
+            "ModelGuardPolicy"
+          ]
+        },
+        {
+          "source": "sentinel.payload_analyzer",
+          "specifiers": [
+            "PayloadAnalyzer",
+            "PayloadField",
+            "PayloadThreat",
+            "PayloadReport",
+            "AnalyzerConfig",
+            "PayloadAnalyzerStats"
+          ]
+        },
+        {
+          "source": "sentinel.compliance_checker",
+          "specifiers": [
+            "ComplianceChecker",
+            "ComplianceRule",
+            "Evidence",
+            "ComplianceResult",
+            "ComplianceOverview",
+            "CheckerStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_injection_v2",
+          "specifiers": [
+            "PromptInjectionV2",
+            "InjectionVector",
+            "DecomposedPayload",
+            "DetectionResultV2",
+            "DetectorV2Stats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_cache",
+          "specifiers": [
+            "SafetyCache",
+            "CacheEntry",
+            "CacheConfig",
+            "CacheReport",
+            "CacheStats"
+          ]
+        },
+        {
+          "source": "sentinel.context_boundary",
+          "specifiers": [
+            "ContextBoundary",
+            "Segment",
+            "BoundaryViolation",
+            "BoundaryReport",
+            "BoundaryConfig",
+            "BoundaryStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_report",
+          "specifiers": [
+            "Finding",
+            "ReportSection",
+            "ReportMetadata",
+            "GeneratedReport",
+            "ReportStats",
+            "SafetyReportGenerator"
+          ]
+        },
+        {
+          "source": "sentinel.tool_safety_guard",
+          "specifiers": [
+            "ToolSafetyGuard",
+            "ToolDefinition",
+            "ToolCallRequest",
+            "ToolCallDecision",
+            "ToolGuardConfig",
+            "ToolGuardStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_pipeline",
+          "specifiers": [
+            "SafetyPipeline",
+            "PipelineStage",
+            "StageResult",
+            "PipelineOutput",
+            "PipelineConfig",
+            "PipelineStats"
+          ]
+        },
+        {
+          "source": "sentinel.semantic_validator",
+          "specifiers": [
+            "SemanticValidator",
+            "SemanticMatch",
+            "SemanticIssue",
+            "SemanticValidationResult"
+          ]
+        },
+        {
+          "source": "sentinel.threat_intelligence",
+          "specifiers": [
+            "ThreatIntelligence",
+            "ThreatIndicator",
+            "ThreatMatch",
+            "ThreatScanResult",
+            "ThreatFeedStats"
+          ]
+        },
+        {
+          "source": "sentinel.output_filter",
+          "specifiers": [
+            "OutputFilter",
+            "FilterRule",
+            "FilterMatch",
+            "FilterOutput",
+            "OutputFilterStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_augmentor",
+          "specifiers": [
+            "PromptAugmentor",
+            "Augmentation",
+            "AugmentedPrompt",
+            "AugmentorConfig",
+            "AugmentorStats"
+          ]
+        },
+        {
+          "source": "sentinel.response_quality",
+          "specifiers": [
+            "ResponseQuality",
+            "QualityDimension",
+            "QualityAssessment",
+            "QualityConfig",
+            "QualityStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_config",
+          "specifiers": [
+            "SafetyConfig",
+            "ConfigValue",
+            "ConfigProfile",
+            "ConfigValidation",
+            "ConfigStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_fuzzer",
+          "specifiers": [
+            "PromptFuzzer",
+            "FuzzMutation",
+            "FuzzedPrompt",
+            "FuzzConfig",
+            "FuzzStats"
+          ]
+        },
+        {
+          "source": "sentinel.safety_monitor",
+          "specifiers": [
+            "SafetyMonitor",
+            "MetricPoint",
+            "AlertRule",
+            "MonitorReport",
+            "MonitorStats",
+            "MonitorAlert"
+          ]
+        },
+        {
+          "source": "sentinel.instruction_parser",
+          "specifiers": [
+            "InstructionParser",
+            "Instruction",
+            "ConflictPair",
+            "ParseResult",
+            "ParserStats"
+          ]
+        },
+        {
+          "source": "sentinel.data_flow_guard",
+          "specifiers": [
+            "DataFlowGuard",
+            "FlowNode",
+            "FlowConnection",
+            "FlowViolation",
+            "FlowAnalysis",
+            "FlowStats"
+          ]
+        },
+        {
+          "source": "sentinel.response_safety",
+          "specifiers": [
+            "ResponseSafety",
+            "SafetySignal",
+            "SafetyAssessment",
+            "SafetyThresholds",
+            "SafetyAssessmentStats"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_history",
+          "specifiers": [
+            "PromptHistory",
+            "PromptVersion",
+            "PromptDiff",
+            "PromptTimeline",
+            "HistoryStats"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 821,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/policy.py": {
+      "filePath": "sentinel/policy.py",
+      "contentHash": "a30898b314e0d86a4a43202d5b5d18f6a4f7e3260b13fc84484be08a37f46554",
+      "functions": [],
+      "classes": [
+        {
+          "name": "_CodeScannerAdapter",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "_SecretsScannerAdapter",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "ScannerPolicy",
+          "methods": [],
+          "properties": [
+            "enabled",
+            "block_threshold",
+            "allow_patterns",
+            "extra_config"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "Policy",
+          "methods": [
+            "from_dict",
+            "from_yaml",
+            "build_guard",
+            "validate"
+          ],
+          "properties": [
+            "name",
+            "version",
+            "block_threshold",
+            "redact_pii",
+            "scanner_policies",
+            "custom_blocked_terms",
+            "allow_list"
+          ],
+          "exported": true,
+          "lineCount": 114
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel",
+            "SentinelGuard"
+          ]
+        }
+      ],
+      "exports": [
+        "_CodeScannerAdapter",
+        "_SecretsScannerAdapter",
+        "ScannerPolicy",
+        "Policy"
+      ],
+      "totalLines": 192,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/guard_policy.py": {
+      "filePath": "sentinel/guard_policy.py",
+      "contentHash": "201ae1f0625967d85ae34077a4526a9a7ae50572fe1aad1f647dae0b600f7952",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CustomBlock",
+          "methods": [
+            "matches"
+          ],
+          "properties": [
+            "pattern",
+            "reason",
+            "_compiled"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "GuardPolicy",
+          "methods": [
+            "from_dict",
+            "from_yaml",
+            "_from_simple_yaml",
+            "to_dict",
+            "create_guard",
+            "_build_custom_rules",
+            "validate"
+          ],
+          "properties": [
+            "version",
+            "block_on",
+            "blocked_commands",
+            "sensitive_paths",
+            "allowed_tools",
+            "denied_tools",
+            "max_risk_per_tool",
+            "rate_limits",
+            "custom_blocks"
+          ],
+          "exported": true,
+          "lineCount": 255
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.session_guard",
+          "specifiers": [
+            "SessionGuard"
+          ]
+        }
+      ],
+      "exports": [
+        "CustomBlock",
+        "GuardPolicy"
+      ],
+      "totalLines": 335,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/prompt_injection.py": {
+      "filePath": "sentinel/scanners/prompt_injection.py",
+      "contentHash": "1a1d8803a7f418023567a94d8c88dc79c29f913da12a8b65bf166754bb6e2c15",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PromptInjectionScanner",
+          "methods": [
+            "__init__",
+            "scan",
+            "_heuristic_score"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 61
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "PromptInjectionScanner"
+      ],
+      "totalLines": 431,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/pii.py": {
+      "filePath": "sentinel/scanners/pii.py",
+      "contentHash": "ad9d0c81f934ce6822a3c9e03e9f97287a84487cc064cc667f394683706f40ed",
+      "functions": [
+        {
+          "name": "_luhn_check",
+          "params": [
+            "number"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "PIIScanner",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "_luhn_check",
+        "PIIScanner"
+      ],
+      "totalLines": 123,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/harmful_content.py": {
+      "filePath": "sentinel/scanners/harmful_content.py",
+      "contentHash": "f955e38225e9324a34ed1b2bf627bf2b98e63a48667ce95c7b2274a3145d50a7",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HarmfulContentScanner",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "HarmfulContentScanner"
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/hallucination.py": {
+      "filePath": "sentinel/scanners/hallucination.py",
+      "contentHash": "a2a21cc35f9438aa36226181b91d3ab2acb7aab336156416c22cf295a9c33638",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HallucinationScanner",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 65
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "HallucinationScanner"
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/toxicity.py": {
+      "filePath": "sentinel/scanners/toxicity.py",
+      "contentHash": "1a8a0d6882449a44201a9fb42c5f571e535c31bbb217ac31447176fecfa538af",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ToxicityScanner",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 62
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "ToxicityScanner"
+      ],
+      "totalLines": 107,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/blocked_terms.py": {
+      "filePath": "sentinel/scanners/blocked_terms.py",
+      "contentHash": "f5c8e8282e847e27318a7fa573a488f7af85407d361ebcfd08d10b2da4271f7f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "BlockedTermsScanner",
+          "methods": [
+            "__init__",
+            "scan"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 34
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "BlockedTermsScanner"
+      ],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/tool_use.py": {
+      "filePath": "sentinel/scanners/tool_use.py",
+      "contentHash": "25de278123a46e12849c3a532bce12fa2af399501f86a095621767a6c15397df",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ToolUseScanner",
+          "methods": [
+            "__init__",
+            "scan",
+            "scan_tool_call",
+            "_collect_strings"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 180
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "ToolUseScanner"
+      ],
+      "totalLines": 277,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/structured_output.py": {
+      "filePath": "sentinel/scanners/structured_output.py",
+      "contentHash": "b577b4424775255f82c282d2dd71c111040349a0f9e68c22fd9c4530f6ea3acb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StructuredOutputScanner",
+          "methods": [
+            "__init__",
+            "scan",
+            "scan_dict",
+            "_scan_value",
+            "_scan_string_value",
+            "_validate_schema",
+            "_check_type"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 250
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "StructuredOutputScanner"
+      ],
+      "totalLines": 332,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/code_scanner.py": {
+      "filePath": "sentinel/scanners/code_scanner.py",
+      "contentHash": "f58ae4cd1cd18bb617e9d3814626bb601b45affc34d5935234a76d26b3ad87bd",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CodeScanner",
+          "methods": [
+            "scan",
+            "scan_tool_output"
+          ],
+          "properties": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 158
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "CodeScanner"
+      ],
+      "totalLines": 752,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/obfuscation.py": {
+      "filePath": "sentinel/scanners/obfuscation.py",
+      "contentHash": "3f6ae2cb1d987b2821895b032858861a18905bc7c8ba7cb479863838a35790fa",
+      "functions": [
+        {
+          "name": "_decode_leet",
+          "params": [
+            "text"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_try_base64_decode",
+          "params": [
+            "s"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "_try_hex_decode",
+          "params": [
+            "hex_str"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "_try_unicode_decode",
+          "params": [
+            "escaped"
+          ],
+          "returnType": "str | None",
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "ObfuscationScanner",
+          "methods": [
+            "scan",
+            "_check_base64",
+            "_check_hex",
+            "_check_rot13",
+            "_check_unicode_escapes",
+            "_check_leetspeak",
+            "_check_zero_width",
+            "_check_string_concat",
+            "_check_charcode",
+            "_check_homoglyphs"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 182
+        }
+      ],
+      "imports": [
+        {
+          "source": "base64",
+          "specifiers": [
+            "base64"
+          ]
+        },
+        {
+          "source": "codecs",
+          "specifiers": [
+            "codecs"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "_decode_leet",
+        "_try_base64_decode",
+        "_try_hex_decode",
+        "_try_unicode_decode",
+        "ObfuscationScanner"
+      ],
+      "totalLines": 365,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/secrets_scanner.py": {
+      "filePath": "sentinel/scanners/secrets_scanner.py",
+      "contentHash": "d1742ee865234e652f5baec24ba834b7b75a81d2c7f2a9eae1155e32509d2601",
+      "functions": [
+        {
+          "name": "_shannon_entropy",
+          "params": [
+            "s"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "_is_false_positive",
+          "params": [
+            "value"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "_is_comment_only",
+          "params": [
+            "line_text",
+            "filename"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_redact_match",
+          "params": [
+            "match_text"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "SecretsScanner",
+          "methods": [
+            "scan",
+            "scan_file",
+            "scan_directory"
+          ],
+          "properties": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 216
+        }
+      ],
+      "imports": [
+        {
+          "source": "math",
+          "specifiers": [
+            "math"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "_shannon_entropy",
+        "_is_false_positive",
+        "SecretsScanner",
+        "_is_comment_only",
+        "_redact_match"
+      ],
+      "totalLines": 609,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/scanners/dependency_scanner.py": {
+      "filePath": "sentinel/scanners/dependency_scanner.py",
+      "contentHash": "4a711a6669864e7f5b9706905d489411230e37890a5e3086c94e6c9565902b7c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "DependencyScanner",
+          "methods": [
+            "scan",
+            "_scan_requirements",
+            "_scan_package_json",
+            "_scan_pyproject",
+            "_check_typosquat",
+            "_check_urls"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 222
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "DependencyScanner"
+      ],
+      "totalLines": 330,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/proxy.py": {
+      "filePath": "sentinel/proxy.py",
+      "contentHash": "e1ec42cdcd87150109c221798787f724aa62ed7ccd6c9e4474da2dd09e893240",
+      "functions": [
+        {
+          "name": "_extract_user_text",
+          "params": [
+            "body"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "_extract_response_text",
+          "params": [
+            "body"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "_extract_tool_calls",
+          "params": [
+            "body"
+          ],
+          "returnType": "list[dict]",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "create_proxy_app",
+          "params": [
+            "config",
+            "guard"
+          ],
+          "returnType": "Any",
+          "exported": true,
+          "lineCount": 245
+        },
+        {
+          "name": "_proxy_headers",
+          "params": [
+            "request",
+            "config"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "_forward_request",
+          "params": [
+            "request",
+            "path",
+            "body",
+            "client"
+          ],
+          "returnType": "Any",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "_forward_streaming",
+          "params": [
+            "request",
+            "path",
+            "body",
+            "client",
+            "guard",
+            "config",
+            "sentinel_headers",
+            "stats"
+          ],
+          "returnType": "Any",
+          "exported": true,
+          "lineCount": 73
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProxyConfig",
+          "methods": [],
+          "properties": [
+            "target_url",
+            "port",
+            "scan_input",
+            "scan_output",
+            "block_threshold",
+            "redact_pii",
+            "log_findings",
+            "pass_auth",
+            "allowed_models",
+            "blocked_tools"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Optional"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "ProxyConfig",
+        "_extract_user_text",
+        "_extract_response_text",
+        "_extract_tool_calls",
+        "create_proxy_app",
+        "_proxy_headers",
+        "_forward_request",
+        "_forward_streaming"
+      ],
+      "totalLines": 463,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/mcp_proxy.py": {
+      "filePath": "sentinel/mcp_proxy.py",
+      "contentHash": "a99eebe1a9c6c30afa33e9b869fce13a4746802da713c5ef3c19f13720492c2e",
+      "functions": [
+        {
+          "name": "_read_mcp_message",
+          "params": [
+            "stream"
+          ],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "_write_mcp_message",
+          "params": [
+            "stream",
+            "message"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "_scan_tool_arguments",
+          "params": [
+            "guard",
+            "tool_name",
+            "arguments"
+          ],
+          "returnType": "list",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "_scan_response",
+          "params": [
+            "guard",
+            "result"
+          ],
+          "returnType": "tuple[dict, list]",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "_make_block_response",
+          "params": [
+            "msg_id",
+            "tool_name",
+            "findings"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "run_proxy",
+          "params": [
+            "upstream_cmd",
+            "block_threshold"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 112
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "subprocess",
+          "specifiers": [
+            "subprocess"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "_read_mcp_message",
+        "_write_mcp_message",
+        "_scan_tool_arguments",
+        "_scan_response",
+        "_make_block_response",
+        "run_proxy"
+      ],
+      "totalLines": 256,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/mcp_server.py": {
+      "filePath": "sentinel/mcp_server.py",
+      "contentHash": "79044f05fdeb18e007b1c3c53ab8c778c726fa16d9d89367b57a8efde0f8c2c8",
+      "functions": [
+        {
+          "name": "_create_guard",
+          "params": [],
+          "returnType": "SentinelGuard",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "handle_initialize",
+          "params": [
+            "params"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "handle_tools_list",
+          "params": [
+            "params"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 363
+        },
+        {
+          "name": "handle_tool_call",
+          "params": [
+            "params"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "_tool_scan_text",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "_tool_scan_tool_call",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "_tool_check_pii",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "_tool_get_risk_report",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "_tool_check_canary",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "_tool_scan_code",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "_tool_scan_secrets",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "_tool_generate_rsp_report",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "_tool_test_robustness",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "_tool_harden_prompt",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "_tool_compliance_check",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "_tool_scan_conversation",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "_tool_threat_lookup",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 67
+        },
+        {
+          "name": "_get_session_guard",
+          "params": [],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_tool_guard_tool_call",
+          "params": [
+            "args"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "_send_response",
+          "params": [
+            "response"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_read_message",
+          "params": [],
+          "returnType": "dict | None",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "main",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 35
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "_create_guard",
+        "handle_initialize",
+        "handle_tools_list",
+        "handle_tool_call",
+        "_tool_scan_text",
+        "_tool_scan_tool_call",
+        "_tool_check_pii",
+        "_tool_get_risk_report",
+        "_tool_check_canary",
+        "_tool_scan_code",
+        "_tool_scan_secrets",
+        "_tool_generate_rsp_report",
+        "_tool_test_robustness",
+        "_tool_harden_prompt",
+        "_tool_compliance_check",
+        "_tool_scan_conversation",
+        "_tool_threat_lookup",
+        "_get_session_guard",
+        "_tool_guard_tool_call",
+        "_send_response",
+        "_read_message",
+        "main"
+      ],
+      "totalLines": 1057,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/hooks.py": {
+      "filePath": "sentinel/hooks.py",
+      "contentHash": "16413a3c8cc32824728d136ba27590f9793b0ef990e756e0f82fded4e7ee747e",
+      "functions": [
+        {
+          "name": "_find_claudemd",
+          "params": [],
+          "returnType": "Path | None",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "_get_enforcer",
+          "params": [],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "_get_guard_policy",
+          "params": [],
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "run_hook",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 88
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "RiskLevel"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.tool_use",
+          "specifiers": [
+            "ToolUseScanner"
+          ]
+        }
+      ],
+      "exports": [
+        "_find_claudemd",
+        "_get_enforcer",
+        "_get_guard_policy",
+        "run_hook"
+      ],
+      "totalLines": 203,
+      "hasStructuralAnalysis": true
+    },
+    "hooks/pre-tool-scan.sh": {
+      "filePath": "hooks/pre-tool-scan.sh",
+      "contentHash": "25c0580e081fa77f89539356fcae9a699a242ebc8df744155312f5fe42fe3417",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "hooks/post-tool-scan.sh": {
+      "filePath": "hooks/post-tool-scan.sh",
+      "contentHash": "3de77fe692abe344d323b07455cc57e91f04fb2a0a016963139bbfeecbe8f109",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 51,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/api.py": {
+      "filePath": "sentinel/api.py",
+      "contentHash": "08441260c1b78f28d914ffddca110fc1a2859a40a698f17f723e1b1c5dcad68e",
+      "functions": [
+        {
+          "name": "create_app",
+          "params": [
+            "guard"
+          ],
+          "returnType": "FastAPI",
+          "exported": true,
+          "lineCount": 87
+        }
+      ],
+      "classes": [
+        {
+          "name": "ScanRequest",
+          "methods": [],
+          "properties": [
+            "text",
+            "context",
+            "scanners"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "FindingResponse",
+          "methods": [],
+          "properties": [
+            "scanner",
+            "category",
+            "description",
+            "risk",
+            "span",
+            "metadata"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "ScanResponse",
+          "methods": [],
+          "properties": [
+            "safe",
+            "blocked",
+            "risk",
+            "findings",
+            "redacted_text",
+            "latency_ms"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "BatchScanRequest",
+          "methods": [],
+          "properties": [
+            "texts"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "BatchScanResponse",
+          "methods": [],
+          "properties": [
+            "results",
+            "total_latency_ms"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "HealthResponse",
+          "methods": [],
+          "properties": [
+            "status",
+            "version",
+            "scanners"
+          ],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Optional"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "FastAPI"
+          ]
+        },
+        {
+          "source": "fastapi.middleware.cors",
+          "specifiers": [
+            "CORSMiddleware"
+          ]
+        },
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard"
+          ]
+        }
+      ],
+      "exports": [
+        "ScanRequest",
+        "FindingResponse",
+        "ScanResponse",
+        "BatchScanRequest",
+        "BatchScanResponse",
+        "HealthResponse",
+        "create_app"
+      ],
+      "totalLines": 154,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/streaming.py": {
+      "filePath": "sentinel/streaming.py",
+      "contentHash": "496c519a2a01a67f1e804e5c85a828f45c87d151b6cd31967715cf46d5431076",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StreamChunkResult",
+          "methods": [],
+          "properties": [
+            "chunk",
+            "safe_text",
+            "redacted_text",
+            "findings",
+            "blocked",
+            "risk",
+            "buffer_text"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "StreamingGuard",
+          "methods": [
+            "__init__",
+            "feed",
+            "finalize",
+            "full_text",
+            "blocked",
+            "all_findings",
+            "reset"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 119
+        }
+      ],
+      "imports": [
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Sequence"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel",
+            "Scanner",
+            "SentinelGuard"
+          ]
+        }
+      ],
+      "exports": [
+        "StreamChunkResult",
+        "StreamingGuard"
+      ],
+      "totalLines": 156,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/anthropic_wrapper.py": {
+      "filePath": "sentinel/anthropic_wrapper.py",
+      "contentHash": "51e5c08ef061ee533b013d0a72b24e7e1d6a37caf51be58fc6358d423e413042",
+      "functions": [
+        {
+          "name": "_extract_text",
+          "params": [
+            "messages"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "_extract_response_text",
+          "params": [
+            "response"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "SafetyError",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "InputBlockedError",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "OutputBlockedError",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "SafeResponse",
+          "methods": [
+            "safety",
+            "__getattr__"
+          ],
+          "properties": [
+            "response",
+            "input_scan",
+            "output_scan"
+          ],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "SafeMessages",
+          "methods": [
+            "__init__",
+            "create",
+            "stream",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 109
+        },
+        {
+          "name": "SafeAsyncMessages",
+          "methods": [
+            "__init__",
+            "create",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 50
+        },
+        {
+          "name": "SafeStreamManager",
+          "methods": [
+            "__init__",
+            "__enter__",
+            "__exit__",
+            "text_stream",
+            "safety",
+            "blocked",
+            "get_final_message"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 77
+        },
+        {
+          "name": "SafeAnthropic",
+          "methods": [
+            "__init__",
+            "messages",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "SafeAsyncAnthropic",
+          "methods": [
+            "__init__",
+            "messages",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "imports": [
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Iterator"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel",
+            "ScanResult",
+            "SentinelGuard"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_leak",
+          "specifiers": [
+            "PromptLeakDetector"
+          ]
+        }
+      ],
+      "exports": [
+        "SafetyError",
+        "InputBlockedError",
+        "OutputBlockedError",
+        "SafeResponse",
+        "_extract_text",
+        "_extract_response_text",
+        "SafeMessages",
+        "SafeAsyncMessages",
+        "SafeStreamManager",
+        "SafeAnthropic",
+        "SafeAsyncAnthropic"
+      ],
+      "totalLines": 452,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/openai_wrapper.py": {
+      "filePath": "sentinel/openai_wrapper.py",
+      "contentHash": "5a4396635d386a05d4dc3e40fe3712f6fb7c50d3272937ec8103a7cfac85727d",
+      "functions": [
+        {
+          "name": "_extract_chat_text",
+          "params": [
+            "messages"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "_extract_completion_text",
+          "params": [
+            "response"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "SafeChatResponse",
+          "methods": [
+            "safety",
+            "__getattr__"
+          ],
+          "properties": [
+            "response",
+            "input_scan",
+            "output_scan"
+          ],
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "SafeChatCompletions",
+          "methods": [
+            "__init__",
+            "create",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 90
+        },
+        {
+          "name": "SafeChat",
+          "methods": [
+            "__init__",
+            "completions",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "SafeOpenAI",
+          "methods": [
+            "__init__",
+            "chat",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 43
+        },
+        {
+          "name": "SafeAsyncOpenAI",
+          "methods": [
+            "__init__",
+            "chat",
+            "__getattr__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 41
+        }
+      ],
+      "imports": [
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Iterator"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "Finding",
+            "RiskLevel",
+            "ScanResult",
+            "SentinelGuard"
+          ]
+        },
+        {
+          "source": "sentinel.prompt_leak",
+          "specifiers": [
+            "PromptLeakDetector"
+          ]
+        },
+        {
+          "source": "sentinel.anthropic_wrapper",
+          "specifiers": [
+            "SafetyError",
+            "InputBlockedError",
+            "OutputBlockedError"
+          ]
+        }
+      ],
+      "exports": [
+        "SafeChatResponse",
+        "_extract_chat_text",
+        "_extract_completion_text",
+        "SafeChatCompletions",
+        "SafeChat",
+        "SafeOpenAI",
+        "SafeAsyncOpenAI"
+      ],
+      "totalLines": 300,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/middleware/langchain_callback.py": {
+      "filePath": "sentinel/middleware/langchain_callback.py",
+      "contentHash": "1a54a46fa63130abbfc57223cfbadf717eff9e58ca29970ce3f879248c6864ef",
+      "functions": [
+        {
+          "name": "create_sentinel_callback",
+          "params": [
+            "block_threshold",
+            "scan_input",
+            "scan_output",
+            "raise_on_block"
+          ],
+          "returnType": "SentinelCallbackHandler",
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "SentinelCallbackHandler",
+          "methods": [
+            "__init__",
+            "reset",
+            "_handle_scan",
+            "on_llm_start",
+            "on_chat_model_start",
+            "on_llm_end",
+            "on_chain_start",
+            "on_chain_end",
+            "on_chain_error",
+            "on_llm_error",
+            "on_tool_start",
+            "on_tool_end",
+            "on_tool_error",
+            "on_text",
+            "_extract_message_text",
+            "_extract_response_text"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 145
+        },
+        {
+          "name": "SentinelBlockedError",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Sequence"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "ScanResult",
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "SentinelCallbackHandler",
+        "SentinelBlockedError",
+        "create_sentinel_callback"
+      ],
+      "totalLines": 195,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/middleware/llamaindex_callback.py": {
+      "filePath": "sentinel/middleware/llamaindex_callback.py",
+      "contentHash": "41c5f31033102d218d9fed4740d7aa208e006fdeb5b15d321c4b1188480eec94",
+      "functions": [
+        {
+          "name": "create_sentinel_handler",
+          "params": [
+            "block_threshold",
+            "scan_queries",
+            "scan_responses",
+            "raise_on_block"
+          ],
+          "returnType": "SentinelEventHandler",
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "SentinelEventHandler",
+          "methods": [
+            "__init__",
+            "reset",
+            "_handle_scan",
+            "on_event_start",
+            "on_event_end",
+            "start_trace",
+            "end_trace",
+            "_extract_query_text",
+            "_extract_response_text",
+            "scan_query",
+            "scan_response"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 146
+        },
+        {
+          "name": "SentinelBlockedError",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "ScanResult",
+            "Finding",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "SentinelEventHandler",
+        "SentinelBlockedError",
+        "create_sentinel_handler"
+      ],
+      "totalLines": 194,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/middleware/fastapi_middleware.py": {
+      "filePath": "sentinel/middleware/fastapi_middleware.py",
+      "contentHash": "fa70f49f256329fccdd221a526f9532fb4ce8550665285040c09fd89dc377dc5",
+      "functions": [
+        {
+          "name": "create_sentinel_middleware",
+          "params": [
+            "guard",
+            "scan_request",
+            "scan_response",
+            "block_on_risk"
+          ],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Callable"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "ScanResult"
+          ]
+        }
+      ],
+      "exports": [
+        "create_sentinel_middleware"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/middleware/agent_sdk.py": {
+      "filePath": "sentinel/middleware/agent_sdk.py",
+      "contentHash": "6b92033c0a1442b915e2d7d19e4f3bc80196efcef192e5d8fe2969e6ef83472c",
+      "functions": [
+        {
+          "name": "_extract_tool_text",
+          "params": [
+            "tool_name",
+            "tool_input"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "sentinel_pretooluse_hook",
+          "params": [
+            "input_data",
+            "tool_use_id",
+            "context"
+          ],
+          "returnType": "dict[str, Any]",
+          "exported": true,
+          "lineCount": 49
+        },
+        {
+          "name": "sentinel_permission_callback",
+          "params": [
+            "tool_name",
+            "input_data",
+            "context"
+          ],
+          "returnType": "Any",
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "RiskLevel"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.tool_use",
+          "specifiers": [
+            "ToolUseScanner"
+          ]
+        }
+      ],
+      "exports": [
+        "_extract_tool_text",
+        "sentinel_pretooluse_hook",
+        "sentinel_permission_callback"
+      ],
+      "totalLines": 140,
+      "hasStructuralAnalysis": true
+    },
+    "sdk-js/src/index.ts": {
+      "filePath": "sdk-js/src/index.ts",
+      "contentHash": "28d2b8409b4caa13ba135932e8c07c51fac2b0a88f4ee8c8900950f52bda1360",
+      "functions": [
+        {
+          "name": "riskGte",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "maxRisk",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "RiskLevel",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "decodeLeet",
+          "params": [
+            "text"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "rot13",
+          "params": [
+            "text"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "tryHexDecode",
+          "params": [
+            "hexStr"
+          ],
+          "returnType": "string | null",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "tryUnicodeDecode",
+          "params": [
+            "escaped"
+          ],
+          "returnType": "string | null",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "decodeHomoglyphs",
+          "params": [
+            "text"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "hasHomoglyphs",
+          "params": [
+            "text"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "hardenPrompt",
+          "params": [
+            "prompt",
+            "options"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 50
+        },
+        {
+          "name": "fenceUserInput",
+          "params": [
+            "input"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "xmlTagSections",
+          "params": [
+            "system",
+            "options"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "classifyEuRisk",
+          "params": [
+            "risk"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "extractText",
+          "params": [
+            "toolName",
+            "args"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "classifyStage",
+          "params": [
+            "toolName",
+            "args"
+          ],
+          "returnType": "ChainStageName | null",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "simpleUuid",
+          "params": [],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "sha256Hex",
+          "params": [
+            "data"
+          ],
+          "returnType": "Promise<string>",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "hashEntrySync",
+          "params": [
+            "entry",
+            "prevHash"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "_getProhibitionPatterns",
+          "params": [],
+          "returnType": "RegExp[]",
+          "exported": false,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "PromptInjectionScanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "patterns"
+          ],
+          "exported": true,
+          "lineCount": 145
+        },
+        {
+          "name": "PIIScanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "patterns"
+          ],
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "HarmfulContentScanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "patterns"
+          ],
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "ToxicityScanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "patterns"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "ToolUseScanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "patterns"
+          ],
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "ObfuscationScanner",
+          "methods": [
+            "scan",
+            "_checkZeroWidth",
+            "_checkRot13",
+            "_checkLeetspeak",
+            "_checkBase64",
+            "_checkHex",
+            "_checkUnicodeEscapes",
+            "_checkStringConcat",
+            "_checkCharCode",
+            "_checkHomoglyphs"
+          ],
+          "properties": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 244
+        },
+        {
+          "name": "SecretsScanner",
+          "methods": [
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "patterns",
+            "PLACEHOLDERS"
+          ],
+          "exported": true,
+          "lineCount": 61
+        },
+        {
+          "name": "BlockedTermsScanner",
+          "methods": [
+            "constructor",
+            "fromList",
+            "scan"
+          ],
+          "properties": [
+            "name",
+            "terms"
+          ],
+          "exported": true,
+          "lineCount": 35
+        },
+        {
+          "name": "SentinelGuard",
+          "methods": [
+            "constructor",
+            "default",
+            "addScanner",
+            "scan",
+            "scanBatch"
+          ],
+          "properties": [
+            "scanners",
+            "blockThreshold",
+            "redactPii"
+          ],
+          "exported": true,
+          "lineCount": 82
+        },
+        {
+          "name": "ConversationGuard",
+          "methods": [
+            "constructor",
+            "addMessage",
+            "turnCount",
+            "reset",
+            "_userMessages",
+            "_detectSplitInjection",
+            "_detectProgressiveJailbreak",
+            "_detectContextManipulation"
+          ],
+          "properties": [
+            "guard",
+            "messages",
+            "blockThreshold"
+          ],
+          "exported": true,
+          "lineCount": 163
+        },
+        {
+          "name": "CanarySystem",
+          "methods": [
+            "createToken",
+            "scanOutput",
+            "getToken"
+          ],
+          "properties": [
+            "tokens"
+          ],
+          "exported": true,
+          "lineCount": 74
+        },
+        {
+          "name": "ComplianceMapper",
+          "methods": [
+            "evaluate",
+            "_assessFramework",
+            "_assessControl"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 107
+        },
+        {
+          "name": "SentinelClient",
+          "methods": [
+            "constructor",
+            "request",
+            "scan",
+            "health"
+          ],
+          "properties": [
+            "baseUrl",
+            "apiKey",
+            "timeout"
+          ],
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "ThreatFeed",
+          "methods": [
+            "constructor",
+            "default",
+            "add",
+            "totalIndicators",
+            "query",
+            "match",
+            "getById",
+            "stats"
+          ],
+          "properties": [
+            "indicators"
+          ],
+          "exported": true,
+          "lineCount": 75
+        },
+        {
+          "name": "AttackChainDetector",
+          "methods": [
+            "constructor",
+            "record",
+            "activeChains",
+            "eventCount",
+            "reset",
+            "detectChains"
+          ],
+          "properties": [
+            "events",
+            "detectedChains",
+            "windowSeconds"
+          ],
+          "exported": true,
+          "lineCount": 72
+        },
+        {
+          "name": "SessionAudit",
+          "methods": [
+            "constructor",
+            "totalEntries",
+            "entries",
+            "logToolCall",
+            "logBlocked",
+            "logAnomaly",
+            "logChain",
+            "verifyIntegrity",
+            "export",
+            "exportJson",
+            "riskTimeline",
+            "_addEntry"
+          ],
+          "properties": [
+            "sessionId",
+            "userId",
+            "agentId",
+            "model",
+            "startTime",
+            "_entries",
+            "_prevHash"
+          ],
+          "exported": true,
+          "lineCount": 174
+        },
+        {
+          "name": "SessionGuard",
+          "methods": [
+            "constructor",
+            "sessionId",
+            "totalChecks",
+            "check",
+            "export",
+            "exportJson",
+            "verifyIntegrity",
+            "_extractText",
+            "_maxRisk",
+            "_riskExceedsThreshold"
+          ],
+          "properties": [
+            "audit",
+            "chainDetector",
+            "threatFeed",
+            "_blockThreshold",
+            "_customRules"
+          ],
+          "exported": true,
+          "lineCount": 173
+        },
+        {
+          "name": "CustomBlock",
+          "methods": [
+            "constructor",
+            "matches"
+          ],
+          "properties": [
+            "pattern",
+            "reason",
+            "_compiled"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "GuardPolicy",
+          "methods": [
+            "constructor",
+            "fromDict",
+            "toDict",
+            "createGuard",
+            "validate"
+          ],
+          "properties": [
+            "version",
+            "blockOn",
+            "blockedCommands",
+            "sensitivePaths",
+            "allowedTools",
+            "deniedTools",
+            "maxRiskPerTool",
+            "rateLimits",
+            "customBlocks"
+          ],
+          "exported": true,
+          "lineCount": 164
+        },
+        {
+          "name": "SessionReplay",
+          "methods": [
+            "constructor",
+            "fromJson",
+            "fromExport",
+            "riskSummary",
+            "riskEscalations",
+            "iocs",
+            "attackTimeline",
+            "incidentReport"
+          ],
+          "properties": [
+            "sessionId",
+            "userId",
+            "agentId",
+            "model",
+            "startTime",
+            "endTime",
+            "entries",
+            "_summary"
+          ],
+          "exported": true,
+          "lineCount": 197
+        },
+        {
+          "name": "EnforcedRule",
+          "methods": [
+            "constructor",
+            "matches"
+          ],
+          "properties": [
+            "text",
+            "ruleType",
+            "pattern",
+            "severity",
+            "lineNumber",
+            "_compiled"
+          ],
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "EnforcementVerdict",
+          "methods": [
+            "constructor",
+            "safe"
+          ],
+          "properties": [
+            "allowed",
+            "toolName",
+            "violatedRules",
+            "warnings",
+            "matchedRules"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "ClaudeMdEnforcer",
+          "methods": [
+            "constructor",
+            "fromText",
+            "check",
+            "toGuardPolicyConfig",
+            "toGuardPolicy",
+            "summary"
+          ],
+          "properties": [
+            "rules"
+          ],
+          "exported": true,
+          "lineCount": 278
+        },
+        {
+          "name": "CodeScanner",
+          "methods": [
+            "scan",
+            "scanToolOutput"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "DependencyScanner",
+          "methods": [
+            "scan",
+            "_scanRequirements",
+            "_scanPackageJson",
+            "_scanPyproject",
+            "_checkTyposquat",
+            "_checkUrls"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 207
+        },
+        {
+          "name": "EvalRunner",
+          "methods": [
+            "constructor",
+            "run",
+            "builtinSuite",
+            "runBuiltin",
+            "formatReport"
+          ],
+          "properties": [
+            "guard"
+          ],
+          "exported": true,
+          "lineCount": 159
+        },
+        {
+          "name": "ScanCache",
+          "methods": [
+            "constructor",
+            "key",
+            "scan",
+            "invalidate",
+            "stats"
+          ],
+          "properties": [
+            "guard",
+            "maxsize",
+            "ttl",
+            "cache",
+            "hits",
+            "misses"
+          ],
+          "exported": true,
+          "lineCount": 63
+        },
+        {
+          "name": "ScanMetrics",
+          "methods": [
+            "record",
+            "avgLatencyMs",
+            "blockRate",
+            "summary",
+            "reset"
+          ],
+          "properties": [
+            "totalScans",
+            "totalBlocked",
+            "totalFindings",
+            "totalLatencyMs",
+            "riskCounts",
+            "categoryCounts"
+          ],
+          "exported": true,
+          "lineCount": 48
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "PromptInjectionScanner",
+        "PIIScanner",
+        "HarmfulContentScanner",
+        "ToxicityScanner",
+        "ToolUseScanner",
+        "ObfuscationScanner",
+        "SecretsScanner",
+        "BlockedTermsScanner",
+        "SentinelGuard",
+        "ConversationGuard",
+        "CanarySystem",
+        "hardenPrompt",
+        "fenceUserInput",
+        "xmlTagSections",
+        "ComplianceMapper",
+        "SentinelClient",
+        "ThreatFeed",
+        "AttackChainDetector",
+        "SessionAudit",
+        "SessionGuard",
+        "CustomBlock",
+        "GuardPolicy",
+        "SessionReplay",
+        "EnforcedRule",
+        "EnforcementVerdict",
+        "ClaudeMdEnforcer",
+        "CodeScanner",
+        "DependencyScanner",
+        "EvalRunner",
+        "ScanCache",
+        "ScanMetrics"
+      ],
+      "totalLines": 4093,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/compliance.py": {
+      "filePath": "sentinel/compliance.py",
+      "contentHash": "712c413a4995c183c45c0672ccf5f9265426935e420dba6a785753a69c6cf436",
+      "functions": [
+        {
+          "name": "_classify_eu_risk",
+          "params": [
+            "risk"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "Framework",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "ComplianceStatus",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "ControlAssessment",
+          "methods": [],
+          "properties": [
+            "control_id",
+            "control_name",
+            "framework",
+            "status",
+            "findings_count",
+            "description",
+            "remediation"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "FrameworkReport",
+          "methods": [],
+          "properties": [
+            "framework",
+            "status",
+            "controls_assessed",
+            "controls_compliant",
+            "controls_partial",
+            "controls_non_compliant",
+            "controls",
+            "risk_classification"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "ComplianceReport",
+          "methods": [
+            "to_dict",
+            "to_markdown"
+          ],
+          "properties": [
+            "generated_at",
+            "total_scans",
+            "overall_risk",
+            "frameworks"
+          ],
+          "exported": true,
+          "lineCount": 102
+        },
+        {
+          "name": "ComplianceMapper",
+          "methods": [
+            "evaluate",
+            "_assess_framework",
+            "_assess_control"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 164
+        }
+      ],
+      "imports": [
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timezone"
+          ]
+        },
+        {
+          "source": "enum",
+          "specifiers": [
+            "Enum"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Sequence"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "RiskLevel",
+            "ScanResult"
+          ]
+        }
+      ],
+      "exports": [
+        "Framework",
+        "ComplianceStatus",
+        "ControlAssessment",
+        "FrameworkReport",
+        "ComplianceReport",
+        "ComplianceMapper",
+        "_classify_eu_risk"
+      ],
+      "totalLines": 568,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/audit_log.py": {
+      "filePath": "sentinel/audit_log.py",
+      "contentHash": "879ae98fe97cc70da635ca0ce0230e25ca92bc96d344e9ade7f355f3a8ea4d9d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AuditEvent",
+          "methods": [
+            "to_dict"
+          ],
+          "properties": [
+            "action",
+            "input_text",
+            "output_text",
+            "risk_level",
+            "blocked",
+            "scanner",
+            "model",
+            "user_id",
+            "session_id",
+            "metadata",
+            "timestamp",
+            "duration_ms"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "AuditStats",
+          "methods": [],
+          "properties": [
+            "total_events",
+            "total_blocked",
+            "total_flagged",
+            "by_action",
+            "by_risk_level",
+            "by_scanner",
+            "block_rate",
+            "avg_duration_ms"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "AuditLog",
+          "methods": [
+            "__init__",
+            "record",
+            "on_event",
+            "events",
+            "count",
+            "query",
+            "stats",
+            "export_jsonl",
+            "export_json",
+            "clear",
+            "compliance_report"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 135
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field",
+            "asdict"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Callable",
+            "Sequence"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        }
+      ],
+      "exports": [
+        "AuditEvent",
+        "AuditStats",
+        "AuditLog"
+      ],
+      "totalLines": 198,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/session_guard.py": {
+      "filePath": "sentinel/session_guard.py",
+      "contentHash": "5bd606f837283ea1d28331101e5f2ea042f74c567cacb6dece85376db46229d1",
+      "functions": [],
+      "classes": [
+        {
+          "name": "GuardVerdict",
+          "methods": [
+            "safe"
+          ],
+          "properties": [
+            "allowed",
+            "risk",
+            "tool_name",
+            "block_reason",
+            "warnings",
+            "threat_matches",
+            "chains_detected",
+            "stage"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "SessionGuard",
+          "methods": [
+            "__init__",
+            "session_id",
+            "check",
+            "export",
+            "export_json",
+            "verify_integrity",
+            "total_checks",
+            "_extract_text",
+            "_max_risk",
+            "_risk_exceeds_threshold"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 181
+        }
+      ],
+      "imports": [
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Callable"
+          ]
+        },
+        {
+          "source": "sentinel.attack_chain",
+          "specifiers": [
+            "AttackChainDetector"
+          ]
+        },
+        {
+          "source": "sentinel.session_audit",
+          "specifiers": [
+            "SessionAudit"
+          ]
+        },
+        {
+          "source": "sentinel.threat_intel",
+          "specifiers": [
+            "ThreatFeed",
+            "ThreatMatch"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        }
+      ],
+      "exports": [
+        "GuardVerdict",
+        "SessionGuard"
+      ],
+      "totalLines": 272,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/session_replay.py": {
+      "filePath": "sentinel/session_replay.py",
+      "contentHash": "2e02e8c2202d2cb1f421351cd2c02f2ddbefdc580be3bc8b1ab5f49c8f4266ea",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReplayEntry",
+          "methods": [],
+          "properties": [
+            "timestamp",
+            "entry_id",
+            "event_type",
+            "tool_name",
+            "arguments",
+            "risk",
+            "findings",
+            "reason",
+            "metadata",
+            "entry_hash"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "RiskEscalation",
+          "methods": [],
+          "properties": [
+            "timestamp",
+            "from_risk",
+            "to_risk",
+            "trigger_tool",
+            "trigger_event",
+            "entry_id"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "IOC",
+          "methods": [],
+          "properties": [
+            "ioc_type",
+            "value",
+            "risk",
+            "timestamp",
+            "entry_id"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "IncidentReport",
+          "methods": [
+            "to_dict",
+            "to_json"
+          ],
+          "properties": [
+            "session_id",
+            "user_id",
+            "agent_id",
+            "model",
+            "duration_seconds",
+            "total_events",
+            "blocked_events",
+            "max_risk",
+            "risk_escalations",
+            "iocs",
+            "attack_chains",
+            "timeline",
+            "recommendations"
+          ],
+          "exported": true,
+          "lineCount": 53
+        },
+        {
+          "name": "SessionReplay",
+          "methods": [
+            "__init__",
+            "from_json",
+            "from_file",
+            "session_id",
+            "entries",
+            "total_entries",
+            "risk_summary",
+            "risk_escalations",
+            "iocs",
+            "attack_timeline",
+            "incident_report",
+            "_extract_text"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 228
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        }
+      ],
+      "exports": [
+        "ReplayEntry",
+        "RiskEscalation",
+        "IOC",
+        "IncidentReport",
+        "SessionReplay"
+      ],
+      "totalLines": 367,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/cost_tracker.py": {
+      "filePath": "sentinel/cost_tracker.py",
+      "contentHash": "2f89020da72ac297b6e698a89264afe9cdd06bac398239ac39755247aa257dd1",
+      "functions": [],
+      "classes": [
+        {
+          "name": "UsageRecord",
+          "methods": [],
+          "properties": [
+            "model",
+            "input_tokens",
+            "output_tokens",
+            "cost",
+            "timestamp",
+            "metadata"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "ModelCost",
+          "methods": [],
+          "properties": [
+            "model",
+            "total_input_tokens",
+            "total_output_tokens",
+            "total_cost",
+            "call_count"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "BudgetAlert",
+          "methods": [],
+          "properties": [
+            "model",
+            "threshold",
+            "current_spend",
+            "timestamp"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "BudgetExceeded",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "CostTracker",
+          "methods": [
+            "__init__",
+            "set_pricing",
+            "set_budget",
+            "set_alert_thresholds",
+            "on_alert",
+            "record",
+            "total_cost",
+            "total_tokens",
+            "call_count",
+            "model_cost",
+            "by_model",
+            "cost_since",
+            "cost_between",
+            "budget_remaining",
+            "budget_utilization",
+            "summary",
+            "reset",
+            "_calculate_cost",
+            "_check_budget",
+            "_check_alerts"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 227
+        }
+      ],
+      "imports": [
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any",
+            "Callable"
+          ]
+        }
+      ],
+      "exports": [
+        "UsageRecord",
+        "ModelCost",
+        "BudgetAlert",
+        "BudgetExceeded",
+        "CostTracker"
+      ],
+      "totalLines": 305,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/attack_chain.py": {
+      "filePath": "sentinel/attack_chain.py",
+      "contentHash": "47d0bc24d5c4c7e163d8ad29f922dcde80982e266cfeeb2574b8ddb18f075ba6",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ChainStage",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "ChainEvent",
+          "methods": [],
+          "properties": [
+            "tool_name",
+            "arguments",
+            "timestamp",
+            "stage",
+            "description"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "DetectedChain",
+          "methods": [
+            "duration_seconds"
+          ],
+          "properties": [
+            "name",
+            "description",
+            "severity",
+            "stages",
+            "confidence"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "ChainVerdict",
+          "methods": [
+            "chain_count"
+          ],
+          "properties": [
+            "tool_name",
+            "stage",
+            "risk",
+            "chains_detected",
+            "alert"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "AttackChainDetector",
+          "methods": [
+            "__init__",
+            "record",
+            "active_chains",
+            "reset",
+            "event_count",
+            "_classify",
+            "_detect_chains",
+            "_build_chain",
+            "_chain_already_detected",
+            "_extract_text",
+            "_collect_strings",
+            "_describe_event",
+            "_stage_risk"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 272
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "enum",
+          "specifiers": [
+            "Enum"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Sequence"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "ChainStage",
+        "ChainEvent",
+        "DetectedChain",
+        "ChainVerdict",
+        "AttackChainDetector"
+      ],
+      "totalLines": 440,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/threat_intel.py": {
+      "filePath": "sentinel/threat_intel.py",
+      "contentHash": "fec318b9f397964fe9f17e5615dbceb3c737f8d6d95ca0446750256de7f86e88",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ThreatCategory",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "Severity",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "ThreatIndicator",
+          "methods": [],
+          "properties": [
+            "id",
+            "technique",
+            "category",
+            "severity",
+            "description",
+            "pattern",
+            "examples",
+            "mitre_id",
+            "references",
+            "tags"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "ThreatMatch",
+          "methods": [
+            "id",
+            "technique",
+            "category",
+            "severity",
+            "description"
+          ],
+          "properties": [
+            "indicator",
+            "matched_text",
+            "confidence"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "ThreatFeed",
+          "methods": [
+            "__init__",
+            "default",
+            "add",
+            "query",
+            "match",
+            "get_by_id",
+            "total_indicators",
+            "stats"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 72
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "enum",
+          "specifiers": [
+            "Enum"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Sequence"
+          ]
+        }
+      ],
+      "exports": [
+        "ThreatCategory",
+        "Severity",
+        "ThreatIndicator",
+        "ThreatMatch",
+        "ThreatFeed"
+      ],
+      "totalLines": 402,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/claudemd_enforcer.py": {
+      "filePath": "sentinel/claudemd_enforcer.py",
+      "contentHash": "87adc227560d538e439aa092e719fadad48153f5f2a5918801a9c36606e98637",
+      "functions": [],
+      "classes": [
+        {
+          "name": "EnforcedRule",
+          "methods": [
+            "matches"
+          ],
+          "properties": [
+            "text",
+            "rule_type",
+            "pattern",
+            "severity",
+            "line_number",
+            "_compiled"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "EnforcementVerdict",
+          "methods": [
+            "safe"
+          ],
+          "properties": [
+            "allowed",
+            "tool_name",
+            "violated_rules",
+            "warnings",
+            "matched_rules"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "ClaudeMdEnforcer",
+          "methods": [
+            "__init__",
+            "from_file",
+            "from_text",
+            "check",
+            "to_guard_policy_dict",
+            "to_guard_policy",
+            "summary"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        }
+      ],
+      "exports": [
+        "EnforcedRule",
+        "EnforcementVerdict",
+        "ClaudeMdEnforcer"
+      ],
+      "totalLines": 336,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/cli.py": {
+      "filePath": "sentinel/cli.py",
+      "contentHash": "866eef3a4d60d852eda3f0d0a4d4c9e0d3b1ccd905c08f6c45d857e21afae9e8",
+      "functions": [
+        {
+          "name": "_format_result",
+          "params": [
+            "result",
+            "fmt",
+            "artifact_uri"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "cmd_scan",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "cmd_red_team",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 49
+        },
+        {
+          "name": "cmd_benchmark",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "cmd_init",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "cmd_hook",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "cmd_code_scan",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "cmd_pre_commit",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 59
+        },
+        {
+          "name": "cmd_mcp_proxy",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "cmd_proxy",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 35
+        },
+        {
+          "name": "cmd_claudemd_scan",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "cmd_audit",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "cmd_mcp_validate",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 53
+        },
+        {
+          "name": "cmd_dep_scan",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 62
+        },
+        {
+          "name": "cmd_secrets_scan",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 49
+        },
+        {
+          "name": "cmd_project_scan",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "cmd_badge",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "cmd_guard",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 100
+        },
+        {
+          "name": "cmd_replay",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 73
+        },
+        {
+          "name": "cmd_enforce",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 71
+        },
+        {
+          "name": "cmd_compliance",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 88
+        },
+        {
+          "name": "cmd_eval",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "cmd_serve",
+          "params": [
+            "args"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "main",
+          "params": [
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 337
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "ScanResult"
+          ]
+        }
+      ],
+      "exports": [
+        "_format_result",
+        "cmd_scan",
+        "cmd_red_team",
+        "cmd_benchmark",
+        "cmd_init",
+        "cmd_hook",
+        "cmd_code_scan",
+        "cmd_pre_commit",
+        "cmd_mcp_proxy",
+        "cmd_proxy",
+        "cmd_claudemd_scan",
+        "cmd_audit",
+        "cmd_mcp_validate",
+        "cmd_dep_scan",
+        "cmd_secrets_scan",
+        "cmd_project_scan",
+        "cmd_badge",
+        "cmd_guard",
+        "cmd_replay",
+        "cmd_enforce",
+        "cmd_compliance",
+        "cmd_eval",
+        "cmd_serve",
+        "main"
+      ],
+      "totalLines": 1334,
+      "hasStructuralAnalysis": true
+    },
+    ".claude-plugin/plugin.json": {
+      "filePath": ".claude-plugin/plugin.json",
+      "contentHash": "302da4738c36c2baff15b2b0cd8db0b90cea2d896dc5335acabe25d27f4c26a1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    ".claude-plugin/marketplace.json": {
+      "filePath": ".claude-plugin/marketplace.json",
+      "contentHash": "52075d7f3f439ba4f663933c1b89bd1571f51dc9e6e73667954a02f0bc600230",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "commands/scan.md": {
+      "filePath": "commands/scan.md",
+      "contentHash": "347c562239bb96043b7bb3ab2f5fa8b5e47a0a92ddd3630024eec9ddbb024270",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "Dockerfile": {
+      "filePath": "Dockerfile",
+      "contentHash": "46f21981e332bf9f3a8e741d442f7c9ff4e222d6037b87918373868df0cf193c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "pyproject.toml": {
+      "filePath": "pyproject.toml",
+      "contentHash": "0a8e5b985dd6967343dbfc6444c1bdd7cb9df861bce396e6925eb1c167922fa2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/ci.yml": {
+      "filePath": ".github/workflows/ci.yml",
+      "contentHash": "cac49b054b2db9145d8530df46393bcbab57788fac072bf66bf6762337edec73",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 94,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/publish.yml": {
+      "filePath": ".github/workflows/publish.yml",
+      "contentHash": "42dae7aa8c2b7cad0a703b4499511bab893c52ab1e38fa41ca3466bc1f781f2c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 82,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/publish-npm.yml": {
+      "filePath": ".github/workflows/publish-npm.yml",
+      "contentHash": "3303a46a5abde61855fd41229aa334156036505aa89ff2376e6ccdb3348d21e6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_secrets_scanner.py": {
+      "filePath": "tests/test_secrets_scanner.py",
+      "contentHash": "cdeab2df4b924b9d8c1a345a297c29d49a35417987a430fe2f6ffdf0351fabc5",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TestAWSKeys",
+          "methods": [
+            "test_detects_aws_access_key",
+            "test_detects_aws_asia_key",
+            "test_detects_aws_secret_key"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "TestGitHubTokens",
+          "methods": [
+            "test_detects_ghp_token",
+            "test_detects_gho_token",
+            "test_detects_ghs_token",
+            "test_detects_github_pat"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "TestGoogleKeys",
+          "methods": [
+            "test_detects_google_api_key",
+            "test_detects_google_oauth_secret"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TestStripeKeys",
+          "methods": [
+            "test_detects_stripe_secret_key",
+            "test_detects_stripe_publishable_key"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "TestSlackTokens",
+          "methods": [
+            "test_detects_slack_bot_token",
+            "test_detects_slack_webhook"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "TestAIProviderKeys",
+          "methods": [
+            "test_detects_openai_project_key",
+            "test_detects_anthropic_key"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "TestOtherProviders",
+          "methods": [
+            "test_detects_sendgrid_key",
+            "test_detects_npm_token",
+            "test_detects_pypi_token",
+            "test_detects_mailgun_key"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "TestPrivateKeys",
+          "methods": [
+            "test_detects_rsa_private_key",
+            "test_detects_ec_private_key",
+            "test_detects_generic_private_key",
+            "test_detects_openssh_private_key",
+            "test_detects_pgp_private_key"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "TestGenericSecrets",
+          "methods": [
+            "test_detects_hardcoded_password",
+            "test_detects_hardcoded_api_key",
+            "test_detects_hardcoded_secret",
+            "test_detects_bearer_token"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "TestConnectionStrings",
+          "methods": [
+            "test_detects_postgres_url",
+            "test_detects_mongodb_url",
+            "test_detects_redis_url"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "TestFalsePositives",
+          "methods": [
+            "test_ignores_placeholder_password",
+            "test_ignores_changeme",
+            "test_ignores_env_variable_reference",
+            "test_ignores_os_environ",
+            "test_ignores_template_variables",
+            "test_ignores_test_dummy_values",
+            "test_ignores_low_entropy_values",
+            "test_ignores_comments_python",
+            "test_ignores_comments_js"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 55
+        },
+        {
+          "name": "TestCleanCode",
+          "methods": [
+            "test_clean_code_no_findings",
+            "test_env_file_reference_clean"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "TestScannerMetadata",
+          "methods": [
+            "test_finding_has_line_number",
+            "test_finding_redacts_secret",
+            "test_scanner_name",
+            "test_risk_level_critical"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "TestSkipFiles",
+          "methods": [
+            "test_skips_minified_js",
+            "test_skips_lock_files",
+            "test_skips_empty_code",
+            "test_skips_short_code"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "TestScanFile",
+          "methods": [
+            "test_scan_file",
+            "test_scan_file_nonexistent"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TestScanDirectory",
+          "methods": [
+            "test_scan_directory",
+            "test_scan_directory_skips_node_modules",
+            "test_scan_directory_max_files",
+            "test_scan_directory_empty"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "TestEntropyAnalysis",
+          "methods": [
+            "test_high_entropy_string",
+            "test_low_entropy_string",
+            "test_empty_string"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TestIsFalsePositive",
+          "methods": [
+            "test_placeholder",
+            "test_env_reference",
+            "test_template",
+            "test_real_secret",
+            "test_uniform_chars"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "TestMultipleFindings",
+          "methods": [
+            "test_multiple_secrets_in_file",
+            "test_no_duplicate_findings"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "imports": [
+        {
+          "source": "pytest",
+          "specifiers": [
+            "pytest"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "sentinel.scanners.secrets_scanner",
+          "specifiers": [
+            "SecretsScanner",
+            "_shannon_entropy",
+            "_is_false_positive"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "TestAWSKeys",
+        "TestGitHubTokens",
+        "TestGoogleKeys",
+        "TestStripeKeys",
+        "TestSlackTokens",
+        "TestAIProviderKeys",
+        "TestOtherProviders",
+        "TestPrivateKeys",
+        "TestGenericSecrets",
+        "TestConnectionStrings",
+        "TestFalsePositives",
+        "TestCleanCode",
+        "TestScannerMetadata",
+        "TestSkipFiles",
+        "TestScanFile",
+        "TestScanDirectory",
+        "TestEntropyAnalysis",
+        "TestIsFalsePositive",
+        "TestMultipleFindings"
+      ],
+      "totalLines": 458,
+      "hasStructuralAnalysis": true
+    },
+    "sentinel/benchmarks.py": {
+      "filePath": "sentinel/benchmarks.py",
+      "contentHash": "ab5e5386aa3f90d66b8a033e6989eb13c92ee4d9abf08c333477fe7c3577b4a0",
+      "functions": [
+        {
+          "name": "_build",
+          "params": [
+            "prefix",
+            "body"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "run_benchmark",
+          "params": [
+            "guard",
+            "cases"
+          ],
+          "returnType": "BenchmarkResult",
+          "exported": true,
+          "lineCount": 68
+        }
+      ],
+      "classes": [
+        {
+          "name": "BenchmarkCase",
+          "methods": [],
+          "properties": [
+            "text",
+            "expected_category",
+            "expected_risk",
+            "description"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "BenchmarkResult",
+          "methods": [
+            "precision",
+            "recall",
+            "f1",
+            "accuracy",
+            "summary"
+          ],
+          "properties": [
+            "total",
+            "true_positives",
+            "false_positives",
+            "true_negatives",
+            "false_negatives",
+            "details"
+          ],
+          "exported": true,
+          "lineCount": 37
+        }
+      ],
+      "imports": [
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass",
+            "field"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "sentinel.core",
+          "specifiers": [
+            "SentinelGuard",
+            "RiskLevel"
+          ]
+        }
+      ],
+      "exports": [
+        "BenchmarkCase",
+        "BenchmarkResult",
+        "_build",
+        "run_benchmark"
+      ],
+      "totalLines": 932,
+      "hasStructuralAnalysis": true
+    }
+  }
+}
